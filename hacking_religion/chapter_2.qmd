@@ -1,0 +1,19 @@
+# Survey Data: Spotlight Project
+
+
+
+
+::: {.callout-tip}
+## How can we measure religion?
+Content tbd
+:::
+
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
+
+
+

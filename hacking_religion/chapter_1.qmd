@@ -1,0 +1,52 @@
+# The 2021 UK Census
+
+## How to get data
+
+## What is data?
+
+## Your first project: building a pie chart
+
+Importing data from a CSV file
+
+Examining data:
+
+```
+dat
+head
+tail
+```
+
+
+<!--
+Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html
+-->
+
+::: {.callout-tip}
+## What is Religion?
+Content tbd
+:::
+
+
+
+
+::: {.callout-tip}
+## Hybrid Religious Identity
+Content tbd
+:::
+
+
+
+
+
+::: {.callout-tip}
+## What is Secularisation?
+Content tbd
+:::
+
+
+
+
+# References {.unnumbered}
+
+::: {#refs}
+:::

@@ -1,0 +1,36 @@
+# Introduction: Hacking Religion
+
+## Who this book is for
+
+
+
+## Why this book?
+
+
+
+## The hacker way
+
+1. Tell the truth
+
+2. Do not deceive using beauty
+
+3. Work transparently: research as open code using open data
+
+4. Draw others in: produce reproducible research
+
+5. Learn by doing
+
+
+## Using the R programming language
+
+Why R? 
+
+Explain accelerated approach in this book, working from examples and providing exposure to concepts in a streamlined way, pointing to other resources
+
+Point to other guides, 
+
+## Other useful guides:
+
+[R For Data Science 2e](https://r4ds.hadley.nz/)
+[Intro to Cultural Analytics and Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html)
+[Data Science in a Box](https://datasciencebox.org/01-overview)
