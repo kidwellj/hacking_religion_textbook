@@ -39,13 +39,17 @@ You can see how I've nested the previous command inside the `kable` command. For
 knitr::kable(tail(religion_uk))
 ```
 
-We use `filter` to pick a single row, in the following way:
+### Parsing and Exploring your data
+
+The first thing you're going to want to do is to take a smaller subset of a large data set, either by filtering out certain columns or rows. Now let's say we want to just work with the data from the West Midlands, and we'd like to omit some of the columns. We can choose a specific range of columns using `select`, like this:
+
+You can use the `filter` command to do this. To give an example, `filter` can pick a single row in the following way:
+
 
 ```{r}
-# wmids_data <- select(religion_uk, geography=="West Midlands")
+wmids_data <- religion_uk %>% 
+  filter(geography=="West Midlands")  
 ```
-
-Now let's say we want to just work with the data from the West Midlands, and we'd like to omit some of the columns. We can choose a specific range of columns using `select`, like this:
 
 [Some readers will want to pause here and check out Hadley Wickham's "R For Data Science" book, in the section, ["Data visualisation"](https://r4ds.hadley.nz/data-visualize#introduction) to get a fuller explanation of how to explore your data.]{.aside}
 
