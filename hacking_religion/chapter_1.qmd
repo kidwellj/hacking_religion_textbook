@@ -1,20 +1,61 @@
 # The 2021 UK Census
 
-## How to get data
-
-## What is data?
-
 ## Your first project: building a pie chart
 
-Importing data from a CSV file
+Let's start by importing some data into R. Because R is what is called an object-oriented programming language, we'll always take our information and give it a home inside a named object. There are many different kinds of objects, which you can specify, but usually R will assign a type that seems to fit best.
 
-Examining data:
+[If you'd like to explore this all in a bit more depth, you can find a very helpful summary in R for Data Science, chapter 8, ["data import"](https://r4ds.hadley.nz/data-import#reading-data-from-a-file).]{.aside}
 
+In the example below, we're going to read in data from a comma separated value file ("csv") which has rows of information on separate lines in a text file with each column separated by a comma. This is one of the standard plain text file formats. R has a function you can use to import this efficiently called "read.csv". Each line of code in R usually starts with the object, and then follows with instructions on what we're going to put inside it, where that comes from, and how to format it:
+
+
+```{r.hidden}
+# R Setup -----------------------------------------------------------------
+setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
+library(here) # much better way to manage working paths in R across multiple instances
+library(tidyverse)
+here::i_am("chapter_1.qmd")
+
+religion_uk <- read.csv(here("example_data", "census2021-ts030-rgn.csv")) 
 ```
-dat
-head
-tail
+
+### Examining data:
+
+What's in the table? You can take a quick look at either the top of the data frame, or the bottom using one of the following commands:
+
+```{r .column-page}
+head(religion_uk)
 ```
+
+This is actually a fairly ugly table, so I'll use an R tool called kable to give you prettier tables in the future, like this:
+
+```{r}
+knitr::kable(head(religion_uk))
+```
+
+You can see how I've nested the previous command inside the `kable` command. For reference, in some cases when you're working with really complex scripts with many different libraries and functions, they may end up with functions that have the same name. You can specify the library where the function is meant to come from by preceding it with :: as we've done `knitr::` above. The same kind of output can be gotten using `tail`:
+
+```{r}
+knitr::kable(tail(religion_uk))
+```
+
+We use `filter` to pick a single row, in the following way:
+
+```{r}
+# wmids_data <- select(religion_uk, geography=="West Midlands")
+```
+
+Now let's say we want to just work with the data from the West Midlands, and we'd like to omit some of the columns. We can choose a specific range of columns using `select`, like this:
+
+[Some readers will want to pause here and check out Hadley Wickham's "R For Data Science" book, in the section, ["Data visualisation"](https://r4ds.hadley.nz/data-visualize#introduction) to get a fuller explanation of how to explore your data.]{.aside}
+
+```{r}
+wmids_data <- select(religion_uk, no_religion:other)
+```
+
+
+In keeping with my goal to demonstrate data science through examples, we're going to move on to producing some snappy looking charts for this data.
+
 
 
 <!--
