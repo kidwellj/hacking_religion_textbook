@@ -1,0 +1,16 @@
+# Some other useful books and guides:
+
+## R Data Science Books:
+- [R For Data Science 2e](https://r4ds.hadley.nz/)
+- [Data Science in a Box](https://datasciencebox.org/01-overview)
+- [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+
+## Python Data Science Books:
+- [Intro to Cultural Analytics and Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html)
+- [The Hitchhiker's Guide to Python](https://docs.python-guide.org/)
+
+## Reproducible Research:
+- [Anna Krystalli, Putting the into Reproducible Research: Directors Cut](https://annakrystalli.me/talks/r-in-repro-research-dc.html)
+
+# Web tools for data scientists:
+- ["i want hue: colors for data scientists"](https://medialab.github.io/iwanthue/)

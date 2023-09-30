@@ -1,4 +1,6 @@
-# Appendix A: how to set up a reproducible R script:
+# Appendix A: how to set up a working environment and layout a reproducible R script:
+
+Add `renv` and explanation of `here`
 
 ```
 # R Setup -----------------------------------------------------------------

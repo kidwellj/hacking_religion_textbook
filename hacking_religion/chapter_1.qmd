@@ -57,6 +57,9 @@ wmids_data <- select(religion_uk, no_religion:other)
 In keeping with my goal to demonstrate data science through examples, we're going to move on to producing some snappy looking charts for this data.
 
 
+## Making your first chart
+
+
 
 <!--
 Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html

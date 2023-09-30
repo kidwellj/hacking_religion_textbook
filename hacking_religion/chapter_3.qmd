@@ -1,6 +1,8 @@
 # Mapping churches: geospatial data science
 
-
+Guides to geographies:
+https://rconsortium.github.io/censusguide/
+https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/
 
 
 

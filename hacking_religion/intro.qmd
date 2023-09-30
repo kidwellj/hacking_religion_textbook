@@ -46,9 +46,3 @@ There are, right now, primarily two languages that statisticians and data scient
 Bearing this in mind, the first step you'll need to take is to download and install R. You can find instructions and install packages for a wide range of hardware on the The Comprehensive R Archive Network (or "CRAN"): https://cran.rstudio.com. Once you've installed R, you've got some choices to make about the kind of programming environment you'd like to use. You can just use a plain text editor like `textedit` to write your code and then execute your programs using the R software you've just installed. However, most users, myself included, tend to use an integrated development environment (or "IDE"). This is usually another software package with a guided user interface and some visual elements that make it faster to write and test your code. Some IDE packages, will have built-in reference tools so you can look up options for libraries you use in your code, they will allow you to visualise the results of your code execution, and perhaps most important of all, will enable you to execute your programs line by line so you can spot errors more quickly (we call this "debugging"). The two most popular IDE platforms for R coding at the time of writing this textbook are RStudio and Visual Studio. You should download and try out both and stick with your favourite, as the differences are largely aesthetic. I use a combination of RStudio and an enhanced plain text editor Sublime Text for my coding.
 
 Once you have R and your pick of an IDE, you are ready to go! Proceed to the next chapter and we'll dive right in and get started!
-
-## Other useful guides:
-
-[R For Data Science 2e](https://r4ds.hadley.nz/)
-[Intro to Cultural Analytics and Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html)
-[Data Science in a Box](https://datasciencebox.org/01-overview)
