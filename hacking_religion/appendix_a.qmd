@@ -1,0 +1,25 @@
+# Appendix A: how to set up a reproducible R script:
+
+```
+# R Setup -----------------------------------------------------------------
+setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
+library(here) # much better way to manage working paths in R across multiple instances
+here::i_am("chapter_1.qmd")
+
+# Set up local workspace, as needed: --------------------------------------
+
+# Set up paths in case they haven't already been created
+
+if (dir.exists(here("data")) == FALSE) {
+  dir.create(here("data")) 
+}
+
+# Note, these two paths are excluded from github as it is best practice in reproducible research for end-user to generate their own
+
+if (dir.exists(here("figures")) == FALSE) {
+  dir.create(here("figures"))
+}
+
+if (dir.exists(here("derivedData")) == FALSE) {
+  dir.create(here("derivedData"))
+}

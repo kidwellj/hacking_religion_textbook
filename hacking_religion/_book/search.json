@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "chapter_1.html",
+    "href": "chapter_1.html",
+    "title": "2  The 2021 UK Census",
+    "section": "",
+    "text": "References"
+  },
+  {
+    "objectID": "chapter_1.html#your-first-project-building-a-pie-chart",
+    "href": "chapter_1.html#your-first-project-building-a-pie-chart",
+    "title": "2  The 2021 UK Census",
+    "section": "2.1 Your first project: building a pie chart",
+    "text": "2.1 Your first project: building a pie chart\nLet’s start by importing some data into R. Because R is what is called an object-oriented programming language, we’ll always take our information and give it a home inside a named object. There are many different kinds of objects, which you can specify, but usually R will assign a type that seems to fit best.\nIf you’d like to explore this all in a bit more depth, you can find a very helpful summary in R for Data Science, chapter 8, “data import”.\nIn the example below, we’re going to read in data from a comma separated value file (“csv”) which has rows of information on separate lines in a text file with each column separated by a comma. This is one of the standard plain text file formats. R has a function you can use to import this efficiently called “read.csv”. Each line of code in R usually starts with the object, and then follows with instructions on what we’re going to put inside it, where that comes from, and how to format it:\n\n# R Setup -----------------------------------------------------------------\nsetwd(\"/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion\")\nlibrary(here) # much better way to manage working paths in R across multiple instances\n\nhere() starts at /Users/kidwellj/gits/hacking_religion_textbook\n\nlibrary(tidyverse)\n\n-- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --\nv dplyr     1.1.3     v readr     2.1.4\nv forcats   1.0.0     v stringr   1.5.0\nv ggplot2   3.4.3     v tibble    3.2.1\nv lubridate 1.9.3     v tidyr     1.3.0\nv purrr     1.0.2     \n\n\n-- Conflicts ------------------------------------------ tidyverse_conflicts() --\nx dplyr::filter() masks stats::filter()\nx dplyr::lag()    masks stats::lag()\ni Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nhere::i_am(\"chapter_1.qmd\")\n\nhere() starts at /Users/kidwellj/gits/hacking_religion_textbook/hacking_religion\n\nreligion_uk &lt;- read.csv(here(\"example_data\", \"census2021-ts030-rgn.csv\")) \n\n\n2.1.1 Examining data:\nWhat’s in the table? You can take a quick look at either the top of the data frame, or the bottom using one of the following commands:\n\nhead(religion_uk)\n\n                 geography   total no_religion christian buddhist  hindu jewish\n1               North East 2647012     1058122   1343948     7026  10924   4389\n2               North West 7417397     2419624   3895779    23028  49749  33285\n3 Yorkshire and The Humber 5480774     2161185   2461519    15803  29243   9355\n4            East Midlands 4880054     1950354   2214151    14521 120345   4313\n5            West Midlands 5950756     1955003   2770559    18804  88116   4394\n6                     East 6335072     2544509   2955071    26814  86631  42012\n  muslim   sikh other no_response\n1  72102   7206  9950      133345\n2 563105  11862 28103      392862\n3 442533  24034 23618      313484\n4 210766  53950 24813      286841\n5 569963 172398 31805      339714\n6 234744  24284 36380      384627\n\n\nThis is actually a fairly ugly table, so I’ll use an R tool called kable to give you prettier tables in the future, like this:\n\nknitr::kable(head(religion_uk))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngeography\ntotal\nno_religion\nchristian\nbuddhist\nhindu\njewish\nmuslim\nsikh\nother\nno_response\n\n\n\n\nNorth East\n2647012\n1058122\n1343948\n7026\n10924\n4389\n72102\n7206\n9950\n133345\n\n\nNorth West\n7417397\n2419624\n3895779\n23028\n49749\n33285\n563105\n11862\n28103\n392862\n\n\nYorkshire and The Humber\n5480774\n2161185\n2461519\n15803\n29243\n9355\n442533\n24034\n23618\n313484\n\n\nEast Midlands\n4880054\n1950354\n2214151\n14521\n120345\n4313\n210766\n53950\n24813\n286841\n\n\nWest Midlands\n5950756\n1955003\n2770559\n18804\n88116\n4394\n569963\n172398\n31805\n339714\n\n\nEast\n6335072\n2544509\n2955071\n26814\n86631\n42012\n234744\n24284\n36380\n384627\n\n\n\n\n\nYou can see how I’ve nested the previous command inside the kable command. For reference, in some cases when you’re working with really complex scripts with many different libraries and functions, they may end up with functions that have the same name. You can specify the library where the function is meant to come from by preceding it with :: as we’ve done knitr:: above. The same kind of output can be gotten using tail:\n\nknitr::kable(tail(religion_uk))\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngeography\ntotal\nno_religion\nchristian\nbuddhist\nhindu\njewish\nmuslim\nsikh\nother\nno_response\n\n\n\n\n5\nWest Midlands\n5950756\n1955003\n2770559\n18804\n88116\n4394\n569963\n172398\n31805\n339714\n\n\n6\nEast\n6335072\n2544509\n2955071\n26814\n86631\n42012\n234744\n24284\n36380\n384627\n\n\n7\nLondon\n8799728\n2380404\n3577681\n77425\n453034\n145466\n1318754\n144543\n86759\n615662\n\n\n8\nSouth East\n9278068\n3733094\n4313319\n54433\n154748\n18682\n309067\n74348\n54098\n566279\n\n\n9\nSouth West\n5701186\n2513369\n2635872\n24579\n27746\n7387\n80152\n7465\n36884\n367732\n\n\n10\nWales\n3107494\n1446398\n1354773\n10075\n12242\n2044\n66947\n4048\n15926\n195041\n\n\n\n\n\nWe use filter to pick a single row, in the following way:\n\n# wmids_data &lt;- select(religion_uk, geography==\"West Midlands\")\n\nNow let’s say we want to just work with the data from the West Midlands, and we’d like to omit some of the columns. We can choose a specific range of columns using select, like this:\nSome readers will want to pause here and check out Hadley Wickham’s “R For Data Science” book, in the section, “Data visualisation” to get a fuller explanation of how to explore your data.\n\nwmids_data &lt;- select(religion_uk, no_religion:other)\n\nIn keeping with my goal to demonstrate data science through examples, we’re going to move on to producing some snappy looking charts for this data.\n\n\n\n\n\n\n\nWhat is Religion?\n\n\n\nContent tbd\n\n\n\n\n\n\n\n\nHybrid Religious Identity\n\n\n\nContent tbd\n\n\n\n\n\n\n\n\nWhat is Secularisation?\n\n\n\nContent tbd"
+  },
+  {
+    "objectID": "chapter_2.html",
+    "href": "chapter_2.html",
+    "title": "3  Survey Data: Spotlight Project",
+    "section": "",
+    "text": "How can we measure religion?\n\n\n\nContent tbd\n\n\n\nReferences"
+  },
+  {
+    "objectID": "chapter_3.html",
+    "href": "chapter_3.html",
+    "title": "4  Mapping churches: geospatial data science",
+    "section": "",
+    "text": "References"
+  },
+  {
+    "objectID": "chapter_4.html",
+    "href": "chapter_4.html",
+    "title": "5  Data scraping, corpus analysis and wordclouds",
+    "section": "",
+    "text": "References"
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "6  Summary",
+    "section": "",
+    "text": "An open textbook introducing data science to religious studies"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Hacking Religion: TRS & Data Science in Action",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
+  },
+  {
+    "objectID": "intro.html#who-this-book-is-for",
+    "href": "intro.html#who-this-book-is-for",
+    "title": "1  Introduction: Hacking Religion",
+    "section": "1.1 Who this book is for",
+    "text": "1.1 Who this book is for"
+  },
+  {
+    "objectID": "intro.html#why-this-book",
+    "href": "intro.html#why-this-book",
+    "title": "1  Introduction: Hacking Religion",
+    "section": "1.2 Why this book?",
+    "text": "1.2 Why this book?"
+  },
+  {
+    "objectID": "intro.html#the-hacker-way",
+    "href": "intro.html#the-hacker-way",
+    "title": "1  Introduction: Hacking Religion",
+    "section": "1.3 The hacker way",
+    "text": "1.3 The hacker way\n\nTell the truth\nDo not deceive using beauty\nWork transparently: research as open code using open data\nDraw others in: produce reproducible research\nLearn by doing"
+  },
+  {
+    "objectID": "intro.html#why-programmatic-data-science",
+    "href": "intro.html#why-programmatic-data-science",
+    "title": "1  Introduction: Hacking Religion",
+    "section": "1.4 Why programmatic data science?",
+    "text": "1.4 Why programmatic data science?\nThis isn’t just a book about data analysis, I’m proposing an approach which might be thought of as research-as-code, where you write out instructions to execute the various steps of work. The upside of this is that other researchers can learn from your work, correct and build on it as part of the commons. It takes a bit more time to learn and set things up, but the upside is that you’ll gain access to a set of tools and a research philosophy which is much more powerful."
+  },
+  {
+    "objectID": "intro.html#learning-to-code-my-way",
+    "href": "intro.html#learning-to-code-my-way",
+    "title": "1  Introduction: Hacking Religion",
+    "section": "1.5 Learning to code: my way",
+    "text": "1.5 Learning to code: my way\nExplain accelerated approach in this book, working from examples and providing exposure to concepts in a streamlined way, pointing to other resources\nPoint to other guides,\nThere are a range of terrific textbooks out there which cover all these elements in greater depth and more slowly. In particular, I’d recommend that many readers will want to check out Hadley Wickham’s “R For Data Science” book. I’ll include marginal notes in this guide pointing to sections of that book, and a few others which unpack the basic mechanics of R in more detail."
+  },
+  {
+    "objectID": "intro.html#getting-set-up",
+    "href": "intro.html#getting-set-up",
+    "title": "1  Introduction: Hacking Religion",
+    "section": "1.6 Getting set up",
+    "text": "1.6 Getting set up\nEvery single tool, programming language and data set we refer to in this book is free and open source. These tools have been produced by professionals and volunteers who are passionate about data science and research and want to share it with the world, and in order to do this (and following the “hacker way”) they’ve made these tools freely available. This also means that you aren’t restricted to a specific proprietary, expensive, or unavailable piece of software to do this work. I’ll make a few opinionated recommendations here based on my own preferences and experience, but it’s really up to your own style and approach. In fact, given that this is an open source textbook, you can even propose additions to this chapter explaining other tools you’ve found that you want to share with others.\nThere are, right now, primarily two languages that statisticians and data scientists use for this kind of programmatic data science: python and R. Each language has its merits and I won’t rehash the debates between various factions. For this book, we’ll be using the R language. This is, in part, because the R user community and libraries tend to scale a bit better for the work that I’m commending in this book. However, it’s entirely possible that one could use python for all these exercises, and perhaps in the future we’ll have volume two of this book outlining python approaches to the same operations.\nBearing this in mind, the first step you’ll need to take is to download and install R. You can find instructions and install packages for a wide range of hardware on the The Comprehensive R Archive Network (or “CRAN”): https://cran.rstudio.com. Once you’ve installed R, you’ve got some choices to make about the kind of programming environment you’d like to use. You can just use a plain text editor like textedit to write your code and then execute your programs using the R software you’ve just installed. However, most users, myself included, tend to use an integrated development environment (or “IDE”). This is usually another software package with a guided user interface and some visual elements that make it faster to write and test your code. Some IDE packages, will have built-in reference tools so you can look up options for libraries you use in your code, they will allow you to visualise the results of your code execution, and perhaps most important of all, will enable you to execute your programs line by line so you can spot errors more quickly (we call this “debugging”). The two most popular IDE platforms for R coding at the time of writing this textbook are RStudio and Visual Studio. You should download and try out both and stick with your favourite, as the differences are largely aesthetic. I use a combination of RStudio and an enhanced plain text editor Sublime Text for my coding.\nOnce you have R and your pick of an IDE, you are ready to go! Proceed to the next chapter and we’ll dive right in and get started!"
+  },
+  {
+    "objectID": "intro.html#other-useful-guides",
+    "href": "intro.html#other-useful-guides",
+    "title": "1  Introduction: Hacking Religion",
+    "section": "1.7 Other useful guides:",
+    "text": "1.7 Other useful guides:\nR For Data Science 2e Intro to Cultural Analytics and Python Data Science in a Box"
+  }
+]
