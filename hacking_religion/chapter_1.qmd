@@ -9,7 +9,7 @@ Let's start by importing some data into R. Because R is what is called an object
 In the example below, we're going to read in data from a comma separated value file ("csv") which has rows of information on separate lines in a text file with each column separated by a comma. This is one of the standard plain text file formats. R has a function you can use to import this efficiently called "read.csv". Each line of code in R usually starts with the object, and then follows with instructions on what we're going to put inside it, where that comes from, and how to format it:
 
 
-```{r.hidden}
+```{r}
 # R Setup -----------------------------------------------------------------
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
 library(here) # much better way to manage working paths in R across multiple instances
@@ -51,18 +51,46 @@ wmids_data <- religion_uk %>%
   filter(geography=="West Midlands")  
 ```
 
+Now we'll use select in a different way to narrow our data to specific columns that are needed (no totals!).
+
 [Some readers will want to pause here and check out Hadley Wickham's "R For Data Science" book, in the section, ["Data visualisation"](https://r4ds.hadley.nz/data-visualize#introduction) to get a fuller explanation of how to explore your data.]{.aside}
-
-```{r}
-wmids_data <- select(religion_uk, no_religion:other)
-```
-
 
 In keeping with my goal to demonstrate data science through examples, we're going to move on to producing some snappy looking charts for this data.
 
 
 ## Making your first chart
 
+We've got a nice lean set of data, so now it's time to visualise this. We'll start by making a pie chart:
+
+```{r}
+wmids_data <- wmids_data %>% select(no_religion:no_response)
+wmids_data <- gather(wmids_data)
+```
+
+
+There are two basic ways to do visualisations in R. You can work with basic functions in R, often called "base R" or you can work with an alternative library called ggplot:
+
+#### Base R
+
+```{r}
+df <- wmids_data[order(wmids_data$value,decreasing = TRUE),]
+barplot(height=df$value, names=df$key)
+``` 
+
+
+#### GGPlot
+
+```{r}
+ggplot(wmids_data, aes(x = key, y = value)) +
+  geom_bar(stat = "identity")
+
+ggplot(wmids_data, aes(x= reorder(key,-value),value)) + geom_bar(stat ="identity")
+```
+
+Clean up chart features
+
+```{r}
+```
 
 
 <!--

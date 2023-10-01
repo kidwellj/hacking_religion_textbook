@@ -4,6 +4,7 @@
 - [R For Data Science 2e](https://r4ds.hadley.nz/)
 - [Data Science in a Box](https://datasciencebox.org/01-overview)
 - [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/)
+- [R Graphics Cookbook, 2nd edition](https://r-graphics.org/)
 
 ## Python Data Science Books:
 - [Intro to Cultural Analytics and Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html)
