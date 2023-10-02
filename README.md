@@ -6,14 +6,15 @@ The course here has been compiled with [quarto](https://quarto.org/), and so the
 
 Directory structure includes:
 * `README.md` this README file displayed on Github
-* `docs` a folder containing the compiled book in html, .pdf and epub formats
-* `course.bib` a bibliography of items used for the course in [BibTeX format](http://www.bibtex.org/Format/)
-* `index.Rmd` Contains initialization settings, and preface content
-* `01-Overview.Rmd` Introduction and overview to course
-* `02-Session1.Rmd` First chapter: "what is data?"
-* `03-Session2.Rmd` Second chapter: "copyright, licenses, and data as property"
-* `04-Session3.Rmd` Third chapter "exploring confidentiality and privacy"
-* `05-Session4.Rmd` Fourth and closing chapter: "how do we decide what to do?"
+* `_book` a folder containing the compiled book in html and .pdf formats
+* `references.bib` a bibliography of items used for the course in [BibTeX format](http://www.bibtex.org/Format/)
+* `preface.qmd` Preface
+* `intro.qmd` Introduction and overview to book
+* `chapter_1.qmd` Chapter 1: working with UK Census religion data
+* `chapter_2.qmd` Chapter 2: survey data
+* `chapter_3.qmd` Chapter 3: geospatial data"
+* `chapter_4.qmd` Chapter 4: data scraping, corpus analysis and wordclouds
+* `chapter_5.qmd` What's next?
 
 # How to produce books from this repository:
 
