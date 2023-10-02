@@ -44,6 +44,12 @@ Each of these measures a particular kind of dimension, and it is interesting to 
 
 You'll find that many surveys will only use one of these forms of question and ignore the rest. I think this is a really bad idea as religious belonging, identity, and spirituality are far too complex to work off a single form of response. We can also test out how these different attributions relate to other demographic features, like interest in politics, economic attainment, etc.
 
+::: {.callout-tip}
+## So *who's* religious?
+
+Content tbd
+:::
+
 Let's dive into the data and see how this all works out:
 
 
@@ -54,7 +60,6 @@ Let's dive into the data and see how this all works out:
 library(RColorBrewer)
 library(hrbrthemes) # Used for ipsum theme etc.
 library(ggeasy) # used for easy_center_title() which is not strictly necessary, but tidier than theme(plot.title = element_text(hjust = 0.5))
-
 
 # Define colour palettes
 # TODO: confirm final colour scheme for charts and normalise across usage of different themes
@@ -399,12 +404,36 @@ chart_single_result_flextable_unsorted <- function(.data, var) {
 ```
 
 ```{r}
-religious_affiliation <- qualtrics_process_single_multiple_choice(as.factor(climate_experience_data$Q56))
+
+# religious_affiliation
+# migrate haven data into separate data frame
+religious_affiliation <- as_tibble(as_factor(climate_experience_data$Q56))
+# make column names coherent and simplified
+names(religious_affiliation) <- c("response")
+# filter out NA values
+religious_affiliation <- filter(religious_affiliation, !is.na(response))
+# generate new dataframe with sums per category and sort in descending order
+religious_affiliation_sums <- religious_affiliation %>%
+  dplyr::count(response, sort = TRUE) %>% 
+  dplyr::mutate(response = forcats::fct_rev(forcats::fct_inorder(response)))    
+# add new column with percentages for each sum
+religious_affiliation_sums <- religious_affiliation_sums %>% 
+  dplyr::mutate(perc = scales::percent(n / sum(n), accuracy = 1, trim = FALSE))
+
+
 # TODO: use mutate to put "prefer not to say" at the bottom
 # Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels
 
 caption <- "Religious Affiliation"
-religious_affiliation_plot <- plot_horizontal_bar(religious_affiliation)
+
+# make plot
+ggplot(religious_affiliation_sums, aes(x = n, y = response)) +
+  geom_col(colour = "white") + 
+  ## add percentage labels
+  geom_text(aes(label = perc),
+            ## make labels left-aligned and white
+            hjust = 1, nudge_x = -.5, colour = "black", size=3)
+
 religious_affiliation_plot <- religious_affiliation_plot + labs(caption = caption, x = "", y = "")
 religious_affiliation_plot
 ggsave("figures/q56_religious_affiliation.png", width = 20, height = 10, units = "cm")
@@ -614,10 +643,6 @@ climate_experience_data <- climate_experience_data %>%
   )
 ```
 
-::: {.callout-tip}
-## How can we measure religion?
-Content tbd
-:::
 
 
 # References {.unnumbered}
