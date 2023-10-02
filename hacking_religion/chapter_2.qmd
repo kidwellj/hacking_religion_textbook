@@ -8,8 +8,611 @@ While I've framed my comments above in terms of climate change research, it is a
 
 We've decided to open up access to our data and I'm highlighting it in this book because it's a unique opportunitiy to explore a dataset that emphasises diversity from the start, and by extension, provides some really interesting ways to use data science techniques to explore religion in the UK.
 
+# Loading in some data
+
+```{r}
+# R Setup -----------------------------------------------------------------
+setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
+library(here)
+library(tidyverse)
+library(haven) # used for importing SPSS .sav files
+here::i_am("chapter_2.qmd")
+climate_experience_data <- read_sav(here("example_data", "climate_experience_data.sav"))
+```
+
+The first thing to note here is that we've drawn in a different type of data file, this time from an `.sav` file, usully produced by the statistics software package SPSS. This uses a different R Library (I use `haven` for this). The upside is that in some cases where you have survey data with both a code and a value like "1" is eqivalent to "very much agree" this will preserve both in the R dataframe that is created. Now that you've loaded in data, you have a new R dataframe called "climate_experience_data" with a lot of columns with just under 1000 survey responses.
+
+# How can you ask about religion?
+
+One of the challenges we faced when running this study is how to gather responsible data from surveys regarding religious identity. We'll dive into this in depth as we do analysis and look at some of the agreements and conflicts in terms of respondent attribution. Just to set the stage, we used the following kinds of question to ask about religion and spirituality:
+
+1. Question 56 asks respondents simply, "What is your religion?" and then provides a range of possible answers. We included follow-up questions regarding denomination for respondents who indicated they were "Christian" or "Muslim". For respondents who ticked "Christian" we asked, "What is your denomination?" nad for respondents who ticked "Muslim" we asked "Which of the following would you identify with?" and then left a range of possible options which could be ticked such as "Sunni," "Shia," "Sufi" etc.
+
+This is one way of measuring religion, that is, to ask a person if they consider themselves formally affiliated with a particular group. This kind of question has some (serious) limitations, but we'll get to that in a moment.
+
+We also asked respondents (Q57): "Regardless of whether you belong to a particular religion, how religious would you say you are?" and then provided a slider from 0 (not religious at all) to 10 (very religious). 
+
+We included some classic indicators about how often respondents go to worship (Q58): Apart from weddings, funerals and other special occasions, how often do you attend religious services? and (Q59): "Q59 Apart from when you are at religious services, how often do you pray?"
+
+- More than once a week  (1) 
+- Once a week  (2) 
+- At least once a month  (3) 
+- Only on special holy days  (4) 
+- Never  (5)
+
+Each of these measures a particular kind of dimension, and it is interesting to note that sometimes there are stronger correlations between how often a person attends worship services (weekly versus once a year) and a particular view, than there is between their affiliation (if they are Christian or Pagan). We'll do some exploratory work shortly to see how this is the case in our sample. We also included a series of questions about spirituality in Q52 and used a nature relatedness scale Q51. 
+
+You'll find that many surveys will only use one of these forms of question and ignore the rest. I think this is a really bad idea as religious belonging, identity, and spirituality are far too complex to work off a single form of response. We can also test out how these different attributions relate to other demographic features, like interest in politics, economic attainment, etc.
+
+Let's dive into the data and see how this all works out:
 
 
+```{r}
+
+# Load some new libraries used by functions below
+
+library(RColorBrewer)
+library(hrbrthemes) # Used for ipsum theme etc.
+library(ggeasy) # used for easy_center_title() which is not strictly necessary, but tidier than theme(plot.title = element_text(hjust = 0.5))
+
+
+# Define colour palettes
+# TODO: confirm final colour scheme for charts and normalise across usage of different themes
+coul3 <- brewer.pal(3, "RdYlBu") # Using RdYlBu range to generate 3 colour palette: https://colorbrewer2.org/#type=diverging&scheme=RdYlBu&n=5
+coul4 <- brewer.pal(4, "RdYlBu")
+coul5 <- brewer.pal(5, "RdYlBu")
+coul6 <- brewer.pal(6, "RdYlBu")
+coul7 <- brewer.pal(7, "RdYlBu")
+coul4_reversed <- c("#2C7BB6", "#ABD9E9", "#FDAE61", "#D7191C")
+coul6_reversed <- c("#4575B4", "#91BFDB" , "#E0F3F8" , "#FEE090", "#FC8D59", "#D73027")
+white <- "#ffffff"
+purple <- "#590048"
+ochre <- "#B18839"
+ochre_12 <- wheel(ochre, num = 12)
+purple_12 <- wheel(purple, num = 12)
+
+# Reusable Functions ------------------------------------------------------
+
+# Importing code for colortools() now deprecated and removed from CRAN here. Some minor modifications to update code, but generally all credit here goes to Gaston Sanchez
+
+setColors <- function(color, num) {
+  # convert to RGB
+  rgb_col = col2rgb(color)
+  # convert to HSV
+  hsv_col = rgb2hsv(rgb_col)[,1]
+  # get degree
+  hue = hsv_col[1]
+  sat = hsv_col[2]
+  val = hsv_col[3]
+  cols = seq(hue, hue + 1, by=1/num)
+  cols = cols[1:num]
+  cols[cols > 1] <- cols[cols > 1] - 1
+  # get colors with hsv
+  colors = hsv(cols, sat, val)
+  # transparency
+  if (substr(color, 1, 1) == "#" && nchar(color) == 9)
+    ({
+      alpha = substr(color, 8, 9)
+      colors = paste(colors, alpha, sep="")
+    })
+  colors
+}
+
+complementary <- function(color, plot=TRUE, bg="white", labcol=NULL, cex=0.8, title=TRUE) {	
+  tmp_cols = setColors(color, 12)
+  comp_colors <- tmp_cols[c(1, 7)]
+  
+  # plot
+  if (plot)
+    ({
+      # labels color
+      if (is.null(labcol)) 
+        ({
+          lab_col = rep("", 12)
+          if (mean(col2rgb(bg)) > 127)
+            ({
+              lab_col[c(1, 7)] <- "black"
+              lab_col[c(2:6,8:12)] <- col2HSV(bg)
+            }) else ({
+              lab_col[c(1, 7)] <- "white"
+              lab_col[c(2:6,8:12)] <- col2HSV(bg)
+            })
+        }) else ({
+          lab_col = rep(labcol, 12)
+          if (mean(col2rgb(bg)) > 127)
+            ({
+              lab_col[c(1, 7)] <- labcol
+              lab_col[c(2:6,8:12)] <- col2HSV(bg)
+            }) else ({
+              lab_col[c(1, 7)] <- labcol
+              lab_col[c(2:6,8:12)] <- col2HSV(bg)
+            })
+        })	
+      # hide non-adjacent colors
+      tmp_cols[c(2:6,8:12)] <- paste(substr(tmp_cols[c(2:6,8:12)],1,7), "0D", sep="")
+      pizza(tmp_cols, labcol=lab_col, bg=bg, cex=cex)
+      # title
+      if (title)
+        title(paste("Complementary (opposite) color of: ", tmp_cols[1]), 
+              col.main=lab_col[1], cex.main=0.8)
+    })
+  # result
+  comp_colors
+}
+
+sequential <- function(color, percentage=5, what="saturation", s=NULL, v=NULL, alpha=NULL, fun="linear", plot=TRUE, verbose=TRUE)  {
+  # convert to HSV
+  col_hsv = rgb2hsv(col2rgb(color))[,1]
+  # transparency
+  if (is.null(alpha))
+    alpha = 1
+  if (substr(color, 1, 1) == "#" && nchar(color) == 9)
+    alpha = substr(color, 8, 9)
+  # get hue, saturation, and value
+  hue = col_hsv[1]
+  if (is.null(s)) s = col_hsv[2]
+  if (is.null(v)) v = col_hsv[3]
+  # sequence function
+  getseq = switch(fun, 
+                  linear = seq(0, 1, by=percentage/100),
+                  sqrt = sqrt(seq(0, 1, by=percentage/100)),
+                  log = log1p(seq(0, 1, by=percentage/100)),
+                  log10 = log10(seq(0, 1, by=percentage/100))
+  )
+  # what type of sequence?
+  if (what == "saturation") ({
+    sat = getseq
+    fixed = paste("v=", round(v,2), " and alpha=", alpha, sep="")
+    if (is.numeric(alpha))
+      seq_col = hsv(hue, s=sat, v=v, alpha=alpha)
+    if (is.character(alpha)) ({
+      seq_col = hsv(hue, s=sat, v=v)
+      seq_col = paste(seq_col, alpha, sep="")
+    })
+  })
+  if (what == "value") ({
+    val = getseq
+    fixed = paste("s=", round(s,2), " and alpha=", alpha, sep="")
+    if (is.numeric(alpha))
+      seq_col = hsv(hue, s=s, v=val, alpha=alpha)
+    if (is.character(alpha)) ({
+      seq_col = hsv(hue, s=s, v=val)
+      seq_col = paste(seq_col, alpha, sep="")
+    })
+  })
+  if (what == "alpha") ({
+    alpha = getseq
+    fixed = paste("s=", round(s,2), " and v=", round(v,2), sep="")
+    seq_col = hsv(hue, s=s, v=v, alpha=alpha)
+  })
+  # if plot TRUE
+  if (plot)
+    ({
+      n = length(seq(0, 1, by=percentage/100))
+      fx = unlist(fixed)
+      #dev.new()
+      plot(0, 0, type="n", xlim=c(0,1), ylim=c(0,1), axes=FALSE, xlab="", ylab="")
+      rect(0:(n-1)/n, 0, 1:n/n, 1, col=seq_col, border="lightgray")
+      mtext(seq_col, side=1, at=0.5:(n)/n, cex=0.8, las=2)
+      title(paste("Sequential colors based on ", what, "\n with fixed ", fx, sep=""),
+            cex.main=0.9)
+    })
+  # result
+  if (verbose)
+    seq_col
+}
+
+wheel <- function(color, num=12, bg="gray95", border=NULL, init.angle=105, cex=1, lty=NULL, main=NULL, verbose=TRUE, ...) {
+  if (!is.numeric(num) || any(is.na(num) | num < 0)) 
+    stop("\n'num' must be positive")
+  x <- rep(1, num)
+  x <- c(0, cumsum(x)/sum(x))
+  dx <- diff(x)
+  nx <- length(dx)
+  # set colors
+  col = setColors(color, num)
+  labels = col
+  # labels color
+  labcol = ifelse( mean(col2rgb(bg)) > 127, "black", "white")
+  # prepare plot window
+  par(bg = bg)
+  plot.new()
+  pin <- par("pin")
+  xlim <- ylim <- c(-1, 1)
+  if (pin[1L] > pin[2L]) 
+    xlim <- (pin[1L]/pin[2L]) * xlim
+  else ylim <- (pin[2L]/pin[1L]) * ylim
+  dev.hold()
+  on.exit(dev.flush())
+  plot.window(xlim, ylim, "", asp = 1)
+  # get ready to plot
+  if (is.null(border[1])) ({
+    border <- rep(bg, length.out = nx)    
+  }) else ({
+    border <- rep(border, length.out = nx)    
+  })
+  if (!is.null(lty))
+    lty <- rep(NULL, length.out = nx)
+  angle <- rep(45, length.out = nx)
+  radius = seq(1, 0, by=-1/num)[1:num]
+  twopi <- -2 * pi
+  t2xy <- function(t, rad) ({
+    t2p <- twopi * t + init.angle * pi/180
+    list(x = rad * cos(t2p), y = rad * sin(t2p))
+  })
+  # plot colored segments
+  for (i in 1L:nx)
+    ({
+      n <- max(2, floor(200 * dx[i]))
+      P <- t2xy(seq.int(x[i], x[i + 1], length.out = n), rad=radius[1])
+      polygon(c(P$x, 0), c(P$y, 0), angle = angle[i], 
+              border = border[i], col = col[i], lty = lty[i])
+      P <- t2xy(mean(x[i + 0:1]), rad=radius[1])
+      lab <- labels[i]
+      if (!is.na(lab) && nzchar(lab)) ({
+        adjs = 0.5
+        if (P$x > 1e-08) adjs <- 0
+        if (P$x < -1e-08) adjs <- 1
+        lines(c(1, 1.05) * P$x, c(1, 1.05) * P$y)
+        text(1.1 * P$x, 1.1 * P$y, labels[i], xpd = TRUE, 
+             adj = adjs, cex=cex, col=labcol, ...)
+      })
+    })
+  # add title
+  title(main = main, ...)
+  # return color names
+  if (verbose)
+    col
+}
+
+# function to produce horizontal bar chart, colours drawn from "ochre" colour wheel defined above to match report
+plot_horizontal_bar <- function(x) {
+  ## code if a specific palette is needed for matching
+  fill = wheel(ochre, num = as.integer(count(x[1])))
+  #fill = scale_fill_brewer()
+  # make plot
+  ggplot(x, aes(x = n, y = response, fill = fill)) +
+    geom_col(colour = "white") +
+    ## add percentage labels
+    geom_text(aes(label = perc),
+              ## make labels left-aligned and white
+              hjust = 1, nudge_x = -.5, colour = "black", size=3) +
+    ## reduce spacing between labels and bars
+    scale_fill_identity(guide = "none") +
+    ## get rid of all elements except y axis labels + adjust plot margin
+    theme_ipsum_rc() +
+    theme(plot.margin = margin(rep(15, 4))) +
+    easy_center_title()
+}
+
+qualtrics_process_single_multiple_choice <- function(x) {
+  # create separate data frame
+  df <- as.data.frame(x)
+  # make column names coherent and simplified
+  names(df) <- c("response")
+  # filter out NA values
+  df <- filter(df, !is.na(response))
+  # generate new dataframe with sums per category and sort in descending order
+  sums <- df %>%
+    dplyr::count(response, sort = TRUE) %>% 
+    dplyr::mutate(
+      response = forcats::fct_rev(forcats::fct_inorder(response))
+    )    
+  # add new column with percentages for each sum
+  sums <- sums %>% 
+    dplyr::mutate(perc = scales::percent(n / sum(n), accuracy = 1, trim = FALSE))
+}
+
+qualtrics_process_single_multiple_choice_unsorted_streamlined <- function(x) {
+  # create separate data frame
+  df <- as.data.frame(as_factor(x))
+  # make column names coherent and simplified
+  names(df) <- c("response")
+  # filter out NA values
+  df <- filter(df, !is.na(response))
+  # generate new dataframe with sums per category and sort in descending order
+  sums <- df %>%
+    dplyr::count(response, sort = FALSE) 
+  # add new column with percentages for each sum
+  sums <- sums %>% 
+    dplyr::mutate(perc = scales::percent(n / sum(n), accuracy = 1, trim = FALSE))
+}
+
+qualtrics_process_single_multiple_choice_basic <- function(x) {
+  # create separate data frame
+  df <- as_factor(x)
+  # make column names coherent and simplified
+  names(df) <- c("response")
+  # filter out NA values
+  df <- filter(df, !is.na(response))
+  # generate new dataframe with sums per category and sort in descending order
+  sums <- df %>%
+    dplyr::count(response, sort = FALSE) 
+  # add new column with percentages for each sum
+  sums <- sums %>% 
+    dplyr::mutate(perc = scales::percent(n / sum(n), accuracy = 1, trim = FALSE))
+}
+
+qualtrics_process_single_multiple_choice_unsorted <- function(x) {
+  # create separate data frame
+  df <- as.data.frame(x)
+  # make column names coherent and simplified
+  names(df) <- c("response")
+  # filter out NA values
+  df <- filter(df, !is.na(response))
+  # generate new dataframe with sums per category and sort in descending order
+  sums <- df %>%
+    dplyr::count(response, sort = FALSE) %>% 
+    dplyr::mutate(
+      response = forcats::fct_rev(forcats::fct_inorder(response))
+    )    
+  # add new column with percentages for each sum
+  sums <- sums %>% 
+    dplyr::mutate(perc = scales::percent(n / sum(n), accuracy = 1, trim = FALSE))
+}
+
+# function to produce a summary table of results for a single column using flextable
+
+chart_single_result_flextable <- function(.data, var) {
+  table <- table(.data)
+  # add calculations and convert to a flextable object
+  table %>%
+    prop.table %>% # turn this into a table of proportions
+    # flextable requires a dataframe
+    as.data.frame() %>%
+    set_names(c("Variable", "Count")) %>%
+    # arrange in descending order
+    arrange({{ var }}) %>%
+    # convert table object to a flextable()
+    flextable(defaults = TRUE) %>%
+    # adjust column widths automatically to fit widest values
+    style(part = 'body', pr_t=fp_text(font.family='Roboto')) %>%
+    style(part = 'header', pr_t=fp_text(font.family='Roboto')) %>%
+    # note, likert also uses set_caption() so need to specify flextable:: here
+    flextable::set_caption(caption, style = "Table Caption", autonum = run_autonum(seq_id = "tab", bkm = "figures", bkm_all = TRUE)) %>%
+    autofit() %>%
+    theme_vanilla() %>%
+    # format numbers in count column as rounded percentages
+    set_formatter( table, Count = function(x) sprintf( "%.1f%%", x*100 ))
+}
+
+chart_single_result_flextable_unsorted <- function(.data, var) {
+  table <- table(.data)
+  # add calculations and convert to a flextable object
+  table %>%
+    prop.table %>% # turn this into a table of proportions
+    # flextable requires a dataframe
+    as.data.frame() %>%
+    set_names(c("Variable", "Count")) %>%
+    # convert table object to a flextable()
+    flextable(defaults = TRUE) %>%
+    # adjust column widths automatically to fit widest values
+    style(part = 'body', pr_t=fp_text(font.family='Roboto')) %>%
+    style(part = 'header', pr_t=fp_text(font.family='Roboto')) %>%
+    # note, likert also uses set_caption() so need to specify flextable:: here
+    flextable::set_caption(caption, style = "Table Caption", autonum = run_autonum(seq_id = "tab", bkm = "figures", bkm_all = TRUE)) %>%
+    autofit() %>%
+    theme_vanilla() %>%
+    # format numbers in count column as rounded percentages
+    set_formatter( table, Count = function(x) sprintf( "%.1f%%", x*100 ))
+}
+```
+
+```{r}
+religious_affiliation <- qualtrics_process_single_multiple_choice(as.factor(climate_experience_data$Q56))
+# TODO: use mutate to put "prefer not to say" at the bottom
+# Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels
+
+caption <- "Religious Affiliation"
+religious_affiliation_plot <- plot_horizontal_bar(religious_affiliation)
+religious_affiliation_plot <- religious_affiliation_plot + labs(caption = caption, x = "", y = "")
+religious_affiliation_plot
+ggsave("figures/q56_religious_affiliation.png", width = 20, height = 10, units = "cm")
+```
+
+Now let's make a table
+
+```{r}
+religious_affiliation_table <- chart_single_result_flextable(climate_experience_data$Q56, Variable)
+religious_affiliation_table
+save_as_docx(religious_affiliation_table, path = "./figures/q56_religious_affiliation.docx")
+
+
+# Q56 follow-ups
+caption <- "Christian Denomination"
+# TODO: copy plot above for Q56 to add two additional plots using climate_experience_data_named$Q56b and climate_experience_data_named$Q56c
+# Religious Affiliation b - Christian Denomination Subquestion
+christian_denomination <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q56b)
+christian_denomination_table <- chart_single_result_flextable(climate_experience_data_named$Q56b, desc(Count))
+christian_denomination_table
+save_as_docx(christian_denomination_table, path = "./figures/q56_religious_affiliation_xn_denomination.docx")
+
+christian_denomination_hi <- filter(climate_experience_data_named, Q56 == "Christian", Q57_bin == "high")
+christian_denomination_hi <- qualtrics_process_single_multiple_choice(christian_denomination_hi$Q56b)
+christian_denomination_hi
+
+# Religious Affiliation c - Muslim Denomination Subquestion
+caption <- "Islamic Identity"
+# Should the label be different than income since the data examined is the Affiliation?
+# TODO: adjust plot to factor using numbered responses on this question (perhaps also above)
+religious_affiliationc <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q56c)
+religious_affiliationc_plot <- plot_horizontal_bar(religious_affiliationc)
+religious_affiliationc_plot <- religious_affiliationc_plot + labs(caption = caption, x = "", y = "")
+religious_affiliationc_plot
+ggsave("figures/q56c_religious_affiliation.png", width = 20, height = 10, units = "cm")
+religious_affiliationc_table <- chart_single_result_flextable(climate_experience_data_named$Q56c, Count)
+religious_affiliationc_table
+save_as_docx(religious_affiliationc_table, path = "./figures/q56_religious_affiliation_islam.docx")
+
+# Q57
+# Religiosity
+caption <- "Respondent Religiosity"
+religiosity <- qualtrics_process_single_multiple_choice(as.character(climate_experience_data_named$Q57_1))
+religiosity_plot <- plot_horizontal_bar(religiosity)
+religiosity_plot <- religiosity_plot + labs(caption = caption, x = "", y = "")
+religiosity_plot
+ggsave("figures/q57_religiosity_plot.png", width = 20, height = 10, units = "cm")
+religiosity_table <- chart_single_result_flextable(climate_experience_data_named$Q57_1, desc(Variable))
+religiosity_table
+save_as_docx(religious_affiliationc_table, path = "./figures/q57_religiousity.docx")
+
+# Q58
+
+caption <- "Respondent Attendance of Religious Services"
+religious_service_attend <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q58)
+religious_service_attend_plot <- plot_horizontal_bar(religious_service_attend)
+religious_service_attend_plot <- religious_service_attend_plot + labs(title = caption, x = "", y = "")
+religious_service_attend_plot
+ggsave("figures/q58_religious_service_attend.png", width = 20, height = 10, units = "cm")
+religious_service_attend_table <- chart_single_result_flextable(climate_experience_data_named$Q58, Count)
+religious_service_attend_table
+save_as_docx(religious_service_attend_table, path = "./figures/q58_religious_service_attend.docx")
+
+# Faceted plot working with 3x3 grid
+df <- select(climate_experience_data, Q52_bin, Q53_bin, Q57_bin, Q58)
+names(df) <- c("Q52_bin", "Q53_bin", "Q57_bin", "response")
+facet_names <- c(`Q52_bin` = "Spirituality", `Q53_bin` = "Politics L/R", `Q57_bin` = "Religiosity", `low`="low", `medium`="medium", `high`="high")
+facet_labeller <- function(variable,value){return(facet_names[value])}
+df$response <- factor(df$response, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
+df$response <- fct_recode(df$response, "More than once a week" = "1", "Once a week" = "2", "At least once a month" = "3", "Only on special holy days" = "4", "Never" = "5")
+df %>% 
+  # we need to get the data including facet info in long format, so we use pivot_longer()
+  pivot_longer(!response, names_to = "bin_name", values_to = "b") %>% 
+  # add counts for plot below
+  count(response, bin_name, b) %>%
+  group_by(bin_name,b) %>%
+  mutate(perc=paste0(round(n*100/sum(n),1),"%")) %>% 
+  # run ggplot
+  ggplot(aes(x = n, y = "", fill = response)) +
+  geom_col(position=position_fill(), aes(fill=response)) +
+  geom_text(aes(label = perc), position = position_fill(vjust=.5), size=2) +
+  scale_fill_brewer(palette = "Dark2", type = "qual") +
+  scale_x_continuous(labels = scales::percent_format()) +
+  facet_grid(vars(b), vars(bin_name), labeller=as_labeller(facet_names)) + 
+  labs(caption = caption, x = "", y = "") + 
+  guides(fill = guide_legend(title = NULL))
+ggsave("figures/q58_faceted.png", width = 30, height = 10, units = "cm")
+
+# Q59
+
+caption <- "Respondent Prayer Outside of Religious Services"
+prayer <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q59)
+prayer_plot <- plot_horizontal_bar(prayer)
+prayer_plot <- prayer_plot + labs(caption = caption, x = "", y = "")
+prayer_plot
+ggsave("figures/q59_prayer.png", width = 20, height = 10, units = "cm")
+prayer_table <- chart_single_result_flextable(climate_experience_data_named$Q59, Count)
+prayer_table
+save_as_docx(prayer_table, path = "./figures/q59_prayer.docx")
+
+# Faceted plot working with 3x3 grid
+df <- select(climate_experience_data, Q52_bin, Q53_bin, Q57_bin, Q59)
+names(df) <- c("Q52_bin", "Q53_bin", "Q57_bin", "response")
+facet_names <- c(`Q52_bin` = "Spirituality", `Q53_bin` = "Politics L/R", `Q57_bin` = "Religiosity", `low`="low", `medium`="medium", `high`="high")
+facet_labeller <- function(variable,value){return(facet_names[value])}
+df$response <- factor(df$response, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
+df$response <- fct_recode(df$response, "More than once a week" = "1", "Once a week" = "2", "At least once a month" = "3", "Only on special holy days" = "4", "Never" = "5")
+df %>% 
+  # we need to get the data including facet info in long format, so we use pivot_longer()
+  pivot_longer(!response, names_to = "bin_name", values_to = "b") %>% 
+  # add counts for plot below
+  count(response, bin_name, b) %>%
+  group_by(bin_name,b) %>%
+  mutate(perc=paste0(round(n*100/sum(n),1),"%")) %>% 
+  # run ggplot
+  ggplot(aes(x = n, y = "", fill = response)) +
+  geom_col(position=position_fill(), aes(fill=response)) +
+  geom_text(aes(label = perc), position = position_fill(vjust=.5), size=2) +
+  scale_fill_brewer(palette = "Dark2", type = "qual") +
+  scale_x_continuous(labels = scales::percent_format()) +
+  facet_grid(vars(b), vars(bin_name), labeller=as_labeller(facet_names)) + 
+  labs(caption = caption, x = "", y = "") + 
+  guides(fill = guide_legend(title = NULL))
+ggsave("figures/q59_faceted.png", width = 30, height = 10, units = "cm")
+
+```
+# Comparing with attitudes surrounding climate change
+
+```{r}
+# Q6
+
+q6_data <- qualtrics_process_single_multiple_choice_unsorted_streamlined(climate_experience_data$Q6)
+
+title <- "Do you think the climate is changing?"
+
+level_order <- c("Don’t know",
+                 "Definitely not changing",
+                 "Probably not changing", 
+                 "Probably changing",
+                 "Definitely changing")
+## code if a specific palette is needed for matching
+fill = wheel(ochre, num = as.integer(count(q6_data[1])))
+# make plot
+q6_data_plot <- ggplot(q6_data, aes(x = n, y = response, fill = fill)) +
+  geom_col(colour = "white") +
+  ## add percentage labels
+  geom_text(aes(label = perc),
+            ## make labels left-aligned and white
+            hjust = 1, colour = "black", size=4) + # use nudge_x = 30, to shift position
+  ## reduce spacing between labels and bars
+  scale_fill_identity(guide = "none") +
+  ## get rid of all elements except y axis labels + adjust plot margin
+  theme_ipsum_rc() +
+  theme(plot.margin = margin(rep(15, 4))) +
+  easy_center_title() + 
+  # with thanks for helpful info on doing wrap here: https://stackoverflow.com/questions/21878974/wrap-long-axis-labels-via-labeller-label-wrap-in-ggplot2
+  scale_y_discrete(labels = wrap_format(30), limits = level_order) + 
+  theme(plot.title = element_text(size =18, hjust = 0.5), axis.text.y = element_text(size =16)) +
+  labs(title = title, x = "", y = "")
+
+q6_data_plot 
+
+ggsave("figures/q6.png", width = 18, height = 12, units = "cm")
+```
+
+# Subsetting
+
+```{r}
+## Q57 subsetting based on Religiosity --------------------------------------------------------------
+climate_experience_data <- climate_experience_data %>%
+  mutate(
+    Q57_bin = case_when(
+      Q57_1 > mean(Q57_1) + sd(Q57_1) ~ "high",
+      Q57_1 < mean(Q57_1) - sd(Q57_1) ~ "low",
+      TRUE ~ "medium"
+    ) %>% factor(levels = c("low", "medium", "high"))
+  )
+
+## Subsetting based on Spirituality --------------------------------------------------------------
+
+### Nature relatedness --------------------------------------------------------------
+# Calculate overall mean nature-relatedness score based on six questions:
+climate_experience_data$Q51_score <- rowMeans(select(climate_experience_data, Q51_remote_vacation:Q51_heritage))
+
+# Create low/med/high bins based on Mean and +1/-1 Standard Deviation
+climate_experience_data <- climate_experience_data %>%
+  mutate(
+    Q51_bin = case_when(
+      Q51_score > mean(Q51_score) + sd(Q51_score) ~ "high",
+      Q51_score < mean(Q51_score) - sd(Q51_score) ~ "low",
+      TRUE ~ "medium"
+    ) %>% factor(levels = c("low", "medium", "high"))
+  )
+
+### Spirituality scale  --------------------------------------------------------------
+# Calculate overall mean spirituality score based on six questions:
+climate_experience_data$Q52_score <- rowMeans(select(climate_experience_data, Q52a_1:Q52f_1))
+
+# Create low/med/high bins based on Mean and +1/-1 Standard Deviation
+climate_experience_data <- climate_experience_data %>%
+  mutate(
+    Q52_bin = case_when(
+      Q52_score > mean(Q52_score) + sd(Q52_score) ~ "high",
+      Q52_score < mean(Q52_score) - sd(Q52_score) ~ "low",
+      TRUE ~ "medium"
+    ) %>% factor(levels = c("low", "medium", "high"))
+  )
+```
 
 ::: {.callout-tip}
 ## How can we measure religion?

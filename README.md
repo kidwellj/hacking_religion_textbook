@@ -2,6 +2,8 @@
 
 An open textbook introducing data science to religious studies.
 
+You can view a live demo of the book here: [https://kidwellj.github.io/hacking_religion_textbook/intro.html]
+
 The course here has been compiled with [quarto](https://quarto.org/), and so the live instance of the course is compiled from openly accessible resources located in this repository. If you're interested in doing something similar, there are a number of other options, some of which have lamentably turned commercial, including:  [bookdown](https://github.com/rstudio/bookdown), [gitbook](https://docs.gitbook.com/), [mkdocs](https://www.mkdocs.org/), [readthedocs](https://readthedocs.org) which technically uses [Sphinx](http://www.sphinx-doc.org/en/master/) or [daux](https://daux.io/).
 
 Directory structure includes:
