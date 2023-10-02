@@ -81,17 +81,24 @@ barplot(height=df$value, names=df$key)
 #### GGPlot
 
 ```{r}
+# unsorted
 ggplot(wmids_data, aes(x = key, y = value)) +
   geom_bar(stat = "identity")
 
+# with sorting added in
 ggplot(wmids_data, aes(x= reorder(key,-value),value)) + geom_bar(stat ="identity")
 ```
 
 Clean up chart features
 
 ```{r}
+
 ```
 
+
+Add time series data for 2001 and 2011 census, change to grouped bar plot:
+
+https://r-graphics.org/recipe-bar-graph-grouped-bar#discussion-8
 
 <!--
 Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html

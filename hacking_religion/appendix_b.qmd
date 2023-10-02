@@ -9,6 +9,7 @@
 ## Python Data Science Books:
 - [Intro to Cultural Analytics and Python](https://melaniewalsh.github.io/Intro-Cultural-Analytics/welcome.html)
 - [The Hitchhiker's Guide to Python](https://docs.python-guide.org/)
+- (https://pysd-cookbook.readthedocs.io/en/latest/index.html)
 
 ## Reproducible Research:
 - [Anna Krystalli, Putting the into Reproducible Research: Directors Cut](https://annakrystalli.me/talks/r-in-repro-research-dc.html)
