@@ -15,8 +15,7 @@ setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
 library(here) # much better way to manage working paths in R across multiple instances
 library(tidyverse)
 here::i_am("chapter_1.qmd")
-
-religion_uk <- read.csv(here("example_data", "census2021-ts030-rgn.csv")) 
+uk_census_2021_religion <- read.csv(here("example_data", "census2021-ts030-rgn.csv")) 
 ```
 
 ### Examining data:
@@ -24,19 +23,21 @@ religion_uk <- read.csv(here("example_data", "census2021-ts030-rgn.csv"))
 What's in the table? You can take a quick look at either the top of the data frame, or the bottom using one of the following commands:
 
 ```{r .column-page}
-head(religion_uk)
+head(uk_census_2021_religion)
+summarise(uk_census_2021_religion)
+rowSums(uk_census_2021_religion)
 ```
 
 This is actually a fairly ugly table, so I'll use an R tool called kable to give you prettier tables in the future, like this:
 
 ```{r}
-knitr::kable(head(religion_uk))
+knitr::kable(head(uk_census_2021_religion))
 ```
 
 You can see how I've nested the previous command inside the `kable` command. For reference, in some cases when you're working with really complex scripts with many different libraries and functions, they may end up with functions that have the same name. You can specify the library where the function is meant to come from by preceding it with :: as we've done `knitr::` above. The same kind of output can be gotten using `tail`:
 
 ```{r}
-knitr::kable(tail(religion_uk))
+knitr::kable(tail(uk_census_2021_religion))
 ```
 
 ### Parsing and Exploring your data
@@ -47,7 +48,7 @@ You can use the `filter` command to do this. To give an example, `filter` can pi
 
 
 ```{r}
-wmids_data <- religion_uk %>% 
+uk_census_2021_religion_wmids <- uk_census_2021_religion %>% 
   filter(geography=="West Midlands")  
 ```
 
@@ -63,8 +64,8 @@ In keeping with my goal to demonstrate data science through examples, we're goin
 We've got a nice lean set of data, so now it's time to visualise this. We'll start by making a pie chart:
 
 ```{r}
-wmids_data <- wmids_data %>% select(no_religion:no_response)
-wmids_data <- gather(wmids_data)
+uk_census_2021_religion_wmids <- uk_census_2021_religion_wmids %>% select(no_religion:no_response)
+uk_census_2021_religion_wmids <- gather(uk_census_2021_religion_wmids)
 ```
 
 
@@ -73,7 +74,7 @@ There are two basic ways to do visualisations in R. You can work with basic func
 #### Base R
 
 ```{r}
-df <- wmids_data[order(wmids_data$value,decreasing = TRUE),]
+df <- uk_census_2021_religion_wmids[order(uk_census_2021_religion_wmids$value,decreasing = TRUE),]
 barplot(height=df$value, names=df$key)
 ``` 
 
@@ -81,20 +82,61 @@ barplot(height=df$value, names=df$key)
 #### GGPlot
 
 ```{r}
-# unsorted
-ggplot(wmids_data, aes(x = key, y = value)) +
-  geom_bar(stat = "identity")
-
-# with sorting added in
-ggplot(wmids_data, aes(x= reorder(key,-value),value)) + geom_bar(stat ="identity")
+ggplot(uk_census_2021_religion_wmids, aes(x = key, y = value)) +   # <1>
+  geom_bar(stat = "identity")                   # <1>
+ggplot(uk_census_2021_religion_wmids, aes(x= reorder(key,-value),value)) + geom_bar(stat ="identity") # <2>
 ```
 
-Clean up chart features
+1. First we'll plot the data using `ggplot` and then...
+2. We'll re-order the column by size.
+
+Let's assume we're working with a data set that doesn't include a "totals" column and that we might want to get sums for each column. This is pretty easy to do in R:
 
 ```{r}
-
+uk_census_2021_religion_totals <- uk_census_2021_religion %>% select(no_religion:no_response) # <1>
+uk_census_2021_religion_totals <- uk_census_2021_religion_totals %>%
+   summarise(across(everything(), ~ sum(., na.rm = TRUE)))  # <2>
+uk_census_2021_religion_totals <- gather(uk_census_2021_religion_totals) # <3>
+ggplot(uk_census_2021_religion_totals, aes(x= reorder(key,-value),value)) + geom_bar(stat ="identity") # <4>
 ```
 
+1. First, remove the column with region names and the totals for the regions as we want just integer data. 
+2. Second calculate the totals. In this example we use the tidyverse library `dplyr()`, but you can also do this using base R with `colsums()` like this: `uk_census_2021_religion_totals <- colSums(uk_census_2021_religion_totals, na.rm = TRUE)`. The downside with base R is that you'll also need to convert the result into a dataframe for `ggplot` like this: `uk_census_2021_religion_totals <- as.data.frame(uk_census_2021_religion_totals)`
+3. In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()
+4. Now plot it out and have a look!
+
+You might have noticed that these two dataframes give us somewhat different results. But with data science, it's much more interesting to compare these two side-by-side in a visualisation. We can join these two dataframes and plot the bars side by side using `bind()` - which can be done by columns with cbind() and rows using rbind():
+
+```{r}
+uk_census_2021_religion_merged <- rbind(uk_census_2021_religion_totals, uk_census_2021_religion_wmids)
+```
+
+Do you notice there's going to be a problem here? How can we tell one set from the other? We need to add in something idenfiable first! This isn't too hard to do as we can simply create a new column for each with identifiable information before we bind them:
+
+```{r}
+uk_census_2021_religion_totals$dataset <- c("totals")
+uk_census_2021_religion_wmids$dataset <- c("wmids")
+uk_census_2021_religion_merged <- rbind(uk_census_2021_religion_totals, uk_census_2021_religion_wmids)
+```
+
+Now we're ready to plot out our data as a grouped barplot:
+
+```{r}
+ggplot(uk_census_2021_religion_merged, aes(fill=dataset, x= reorder(key,-value), value)) + geom_bar(position="dodge", stat ="identity")
+```
+If you're looking closely, you will notice that I've added two elements to our previous ggplot. I've asked ggplot to fill in the columns with reference to the `dataset` column we've just created. Then I've also asked ggplot to alter the `position="dodge"` which places bars side by side rather than stacked on top of one another. You can give it a try without this instruction to see how this works. We will use stacked bars in a later chapter, so remember this feature.
+
+If you inspect our chart, you can see that we're getting closer, but it's not really that helpful to compare the totals. What we need to do is get percentages that can be compared side by side. This is easy to do using another `dplyr` feature `mutate`:
+
+```{r}
+uk_census_2021_religion_totals <- uk_census_2021_religion_totals %>% 
+  dplyr::mutate(perc = scales::percent(value / sum(value), accuracy = 0.1, trim = FALSE)) # <3>
+uk_census_2021_religion_wmids <- uk_census_2021_religion_wmids %>% 
+  dplyr::mutate(perc = scales::percent(value / sum(value), accuracy = 0.1, trim = FALSE)) # <3>
+uk_census_2021_religion_merged <- rbind(uk_census_2021_religion_totals, uk_census_2021_religion_wmids)
+ggplot(uk_census_2021_religion_merged, aes(fill=dataset, x=key, y=perc)) + geom_bar(position="dodge", stat ="identity")
+```
+Now you can see a very rough comparison
 
 Add time series data for 2001 and 2011 census, change to grouped bar plot:
 
@@ -104,27 +146,7 @@ https://r-graphics.org/recipe-bar-graph-grouped-bar#discussion-8
 Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html
 -->
 
-::: {.callout-tip}
-## What is Religion?
-Content tbd
-:::
 
-
-
-
-::: {.callout-tip}
-## Hybrid Religious Identity
-Content tbd
-:::
-
-
-
-
-
-::: {.callout-tip}
-## What is Secularisation?
-Content tbd
-:::
 
 
 

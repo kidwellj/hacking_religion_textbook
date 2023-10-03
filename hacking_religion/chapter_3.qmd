@@ -4,7 +4,8 @@ Guides to geographies:
 https://rconsortium.github.io/censusguide/
 https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/
 
-
+Extact places of worship from Ordnance survey open data set
+Calculate proximity to pubs
 
 # References {.unnumbered}
 
