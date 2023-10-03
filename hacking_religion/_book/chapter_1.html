@@ -271,13 +271,13 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <div class="cell-output cell-output-stderr">
 <pre><code>here() starts at /Users/kidwellj/gits/hacking_religion_textbook/hacking_religion</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>religion_uk <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"example_data"</span>, <span class="st">"census2021-ts030-rgn.csv"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"example_data"</span>, <span class="st">"census2021-ts030-rgn.csv"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="examining-data" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="examining-data"><span class="header-section-number">2.1.1</span> Examining data:</h3>
 <p>What’s in the table? You can take a quick look at either the top of the data frame, or the bottom using one of the following commands:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(religion_uk)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(uk_census_2021_religion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                 geography   total no_religion christian buddhist  hindu jewish
 1               North East 2647012     1058122   1343948     7026  10924   4389
@@ -297,7 +297,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 <p>This is actually a fairly ugly table, so I’ll use an R tool called kable to give you prettier tables in the future, like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(religion_uk))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(uk_census_2021_religion))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
@@ -413,7 +413,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 </div>
 <p>You can see how I’ve nested the previous command inside the <code>kable</code> command. For reference, in some cases when you’re working with really complex scripts with many different libraries and functions, they may end up with functions that have the same name. You can specify the library where the function is meant to come from by preceding it with :: as we’ve done <code>knitr::</code> above. The same kind of output can be gotten using <code>tail</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">tail</span>(religion_uk))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">tail</span>(uk_census_2021_religion))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
@@ -541,7 +541,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <p>The first thing you’re going to want to do is to take a smaller subset of a large data set, either by filtering out certain columns or rows. Now let’s say we want to just work with the data from the West Midlands, and we’d like to omit some of the columns. We can choose a specific range of columns using <code>select</code>, like this:</p>
 <p>You can use the <code>filter</code> command to do this. To give an example, <code>filter</code> can pick a single row in the following way:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>wmids_data <span class="ot">&lt;-</span> religion_uk <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_wmids <span class="ot">&lt;-</span> uk_census_2021_religion <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(geography<span class="sc">==</span><span class="st">"West Midlands"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we’ll use select in a different way to narrow our data to specific columns that are needed (no totals!).</p>
@@ -553,14 +553,14 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <h2 data-number="2.2" class="anchored" data-anchor-id="making-your-first-chart"><span class="header-section-number">2.2</span> Making your first chart</h2>
 <p>We’ve got a nice lean set of data, so now it’s time to visualise this. We’ll start by making a pie chart:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>wmids_data <span class="ot">&lt;-</span> wmids_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(no_religion<span class="sc">:</span>no_response)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>wmids_data <span class="ot">&lt;-</span> <span class="fu">gather</span>(wmids_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_wmids <span class="ot">&lt;-</span> uk_census_2021_religion_wmids <span class="sc">%&gt;%</span> <span class="fu">select</span>(no_religion<span class="sc">:</span>no_response)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_wmids <span class="ot">&lt;-</span> <span class="fu">gather</span>(uk_census_2021_religion_wmids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are two basic ways to do visualisations in R. You can work with basic functions in R, often called “base R” or you can work with an alternative library called ggplot:</p>
 <section id="base-r" class="level4" data-number="2.2.0.1">
 <h4 data-number="2.2.0.1" class="anchored" data-anchor-id="base-r"><span class="header-section-number">2.2.0.1</span> Base R</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> wmids_data[<span class="fu">order</span>(wmids_data<span class="sc">$</span>value,<span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> uk_census_2021_religion_wmids[<span class="fu">order</span>(uk_census_2021_religion_wmids<span class="sc">$</span>value,<span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="at">height=</span>df<span class="sc">$</span>value, <span class="at">names=</span>df<span class="sc">$</span>key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="chapter_1_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
@@ -570,68 +570,96 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <section id="ggplot" class="level4" data-number="2.2.0.2">
 <h4 data-number="2.2.0.2" class="anchored" data-anchor-id="ggplot"><span class="header-section-number">2.2.0.2</span> GGPlot</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unsorted</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wmids_data, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> value)) <span class="sc">+</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-11"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-11-1"><a href="#annotated-cell-11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_wmids, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="annotated-cell-11-2"><a href="#annotated-cell-11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-12" data-code-annotation="2" data-code-lines="1">We’ll re-order the column by size.</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output-display">
 <p><img src="chapter_1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># with sorting added in</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(wmids_data, <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">reorder</span>(key,<span class="sc">-</span>value),value)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span><span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-12"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-12" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-12-1" class="code-annotation-target"><a href="#annotated-cell-12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_wmids, <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">reorder</span>(key,<span class="sc">-</span>value),value)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span><span class="st">"identity"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="chapter_1_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Clean up chart features</p>
+<p>Let’s assume we’re working with a data set that doesn’t include a “totals” column and that we might want to get sums for each column. This is pretty easy to do in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-13"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-13-1" class="code-annotation-target"><a href="#annotated-cell-13-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_totals <span class="ot">&lt;-</span> uk_census_2021_religion <span class="sc">%&gt;%</span> <span class="fu">select</span>(no_religion<span class="sc">:</span>no_response)</span>
+<span id="annotated-cell-13-2"><a href="#annotated-cell-13-2" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_totals <span class="ot">&lt;-</span> uk_census_2021_religion_totals <span class="sc">%&gt;%</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-13-3" class="code-annotation-target"><a href="#annotated-cell-13-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-13-4" class="code-annotation-target"><a href="#annotated-cell-13-4" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_totals <span class="ot">&lt;-</span> <span class="fu">gather</span>(uk_census_2021_religion_totals)</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-13" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-13-5" class="code-annotation-target"><a href="#annotated-cell-13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_totals, <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">reorder</span>(key,<span class="sc">-</span>value),value)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span><span class="st">"identity"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="1" data-code-lines="1">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="2" data-code-lines="3">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="3" data-code-lines="4">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
+</dd>
+<dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-13" data-code-annotation="4" data-code-lines="5">Now plot it out and have a look!</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="chapter_1_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You might have noticed that these two dataframes give us somewhat different results. But with data science, it’s much more interesting to compare these two side-by-side in a visualisation. We can join these two dataframes and plot the bars side by side using <code>bind()</code> - which can be done by columns with cbind() and rows using rbind():</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_merged <span class="ot">&lt;-</span> <span class="fu">rbind</span>(uk_census_2021_religion_totals, uk_census_2021_religion_wmids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Do you notice there’s going to be a problem here? How can we tell one set from the other? We need to add in something idenfiable first! This isn’t too hard to do as we can simply create a new column for each with identifiable information before we bind them:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_totals<span class="sc">$</span>dataset <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"totals"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_wmids<span class="sc">$</span>dataset <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"wmids"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_merged <span class="ot">&lt;-</span> <span class="fu">rbind</span>(uk_census_2021_religion_totals, uk_census_2021_religion_wmids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we’re ready to plot out our data as a grouped barplot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_merged, <span class="fu">aes</span>(<span class="at">fill=</span>dataset, <span class="at">x=</span> <span class="fu">reorder</span>(key,<span class="sc">-</span>value), value)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat =</span><span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter_1_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>If you’re looking closely, you will notice that I’ve added two elements to our previous ggplot. I’ve asked ggplot to fill in the columns with reference to the <code>dataset</code> column we’ve just created. Then I’ve also asked ggplot to alter the <code>position="dodge"</code> which places bars side by side rather than stacked on top of one another. You can give it a try without this instruction to see how this works. We will use stacked bars in a later chapter, so remember this feature.</p>
+<p>If you inspect our chart, you can see that we’re getting closer, but it’s not really that helpful to compare the totals. What we need to do is get percentages that can be compared side by side. This is easy to do using another <code>dplyr</code> feature <code>mutate</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-17"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-17-1"><a href="#annotated-cell-17-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_totals <span class="ot">&lt;-</span> uk_census_2021_religion_totals <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-17-2"><a href="#annotated-cell-17-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">perc =</span> scales<span class="sc">::</span><span class="fu">percent</span>(value <span class="sc">/</span> <span class="fu">sum</span>(value), <span class="at">accuracy =</span> <span class="fl">0.1</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>))</span>
+<span id="annotated-cell-17-3"><a href="#annotated-cell-17-3" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_wmids <span class="ot">&lt;-</span> uk_census_2021_religion_wmids <span class="sc">%&gt;%</span> </span>
+<span id="annotated-cell-17-4"><a href="#annotated-cell-17-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">perc =</span> scales<span class="sc">::</span><span class="fu">percent</span>(value <span class="sc">/</span> <span class="fu">sum</span>(value), <span class="at">accuracy =</span> <span class="fl">0.1</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>))</span>
+<span id="annotated-cell-17-5"><a href="#annotated-cell-17-5" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_merged <span class="ot">&lt;-</span> <span class="fu">rbind</span>(uk_census_2021_religion_totals, uk_census_2021_religion_wmids)</span>
+<span id="annotated-cell-17-6"><a href="#annotated-cell-17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_merged, <span class="fu">aes</span>(<span class="at">fill=</span>dataset, <span class="at">x=</span>key, <span class="at">y=</span>perc)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat =</span><span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter_1_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now you can see a very rough comparison</p>
 <p>Add time series data for 2001 and 2011 census, change to grouped bar plot:</p>
 <p>https://r-graphics.org/recipe-bar-graph-grouped-bar#discussion-8</p>
 <!--
 Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html
 -->
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Religion?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Content tbd</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hybrid Religious Identity
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Content tbd</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-What is Secularisation?
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Content tbd</p>
-</div>
-</div>
 </section>
 </section>
 <section id="references" class="level1 unnumbered">
 <h1 class="unnumbered">References</h1>
-<div id="refs" role="list">
+<div id="refs" role="list" style="display: none">
 
 </div>
 

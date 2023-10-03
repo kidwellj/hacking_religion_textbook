@@ -24,8 +24,6 @@ What's in the table? You can take a quick look at either the top of the data fra
 
 ```{r .column-page}
 head(uk_census_2021_religion)
-summarise(uk_census_2021_religion)
-rowSums(uk_census_2021_religion)
 ```
 
 This is actually a fairly ugly table, so I'll use an R tool called kable to give you prettier tables in the future, like this:
