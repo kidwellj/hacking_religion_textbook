@@ -10,7 +10,8 @@ In the example below, we're going to read in data from a comma separated value f
 
 
 ```{r}
-# R Setup -----------------------------------------------------------------
+#| include: true
+#| label: fig-polar
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
 library(here) # much better way to manage working paths in R across multiple instances
 library(tidyverse)

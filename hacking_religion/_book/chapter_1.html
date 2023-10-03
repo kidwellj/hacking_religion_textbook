@@ -246,9 +246,8 @@ div.csl-indent {
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you’d like to explore this all in a bit more depth, you can find a very helpful summary in R for Data Science, chapter 8, <a href="https://r4ds.hadley.nz/data-import#reading-data-from-a-file">“data import”</a>.</span></div></div>
 <p>In the example below, we’re going to read in data from a comma separated value file (“csv”) which has rows of information on separate lines in a text file with each column separated by a comma. This is one of the standard plain text file formats. R has a function you can use to import this efficiently called “read.csv”. Each line of code in R usually starts with the object, and then follows with instructions on what we’re going to put inside it, where that comes from, and how to format it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R Setup -----------------------------------------------------------------</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co"># much better way to manage working paths in R across multiple instances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co"># much better way to manage working paths in R across multiple instances</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>here() starts at /Users/kidwellj/gits/hacking_religion_textbook</code></pre>
 </div>
@@ -576,7 +575,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-12" data-code-annotation="2" data-code-lines="1">We’ll re-order the column by size.</span>
+<span data-code-annotation="2" data-code-lines="1" data-code-cell="annotated-cell-12">We’ll re-order the column by size.</span>
 </dd>
 </dl>
 </div>
@@ -599,19 +598,19 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="1" data-code-lines="1">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
+<span data-code-annotation="1" data-code-lines="1" data-code-cell="annotated-cell-13">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="2" data-code-lines="3">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
+<span data-code-annotation="2" data-code-lines="3" data-code-cell="annotated-cell-13">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="3" data-code-lines="4">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
+<span data-code-annotation="3" data-code-lines="4" data-code-cell="annotated-cell-13">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-13" data-code-annotation="4" data-code-lines="5">Now plot it out and have a look!</span>
+<span data-code-annotation="4" data-code-lines="5" data-code-cell="annotated-cell-13">Now plot it out and have a look!</span>
 </dd>
 </dl>
 </div>
