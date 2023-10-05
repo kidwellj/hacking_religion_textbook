@@ -97,10 +97,28 @@ ggplot(religious_affiliation_sums, aes(x = n, y = response)) +
             ## make labels left-aligned and white
             hjust = 1, nudge_x = -.5, colour = "white", size=3)
 ```
+I've added one feature to our chart that wasn't in the bar charts in chapter 1, text labels with the actual value on each bar. 
 
+You may be thinking about the plots we've just finished in chapter 1 and wondering how they compare. Let's use the same facet approach that we've just used to render this data in a subsetted way.
 
+```{r}
+# First we need to add in data on ethnic self-identification from our respondents:
+df <- select(climate_experience_data, Q56, Q0)
+religious_affiliation_ethnicity <- as_tibble(as_factor(df))
+names(religious_affiliation_ethnicity) <- c("Religion", "Ethnicity")
 
-Add colours
+religious_affiliation_ethnicity_sums <- religious_affiliation_ethnicity %>%  
+  group_by(Ethnicity) %>%
+  dplyr::count(Religion, sort = TRUE) %>% # <1>
+  dplyr::mutate(Religion = forcats::fct_rev(forcats::fct_inorder(Religion)))
+
+plot1 <- ggplot(religious_affiliation_ethnicity_sums, aes(x = n, y = Religion)) +
+  geom_col(colour = "white") + facet_wrap(~Ethnicity, scales="free_x")
+
+ggsave("chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
+
+```
+
 Use mutate to put "prefer not to say" at the bottom
 # Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels
 

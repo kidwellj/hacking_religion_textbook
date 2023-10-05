@@ -126,6 +126,9 @@ If you're looking closely, you will notice that I've added two elements to our p
 
 If you inspect our chart, you can see that we're getting closer, but it's not really that helpful to compare the totals. What we need to do is get percentages that can be compared side by side. This is easy to do using another `dplyr` feature `mutate`:
 
+[It's worth noting that an alternative approach is to leave the numbers intact and simply label them differently so they render as percentages on your charts. You can do this with the `scales() library and the label_percent() function. The downside of this approach is that it won't transfer to tables if you make them.]{.aside}
+
+
 ```{r}
 uk_census_2021_religion_totals <- uk_census_2021_religion_totals %>% 
   dplyr::mutate(perc = scales::percent(value / sum(value), accuracy = 0.1, trim = FALSE)) # <3>
@@ -158,7 +161,11 @@ ggplot(uk_census_2021_religion_merged, aes(fill=fct_reorder(dataset, value), x=r
 ```
 ## Is your chart accurate? Telling the truth in data science
 
-There is some technical work yet to be done fine-tuning the visualisation of our chart here. But I'd like to pause for a moment and consider an ethical question. Is the title of this chart truthful and accurate? On one hand, it is a straight-forward reference to the nature of the question asked on the 2021 census survey instrument. However, as you will see in the next chapter, large data sets from the same year which asked a fairly similar question yield different results. Part of this could be attributed to the amount of non-respose to this specific question which, in the 2021 census is between 5-6% across many demographics. It's possible (though perhaps unlikely) that all those non-responses were Sikh respondents who felt uncomfortable identifying themselves on such a survey. If even half of the non-responses were of this nature, this would dramatically shift the results especially in comparison to other minority groups. So there is some work for us to do here in representing non-response as a category on the census. But it's equally possible that someone might feel uncertain when answering, but nonetheless land on a particular decision marking "Christian" when they wondered if they should instead tick "no religion. Some surveys attempt to capture uncertainty in this way, asking respondents to mark how confident they are about their answers, but the census hasn't capture this so we simply don't know. If a large portion of respondents in the "Christian" category were hovering between this and another response, again, they might shift their answers when responding on a different day, perhaps having just had a conversation with a friend which shifted their thinking. Even the inertia of survey design can have an effect on this, so responding to other questions in a particular way, thinking about ethnic identity, for example, can prime a person to think about their religious identity in a different or more focussed way, altering their response to the question. For this reason, some survey instruments randomise the order of questions. This hasn't been done on the census (which would have been quite hard work given that most of the instruments were printed hard copies!), so again, we can't really be sure if those answers given are stable. Finally, researchers have also found that when people are asked to mark their religious affiliation, sometimes they can prefer to mark more than one answer. A person might consider themselves to be "Muslim" but also "Spiritual but not religious" preferring the combination of those identities. It is also the case that respondents can identify with more unexpected hybrid religious identities, such as "Christian" and "Hindu". The census only allows respondents to tick a single box for the religion category. It is worth noting that, in contrast, the responses for ethnicity allow for combinations. Given that this is the case, it's impossible to know which way a person went at the fork in the road as they were forced to choose just one half of this kind of hybrid identity. Finally, it is interesting to wonder exactly what it means for a person when they tick a box like this. Is it because they attend synagogue on a weekly basis? Some persons would consider weekly attendance at workship a prerequisite for membership in a group, but others would not. Indeed we can infer from surveys and research which aims to track rates of participation in weekly worship that many people who tick boxes for particular religious identities on the census have never attended a worship service at all.
+There is some technical work yet to be done fine-tuning the visualisation of our chart here. But I'd like to pause for a moment and consider an ethical question. Is the title of this chart truthful and accurate? On one hand, it is a straight-forward reference to the nature of the question asked on the 2021 census survey instrument. However, as you will see in the next chapter, large data sets from the same year which asked a fairly similar question yield different results. Part of this could be attributed to the amount of non-respose to this specific question which, in the 2021 census is between 5-6% across many demographics. It's possible (though perhaps unlikely) that all those non-responses were Sikh respondents who felt uncomfortable identifying themselves on such a survey. If even half of the non-responses were of this nature, this would dramatically shift the results especially in comparison to other minority groups. So there is some work for us to do here in representing non-response as a category on the census. 
+
+It's equally possible that someone might feel uncertain when answering, but nonetheless land on a particular decision marking "Christian" when they wondered if they should instead tick "no religion. Some surveys attempt to capture uncertainty in this way, asking respondents to mark how confident they are about their answers, but the census hasn't capture this so we simply don't know. If a large portion of respondents in the "Christian" category were hovering between this and another response, again, they might shift their answers when responding on a different day, perhaps having just had a conversation with a friend which shifted their thinking. Even the inertia of survey design can have an effect on this, so responding to other questions in a particular way, thinking about ethnic identity, for example, can prime a person to think about their religious identity in a different or more focussed way, altering their response to the question. For this reason, some survey instruments randomise the order of questions. This hasn't been done on the census (which would have been quite hard work given that most of the instruments were printed hard copies!), so again, we can't really be sure if those answers given are stable. 
+
+Finally, researchers have also found that when people are asked to mark their religious affiliation, sometimes they can prefer to mark more than one answer. A person might consider themselves to be "Muslim" but also "Spiritual but not religious" preferring the combination of those identities. It is also the case that respondents can identify with more unexpected hybrid religious identities, such as "Christian" and "Hindu". The census only allows respondents to tick a single box for the religion category. It is worth noting that, in contrast, the responses for ethnicity allow for combinations. Given that this is the case, it's impossible to know which way a person went at the fork in the road as they were forced to choose just one half of this kind of hybrid identity. Finally, it is interesting to wonder exactly what it means for a person when they tick a box like this. Is it because they attend synagogue on a weekly basis? Some persons would consider weekly attendance at workship a prerequisite for membership in a group, but others would not. Indeed we can infer from surveys and research which aims to track rates of participation in weekly worship that many people who tick boxes for particular religious identities on the census have never attended a worship service at all.
 
 What does this mean for our results? Are they completely unreliable and invalid? I don't think this is the case or that taking a clear-eyed look at the force and stability of our underlying data should be cause for despair. Instead, the most appropriate response is humility. Someone has made a statement which is recorded in the census, of this we can be sure. They felt it to be an accurate response on some level based on the information they had at the time. And with regard to the census, it is a massive, almost completely population level, sample so there is additional validity there. The easiest way to represent all this reality in the form of speaking truthfully about our data is to acknowledge that however valid it may seem, it is nonetheless a snapshot. For this reason, I would always advise that the best title for a chart is one which specifies the data set. We should also probably do something different with those non-responses:
 
@@ -184,14 +191,27 @@ Let's take a moment to review our hacker code. I've just spent some time address
 
 One element of R data analysis that can get really interesting is working with multiple variables. Above we've looked at the breakdown of religious affiliation across the whole of England and Wales (Scotland operates an independent census), and by placing this data alongside a specific region, we've already made a basic entry into working with multiple variables but this can get much more interesting. Adding an additional quantative variable (also known as bivariate data) into the mix, however can also generate a lot more information and we have to think about visualising it in different ways which can still communicate with visual clarity in spite of the additional visual noise which is inevitable with enhanced complexity. Let's have a look at the way that religion in England and Wales breaks down by ethnicity.
 
-```{r}
-library(nomisr)
+::: {.callout-tip}
+## What is Nomis?
 
+For the UK, census data is made available for programmatic research like this via an organisation called NOMIS. Luckily for us, there is an R library you can use to access nomis directly which greatly simplifies the process of pulling data down from the platform. It's worth noting that if you're not in the UK, there are similar options for other countries. Nearly every R textbook I've ever seen works with USA census data, so you'll find plenty of documentation available on the tools you can use for US Census data. Similarly for the EU, Canada, Austrailia etc.
+
+Here's the process to identify a dataset within the nomis platform:
+
+```{r}
 # Process to explore nomis() data for specific datasets
+library(nomisr)
 religion_search <- nomis_search(name = "*Religion*")
-religion_measures <- nomis_get_metadata("NM_529_1", "measures")
+religion_measures <- nomis_get_metadata("ST104", "measures")
 tibble::glimpse(religion_measures)
 religion_geography <- nomis_get_metadata("NM_529_1", "geography", "TYPE")
+```
+
+:::
+
+
+```{r}
+library(nomisr)
 
 # Get table of Census 2011 religion data from nomis
 z <- nomis_get_data(id = "NM_529_1", time = "latest", geography = "TYPE499", measures=c(20301))
@@ -201,46 +221,151 @@ uk_census_2011_religion <- filter(z, GEOGRAPHY_NAME=="England and Wales" & RURAL
 uk_census_2011_religion <- select(uk_census_2011_religion, C_RELPUK11_NAME, OBS_VALUE)
 # Plot results
 plot1 <- ggplot(uk_census_2011_religion, aes(x = C_RELPUK11_NAME, y = OBS_VALUE)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-ggsave(filename = "plot.png", plot = plot1)
+# ggsave(filename = "plot.png", plot = plot1)
+
+# grab daata from nomis for 2001 census religion / ethnicity
+
+z0 <- nomis_get_data(id = "NM_1872_1", time = "latest", geography = "TYPE499", measures=c(20100))
+# select relevant columns
+uk_census_2001_religion_ethnicity <- select(z0, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHHUK11_NAME, OBS_VALUE)
+# Filter down to simplified dataset with England / Wales and percentages without totals
+uk_census_2001_religion_ethnicity <- filter(uk_census_2001_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C_RELPUK11_NAME != "All categories: Religion")
+# Simplify data to only include general totals and omit subcategories
+uk_census_2001_religion_ethnicity <- uk_census_2001_religion_ethnicity %>% filter(grepl('Total', C_ETHHUK11_NAME))
 
 # grab data from nomis for 2011 census religion / ethnicity table
 z1 <- nomis_get_data(id = "NM_659_1", time = "latest", geography = "TYPE499", measures=c(20100))
 # select relevant columns
-uk_census_2011_religion_ethnicitity <- select(z1, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHPUK11_NAME, OBS_VALUE)
+uk_census_2011_religion_ethnicity <- select(z1, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHPUK11_NAME, OBS_VALUE)
 # Filter down to simplified dataset with England / Wales and percentages without totals
-uk_census_2011_religion_ethnicitity <- filter(uk_census_2011_religion_ethnicitity, GEOGRAPHY_NAME=="England and Wales" & C_RELPUK11_NAME != "All categories: Religion" & C_ETHPUK11_NAME != "All categories: Ethnic group")
+uk_census_2011_religion_ethnicity <- filter(uk_census_2011_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C_RELPUK11_NAME != "All categories: Religion" & C_ETHPUK11_NAME != "All categories: Ethnic group")
 # Simplify data to only include general totals and omit subcategories
-uk_census_2011_religion_ethnicitity <- uk_census_2011_religion_ethnicitity %>% filter(grepl('Total', C_ETHPUK11_NAME))
+uk_census_2011_religion_ethnicity <- uk_census_2011_religion_ethnicity %>% filter(grepl('Total', C_ETHPUK11_NAME))
 
-ggplot(uk_census_2011_religion_ethnicitity, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+# grab data from nomis for 2021 census religion / ethnicity table
+z2 <- nomis_get_data(id = "NM_2131_1", time = "latest", geography = "TYPE499", measures=c(20100))
+# select relevant columns
+uk_census_2021_religion_ethnicity <- select(z2, GEOGRAPHY_NAME, C2021_RELIGION_10_NAME, C2021_ETH_8_NAME, OBS_VALUE)
+# Filter down to simplified dataset with England / Wales and percentages without totals
+uk_census_2021_religion_ethnicity <- filter(uk_census_2021_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C2021_RELIGION_10_NAME != "Total" & C2021_ETH_8_NAME != "Total")
+# 2021 census includes white sub-groups so we need to omit those so we just have totals:
+uk_census_2021_religion_ethnicity <- filter(uk_census_2021_religion_ethnicity, C2021_ETH_8_NAME != "White: English, Welsh, Scottish, Northern Irish or British" & C2021_ETH_8_NAME != "White: Irish" & C2021_ETH_8_NAME != "White: Gypsy or Irish Traveller, Roma or Other White")
+
+ggplot(uk_census_2011_religion_ethnicity, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 The trouble with using grouped bars here, as you can see, is that there are quite sharp disparities which make it hard to compare in meaningful ways. We could use logarithmic rather than linear scaling as an option, but this is hard for many general public audiences to apprecaite without guidance. One alternative quick fix is to extract data from "white" respondents which can then be placed in a separate chart with a different scale.
 
 ```{r}
 # Filter down to simplified dataset with England / Wales and percentages without totals
-uk_census_2011_religion_ethnicitity_white <- filter(uk_census_2011_religion_ethnicitity, C_ETHPUK11_NAME == "White: Total")
-uk_census_2011_religion_ethnicitity_nonwhite <- filter(uk_census_2011_religion_ethnicitity, C_ETHPUK11_NAME != "White: Total")
+uk_census_2011_religion_ethnicity_white <- filter(uk_census_2011_religion_ethnicity, C_ETHPUK11_NAME == "White: Total")
+uk_census_2011_religion_ethnicity_nonwhite <- filter(uk_census_2011_religion_ethnicity, C_ETHPUK11_NAME != "White: Total")
 
-ggplot(uk_census_2011_religion_ethnicitity_nonwhite, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+ggplot(uk_census_2011_religion_ethnicity_nonwhite, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
 This still doesn't quite render with as much visual clarity and communication as I'd like. For a better look, we can use a technique in R called "faceting" to create a series of small charts which can be viewed alongside one another.
 
 ```{r}
-ggplot(uk_census_2011_religion_ethnicitity_nonwhite, aes(x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~C_ETHPUK11_NAME, ncol = 2) + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2011 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+ggplot(uk_census_2011_religion_ethnicity_nonwhite, aes(x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~C_ETHPUK11_NAME, ncol = 2) + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2011 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
+For our finale chart, I'd like to take the faceted chart we've just done, and add in totals for the previous two census years (2001 and 2011) so we can see how trends are changing in terms of religious affiliation within ethnic self-identification categories. We'll draw on some techniques we're already developed above using `rbind()` to connect up each of these charts (after we've added a column identifying each chart by the census year). We will also need to use one new technique to change the wording of ethnic categories as this isn't consistent from one census to the next and ggplot will struggle to chart things if the terms being used are exactly the same. We'll use `mutate()` again to accomplish this with some slightly different code.
 
-<!--
-Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html
--->
+```{r}
+# First add column to each dataframe so we don't lose track of the census it comes from:
+uk_census_2001_religion_ethnicity$dataset <- c("2001")
+uk_census_2011_religion_ethnicity$dataset <- c("2011")
+uk_census_2021_religion_ethnicity$dataset <- c("2021")
 
+# Let's tidy the names of each column:
 
+names(uk_census_2001_religion_ethnicity) <- c("Geography", "Religion", "Ethnicity", "Value", "Year")
+names(uk_census_2011_religion_ethnicity) <- c("Geography", "Religion", "Ethnicity", "Value", "Year")
+names(uk_census_2021_religion_ethnicity) <- c("Geography", "Religion", "Ethnicity", "Value", "Year")
 
+# Next we need to change the terms using mutate()
+uk_census_2001_religion_ethnicity <- uk_census_2001_religion_ethnicity %>% 
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^White: Total$", replacement = "White")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Mixed: Total$", replacement = "Mixed")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Asian: Total$", replacement = "Asian")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Black or Black British: Total$", replacement = "Black")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Chinese or Other ethnic group: Total$", replacement = "Other"))
+  
+uk_census_2011_religion_ethnicity <- uk_census_2011_religion_ethnicity %>% 
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^White: Total$", replacement = "White")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Mixed/multiple ethnic group: Total$", replacement = "Mixed")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Asian/Asian British: Total$", replacement = "Asian")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Black/African/Caribbean/Black British: Total$", replacement = "Black")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Other ethnic group: Total$", replacement = "Other"))
 
+uk_census_2021_religion_ethnicity <- uk_census_2021_religion_ethnicity %>% 
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^White: Total$", replacement = "White")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Mixed or Multiple ethnic groups$", replacement = "Mixed")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Asian, Asian British or Asian Welsh$", replacement = "Asian")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Black, Black British, Black Welsh, Caribbean or African$", replacement = "Black")) %>%
+  mutate(Ethnicity = str_replace_all(Ethnicity, 
+            pattern = "^Other ethnic group$", replacement = "Other"))
 
+# Now let's merge the tables:
+
+uk_census_merged_religion_ethnicity <- rbind(uk_census_2021_religion_ethnicity, uk_census_2011_religion_ethnicity)
+
+uk_census_merged_religion_ethnicity <- rbind(uk_census_merged_religion_ethnicity, uk_census_2001_religion_ethnicity)
+
+# As above, we'll split out non-white and white:
+
+uk_census_merged_religion_ethnicity_nonwhite <- filter(uk_census_merged_religion_ethnicity, Ethnicity != "White")
+
+# Time to plot!
+
+ggplot(uk_census_merged_religion_ethnicity_nonwhite, aes(fill=Year, x=Religion, y=Value)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~Ethnicity, ncol = 2) + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2001-2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+ 
+There are a few formatting issues which remain. Our y-axis number labels are in scientific format which isn't really very easy to read. You can use the very powerful and flexible `scales()` library to bring in some more readable formatting of numbers in a variety of places in R including in ggplot visualizations. 
+
+```{r}
+library(scales)
+ggplot(uk_census_merged_religion_ethnicity_nonwhite, aes(fill=Year, x=Religion, y=Value)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~Ethnicity, ncol = 2) + scale_fill_brewer(palette = "Set1") + scale_y_continuous(labels = unit_format(unit = "M", scale = 1e-6), breaks = breaks_extended(8)) + ggtitle("Religious Affiliation in the 2001-2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# https://ggplot2-book.org/scales-position#sec-position-continuous-breaks
+
+```
+This chart shows an increase in almost every category, though it's a bit hard to read in some cases. However, this information is based on the increase in raw numbers. It's possbile that numbers may be going up, but in some cases the percentage share for a particular category has actually gone down. Let's transform and visualise our data as percentages to see what kind of trends we can actually isolate:
+
+```{r}
+uk_census_merged_religion_ethnicity <- uk_census_merged_religion_ethnicity %>%
+  group_by(Ethnicity, Year) %>%
+  dplyr::mutate(Percent = Value/sum(Value))
+
+ggplot(uk_census_merged_religion_ethnicity, aes(fill=Year, x=Religion, y=Percent)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~Ethnicity, scales="free_x") + scale_fill_brewer(palette = "Set1") + scale_y_continuous(labels = scales::percent) + ggtitle("Religious Affiliation in the 2001-2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+Now you can see why this shift is important - the visualisation tells a completely different story in some cases across the two different charts. In the first, working off raw numbers we see a net increase in Christianity across all categories. But if we take into account the fact that the overall share of population is growing for each of these groups, their actual composition is changing in a different direction. The proportion of each group is declining across the three census periods (albeit with an exception for the "Other" category from 2011 to 2021).
+
+To highlight a few features of this final plot, I've used a specific feature within `facet_wrap` `scales = "free_x"` to let each of the individual facets adjust the total range on the x-axis. Since we're looking at trends here and not absolute values, having correspondence across scales isn't important and this makes for something a bit more visually tidy. I've also shifted the code for `scale_y_continuous` to render values as percentages (rather than millions).
+
+In case you want to print this plot out and hang it on your wall, you can use the ggsave tool to render the chart as an image file:
+
+```{r}
+plot1 <- ggplot(uk_census_merged_religion_ethnicity, aes(fill=Year, x=Religion, y=Percent)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~Ethnicity, scales="free_x") + scale_fill_brewer(palette = "Set1") + scale_y_continuous(labels = scales::percent) + ggtitle("Religious Affiliation in the 2001-2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggsave("chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
+```
 
 # References {.unnumbered}
 
