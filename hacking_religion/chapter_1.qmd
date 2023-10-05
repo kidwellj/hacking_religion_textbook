@@ -1,6 +1,6 @@
 # The 2021 UK Census
 
-## Your first project: building a pie chart
+## Your first project: the UK Census
 
 Let's start by importing some data into R. Because R is what is called an object-oriented programming language, we'll always take our information and give it a home inside a named object. There are many different kinds of objects, which you can specify, but usually R will assign a type that seems to fit best.
 
@@ -19,7 +19,7 @@ here::i_am("chapter_1.qmd")
 uk_census_2021_religion <- read.csv(here("example_data", "census2021-ts030-rgn.csv")) 
 ```
 
-### Examining data:
+## Examining data:
 
 What's in the table? You can take a quick look at either the top of the data frame, or the bottom using one of the following commands:
 
@@ -39,7 +39,7 @@ You can see how I've nested the previous command inside the `kable` command. For
 knitr::kable(tail(uk_census_2021_religion))
 ```
 
-### Parsing and Exploring your data
+## Parsing and Exploring your data
 
 The first thing you're going to want to do is to take a smaller subset of a large data set, either by filtering out certain columns or rows. Now let's say we want to just work with the data from the West Midlands, and we'd like to omit some of the columns. We can choose a specific range of columns using `select`, like this:
 
@@ -47,8 +47,7 @@ You can use the `filter` command to do this. To give an example, `filter` can pi
 
 
 ```{r}
-uk_census_2021_religion_wmids <- uk_census_2021_religion %>% 
-  filter(geography=="West Midlands")  
+uk_census_2021_religion_wmids <- uk_census_2021_religion %>% filter(geography=="West Midlands")  
 ```
 
 Now we'll use select in a different way to narrow our data to specific columns that are needed (no totals!).
@@ -58,7 +57,7 @@ Now we'll use select in a different way to narrow our data to specific columns t
 In keeping with my goal to demonstrate data science through examples, we're going to move on to producing some snappy looking charts for this data.
 
 
-## Making your first chart
+## Making your first data visulation: the humble bar chart
 
 We've got a nice lean set of data, so now it's time to visualise this. We'll start by making a pie chart:
 
@@ -70,7 +69,7 @@ uk_census_2021_religion_wmids <- gather(uk_census_2021_religion_wmids)
 
 There are two basic ways to do visualisations in R. You can work with basic functions in R, often called "base R" or you can work with an alternative library called ggplot:
 
-#### Base R
+### Base R
 
 ```{r}
 df <- uk_census_2021_religion_wmids[order(uk_census_2021_religion_wmids$value,decreasing = TRUE),]
@@ -78,7 +77,7 @@ barplot(height=df$value, names=df$key)
 ``` 
 
 
-#### GGPlot
+### GGPlot
 
 ```{r}
 ggplot(uk_census_2021_religion_wmids, aes(x = key, y = value)) +   # <1>
@@ -135,11 +134,89 @@ uk_census_2021_religion_wmids <- uk_census_2021_religion_wmids %>%
 uk_census_2021_religion_merged <- rbind(uk_census_2021_religion_totals, uk_census_2021_religion_wmids)
 ggplot(uk_census_2021_religion_merged, aes(fill=dataset, x=key, y=perc)) + geom_bar(position="dodge", stat ="identity")
 ```
-Now you can see a very rough comparison
+Now you can see a very rough comparison, which sets bars from the W Midlands data and overall data side by side for each category. The same principles that we've used here can be applied to draw in more data. You could, for example, compare census data from different years, e.g. 2001 2011 and 2021. Our use of `dplyr::mutate` above can be repeated to add an infinite number of further series' which can be plotted in bar groups.
 
-Add time series data for 2001 and 2011 census, change to grouped bar plot:
+We'll draw this data into comparison with later sets in the next chapter. But the one glaring issue which remains for our chart is that it's lacking in really any aesthetic refinements. This is where `ggplot` really shines as a tool as you can add all sorts of things.
 
-https://r-graphics.org/recipe-bar-graph-grouped-bar#discussion-8
+These are basically just added to our `ggplot` code. So, for example, let's say we want to improve the colours used for our bars. You can specify the formatting for the fill on the `scale` using `scale_fill_brewer`. This uses a particular tool (and a personal favourite of mine) called `colorbrewer`. Part of my appreciation of this tool is that you can pick colours which are not just visually pleasing, and produce useful contrast / complementary schemes, but you can also work proactively to accommodate colourblindness. Working with colour schemes which can be divergent in a visually obvious way will be even more important when we work on geospatial data and maps in a later chapter.
+
+```{r}
+ggplot(uk_census_2021_religion_merged, aes(fill=dataset, x=key, y=perc)) + geom_bar(position="dodge", stat ="identity") + scale_fill_brewer(palette = "Set1")
+```
+We might also want to add a border to our bars to make them more visually striking (notice the addition of `color` to the geom_bar below. I've also added `reorder()` to the x value to sort descending from the largest to smallest.
+
+[You can find more information about reordering ggplots on the [R Graph gallery](https://r-graph-gallery.com/267-reorder-a-variable-in-ggplot2.html).]{.aside}
+
+```{r}
+uk_census_2021_religion_merged$dataset <- factor(uk_census_2021_religion_merged$dataset, levels = c('wmids', 'totals'))
+ggplot(uk_census_2021_religion_merged, aes(fill=fct_reorder(dataset, value), x=reorder(key,-value),value, y=perc)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1")
+```
+We can fine tune a few other visual features here as well, like adding a title with `ggtitle` and a them with some prettier fonts with `theme_ipsum()` (which requires the `hrbrthemes()` library). We can also remove the x and y axis labels (not the data labels, which are rather important).
+
+```{r}
+ggplot(uk_census_2021_religion_merged, aes(fill=fct_reorder(dataset, value), x=reorder(key,-value),value, y=perc)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the UK: 2021") + xlab("") + ylab("")
+```
+## Is your chart accurate? Telling the truth in data science
+
+There is some technical work yet to be done fine-tuning the visualisation of our chart here. But I'd like to pause for a moment and consider an ethical question. Is the title of this chart truthful and accurate? On one hand, it is a straight-forward reference to the nature of the question asked on the 2021 census survey instrument. However, as you will see in the next chapter, large data sets from the same year which asked a fairly similar question yield different results. Part of this could be attributed to the amount of non-respose to this specific question which, in the 2021 census is between 5-6% across many demographics. It's possible (though perhaps unlikely) that all those non-responses were Sikh respondents who felt uncomfortable identifying themselves on such a survey. If even half of the non-responses were of this nature, this would dramatically shift the results especially in comparison to other minority groups. So there is some work for us to do here in representing non-response as a category on the census. But it's equally possible that someone might feel uncertain when answering, but nonetheless land on a particular decision marking "Christian" when they wondered if they should instead tick "no religion. Some surveys attempt to capture uncertainty in this way, asking respondents to mark how confident they are about their answers, but the census hasn't capture this so we simply don't know. If a large portion of respondents in the "Christian" category were hovering between this and another response, again, they might shift their answers when responding on a different day, perhaps having just had a conversation with a friend which shifted their thinking. Even the inertia of survey design can have an effect on this, so responding to other questions in a particular way, thinking about ethnic identity, for example, can prime a person to think about their religious identity in a different or more focussed way, altering their response to the question. For this reason, some survey instruments randomise the order of questions. This hasn't been done on the census (which would have been quite hard work given that most of the instruments were printed hard copies!), so again, we can't really be sure if those answers given are stable. Finally, researchers have also found that when people are asked to mark their religious affiliation, sometimes they can prefer to mark more than one answer. A person might consider themselves to be "Muslim" but also "Spiritual but not religious" preferring the combination of those identities. It is also the case that respondents can identify with more unexpected hybrid religious identities, such as "Christian" and "Hindu". The census only allows respondents to tick a single box for the religion category. It is worth noting that, in contrast, the responses for ethnicity allow for combinations. Given that this is the case, it's impossible to know which way a person went at the fork in the road as they were forced to choose just one half of this kind of hybrid identity. Finally, it is interesting to wonder exactly what it means for a person when they tick a box like this. Is it because they attend synagogue on a weekly basis? Some persons would consider weekly attendance at workship a prerequisite for membership in a group, but others would not. Indeed we can infer from surveys and research which aims to track rates of participation in weekly worship that many people who tick boxes for particular religious identities on the census have never attended a worship service at all.
+
+What does this mean for our results? Are they completely unreliable and invalid? I don't think this is the case or that taking a clear-eyed look at the force and stability of our underlying data should be cause for despair. Instead, the most appropriate response is humility. Someone has made a statement which is recorded in the census, of this we can be sure. They felt it to be an accurate response on some level based on the information they had at the time. And with regard to the census, it is a massive, almost completely population level, sample so there is additional validity there. The easiest way to represent all this reality in the form of speaking truthfully about our data is to acknowledge that however valid it may seem, it is nonetheless a snapshot. For this reason, I would always advise that the best title for a chart is one which specifies the data set. We should also probably do something different with those non-responses:
+
+```{r}
+ggplot(uk_census_2021_religion_merged, aes(fill=fct_reorder(dataset, value), x=reorder(key,-value),value, y=perc)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("")
+```
+
+
+Change orientation of X axis labels
++ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+Relabel fields
+Simplify y-axis labels
+Add percentage text to bars (or maybe save for next chapter?)
+
+
+## Making our script reproducible 
+
+Let's take a moment to review our hacker code. I've just spent some time addressing how we can be truthful in our data science work. We haven't done much yet to talk abour reproducibility. 
+
+
+## Multifactor Visualisation
+
+One element of R data analysis that can get really interesting is working with multiple variables. Above we've looked at the breakdown of religious affiliation across the whole of England and Wales (Scotland operates an independent census), and by placing this data alongside a specific region, we've already made a basic entry into working with multiple variables but this can get much more interesting. Adding an additional quantative variable (also known as bivariate data) into the mix, however can also generate a lot more information and we have to think about visualising it in different ways which can still communicate with visual clarity in spite of the additional visual noise which is inevitable with enhanced complexity. Let's have a look at the way that religion in England and Wales breaks down by ethnicity.
+
+```{r}
+library(nomisr)
+
+# Process to explore nomis() data for specific datasets
+religion_search <- nomis_search(name = "*Religion*")
+religion_measures <- nomis_get_metadata("NM_529_1", "measures")
+tibble::glimpse(religion_measures)
+religion_geography <- nomis_get_metadata("NM_529_1", "geography", "TYPE")
+
+# Get table of Census 2011 religion data from nomis
+z <- nomis_get_data(id = "NM_529_1", time = "latest", geography = "TYPE499", measures=c(20301))
+# Filter down to simplified dataset with England / Wales and percentages without totals
+uk_census_2011_religion <- filter(z, GEOGRAPHY_NAME=="England and Wales" & RURAL_URBAN_NAME=="Total" & C_RELPUK11_NAME != "All categories: Religion")
+# Drop unnecessary columns
+uk_census_2011_religion <- select(uk_census_2011_religion, C_RELPUK11_NAME, OBS_VALUE)
+# Plot results
+plot1 <- ggplot(uk_census_2011_religion, aes(x = C_RELPUK11_NAME, y = OBS_VALUE)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+ggsave(filename = "plot.png", plot = plot1)
+
+# grab data from nomis for 2011 census religion / ethnicity table
+z1 <- nomis_get_data(id = "NM_659_1", time = "latest", geography = "TYPE499", measures=c(20100))
+# select relevant columns
+uk_census_2011_religion_ethnicitity <- select(z1, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHPUK11_NAME, OBS_VALUE)
+# Filter down to simplified dataset with England / Wales and percentages without totals
+uk_census_2011_religion_ethnicitity <- filter(uk_census_2011_religion_ethnicitity, GEOGRAPHY_NAME=="England and Wales" & C_RELPUK11_NAME != "All categories: Religion" & C_ETHPUK11_NAME != "All categories: Ethnic group")
+# Simplify data to only include general totals and omit subcategories
+uk_census_2011_religion_ethnicitity <- uk_census_2011_religion_ethnicitity %>% filter(grepl('Total', C_ETHPUK11_NAME))
+
+ggplot(uk_census_2011_religion_ethnicitity, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("")
+
+```
+
+
 
 <!--
 Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html
