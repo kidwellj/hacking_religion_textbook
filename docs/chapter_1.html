@@ -219,7 +219,8 @@ div.csl-indent {
   <li><a href="#ggplot" id="toc-ggplot" class="nav-link" data-scroll-target="#ggplot"><span class="header-section-number">2.4.2</span> GGPlot</a></li>
   </ul></li>
   <li><a href="#is-your-chart-accurate-telling-the-truth-in-data-science" id="toc-is-your-chart-accurate-telling-the-truth-in-data-science" class="nav-link" data-scroll-target="#is-your-chart-accurate-telling-the-truth-in-data-science"><span class="header-section-number">2.5</span> Is your chart accurate? Telling the truth in data science</a></li>
-  <li><a href="#multifactor-visualisation" id="toc-multifactor-visualisation" class="nav-link" data-scroll-target="#multifactor-visualisation"><span class="header-section-number">2.6</span> Multifactor Visualisation</a></li>
+  <li><a href="#making-our-script-reproducible" id="toc-making-our-script-reproducible" class="nav-link" data-scroll-target="#making-our-script-reproducible"><span class="header-section-number">2.6</span> Making our script reproducible</a></li>
+  <li><a href="#multifactor-visualisation" id="toc-multifactor-visualisation" class="nav-link" data-scroll-target="#multifactor-visualisation"><span class="header-section-number">2.7</span> Multifactor Visualisation</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -578,7 +579,7 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-12" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="1" data-code-annotation="2" data-code-cell="annotated-cell-12">We’ll re-order the column by size.</span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-12" data-code-lines="1">We’ll re-order the column by size.</span>
 </dd>
 </dl>
 </div>
@@ -601,19 +602,19 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-13" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-annotation="1" data-code-cell="annotated-cell-13">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
+<span data-code-annotation="1" data-code-cell="annotated-cell-13" data-code-lines="1">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-annotation="2" data-code-cell="annotated-cell-13">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
+<span data-code-annotation="2" data-code-cell="annotated-cell-13" data-code-lines="3">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="4" data-code-annotation="3" data-code-cell="annotated-cell-13">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
+<span data-code-annotation="3" data-code-cell="annotated-cell-13" data-code-lines="4">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
 </dd>
 <dt data-target-cell="annotated-cell-13" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="5" data-code-annotation="4" data-code-cell="annotated-cell-13">Now plot it out and have a look!</span>
+<span data-code-annotation="4" data-code-cell="annotated-cell-13" data-code-lines="5">Now plot it out and have a look!</span>
 </dd>
 </dl>
 </div>
@@ -691,8 +692,12 @@ i Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all
 <p>Change orientation of X axis labels + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))</p>
 <p>Relabel fields Simplify y-axis labels Add percentage text to bars (or maybe save for next chapter?)</p>
 </section>
-<section id="multifactor-visualisation" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="multifactor-visualisation"><span class="header-section-number">2.6</span> Multifactor Visualisation</h2>
+<section id="making-our-script-reproducible" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="making-our-script-reproducible"><span class="header-section-number">2.6</span> Making our script reproducible</h2>
+<p>Let’s take a moment to review our hacker code. I’ve just spent some time addressing how we can be truthful in our data science work. We haven’t done much yet to talk abour reproducibility.</p>
+</section>
+<section id="multifactor-visualisation" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="multifactor-visualisation"><span class="header-section-number">2.7</span> Multifactor Visualisation</h2>
 <p>One element of R data analysis that can get really interesting is working with multiple variables. Above we’ve looked at the breakdown of religious affiliation across the whole of England and Wales (Scotland operates an independent census), and by placing this data alongside a specific region, we’ve already made a basic entry into working with multiple variables but this can get much more interesting. Adding an additional quantative variable (also known as bivariate data) into the mix, however can also generate a lot more information and we have to think about visualising it in different ways which can still communicate with visual clarity in spite of the additional visual noise which is inevitable with enhanced complexity. Let’s have a look at the way that religion in England and Wales breaks down by ethnicity.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nomisr)</span>
@@ -729,7 +734,30 @@ $ description.en &lt;chr&gt; "value", "percent"</code></pre>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter down to simplified dataset with England / Wales and percentages without totals</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>uk_census_2011_religion_ethnicitity <span class="ot">&lt;-</span> <span class="fu">filter</span>(uk_census_2011_religion_ethnicitity, GEOGRAPHY_NAME<span class="sc">==</span><span class="st">"England and Wales"</span> <span class="sc">&amp;</span> C_RELPUK11_NAME <span class="sc">!=</span> <span class="st">"All categories: Religion"</span> <span class="sc">&amp;</span> C_ETHPUK11_NAME <span class="sc">!=</span> <span class="st">"All categories: Ethnic group"</span>)</span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Simplify data to only include general totals and omit subcategories</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>uk_census_2011_religion_ethnicitity <span class="ot">&lt;-</span> uk_census_2011_religion_ethnicitity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'Total'</span>, C_ETHPUK11_NAME))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>uk_census_2011_religion_ethnicitity <span class="ot">&lt;-</span> uk_census_2011_religion_ethnicitity <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">'Total'</span>, C_ETHPUK11_NAME))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2011_religion_ethnicitity, <span class="fu">aes</span>(<span class="at">fill=</span>C_ETHPUK11_NAME, <span class="at">x=</span>C_RELPUK11_NAME, <span class="at">y=</span>OBS_VALUE)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat =</span><span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Religious Affiliation in the 2021 Census of England and Wales"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter_1_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The trouble with using grouped bars here, as you can see, is that there are quite sharp disparities which make it hard to compare in meaningful ways. We could use logarithmic rather than linear scaling as an option, but this is hard for many general public audiences to apprecaite without guidance. One alternative quick fix is to extract data from “white” respondents which can then be placed in a separate chart with a different scale.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter down to simplified dataset with England / Wales and percentages without totals</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>uk_census_2011_religion_ethnicitity_white <span class="ot">&lt;-</span> <span class="fu">filter</span>(uk_census_2011_religion_ethnicitity, C_ETHPUK11_NAME <span class="sc">==</span> <span class="st">"White: Total"</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>uk_census_2011_religion_ethnicitity_nonwhite <span class="ot">&lt;-</span> <span class="fu">filter</span>(uk_census_2011_religion_ethnicitity, C_ETHPUK11_NAME <span class="sc">!=</span> <span class="st">"White: Total"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2011_religion_ethnicitity_nonwhite, <span class="fu">aes</span>(<span class="at">fill=</span>C_ETHPUK11_NAME, <span class="at">x=</span>C_RELPUK11_NAME, <span class="at">y=</span>OBS_VALUE)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat =</span><span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Religious Affiliation in the 2021 Census of England and Wales"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter_1_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This still doesn’t quite render with as much visual clarity and communication as I’d like. For a better look, we can use a technique in R called “faceting” to create a series of small charts which can be viewed alongside one another.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2011_religion_ethnicitity_nonwhite, <span class="fu">aes</span>(<span class="at">x=</span>C_RELPUK11_NAME, <span class="at">y=</span>OBS_VALUE)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat =</span><span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>C_ETHPUK11_NAME, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Religious Affiliation in the 2011 Census of England and Wales"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="chapter_1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
 </div>
 <!--
 Reference on callout box syntax here: https://quarto.org/docs/authoring/callouts.html

@@ -212,10 +212,25 @@ uk_census_2011_religion_ethnicitity <- filter(uk_census_2011_religion_ethnicitit
 # Simplify data to only include general totals and omit subcategories
 uk_census_2011_religion_ethnicitity <- uk_census_2011_religion_ethnicitity %>% filter(grepl('Total', C_ETHPUK11_NAME))
 
-ggplot(uk_census_2011_religion_ethnicitity, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("")
+ggplot(uk_census_2011_religion_ethnicitity, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+The trouble with using grouped bars here, as you can see, is that there are quite sharp disparities which make it hard to compare in meaningful ways. We could use logarithmic rather than linear scaling as an option, but this is hard for many general public audiences to apprecaite without guidance. One alternative quick fix is to extract data from "white" respondents which can then be placed in a separate chart with a different scale.
+
+```{r}
+# Filter down to simplified dataset with England / Wales and percentages without totals
+uk_census_2011_religion_ethnicitity_white <- filter(uk_census_2011_religion_ethnicitity, C_ETHPUK11_NAME == "White: Total")
+uk_census_2011_religion_ethnicitity_nonwhite <- filter(uk_census_2011_religion_ethnicitity, C_ETHPUK11_NAME != "White: Total")
+
+ggplot(uk_census_2011_religion_ethnicitity_nonwhite, aes(fill=C_ETHPUK11_NAME, x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
+This still doesn't quite render with as much visual clarity and communication as I'd like. For a better look, we can use a technique in R called "faceting" to create a series of small charts which can be viewed alongside one another.
+
+```{r}
+ggplot(uk_census_2011_religion_ethnicitity_nonwhite, aes(x=C_RELPUK11_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~C_ETHPUK11_NAME, ncol = 2) + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2011 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
 
 
 <!--
