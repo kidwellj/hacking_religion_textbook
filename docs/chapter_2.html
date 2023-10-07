@@ -355,15 +355,15 @@ So <em>who’s</em> religious?
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="1">First we generate new a dataframe with sums per category and</span>
+<span data-code-annotation="1" data-code-lines="2" data-code-cell="annotated-cell-6">First we generate new a dataframe with sums per category and</span>
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="2">…sort in descending order</span>
+<span data-code-annotation="2" data-code-lines="3" data-code-cell="annotated-cell-6">…sort in descending order</span>
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="3">Then we add new column with percentages based on the sums you’ve just generated</span>
+<span data-code-annotation="3" data-code-lines="5" data-code-cell="annotated-cell-6">Then we add new column with percentages based on the sums you’ve just generated</span>
 </dd>
 </dl>
 </div>
@@ -395,7 +395,25 @@ So <em>who’s</em> religious?
 <p><img src="chapter_2_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Add colours Use mutate to put “prefer not to say” at the bottom # Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels</p>
+<p>I’ve added one feature to our chart that wasn’t in the bar charts in chapter 1, text labels with the actual value on each bar.</p>
+<p>You may be thinking about the plots we’ve just finished in chapter 1 and wondering how they compare. Let’s use the same facet approach that we’ve just used to render this data in a subsetted way.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we need to add in data on ethnic self-identification from our respondents:</span></span>
+<span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">select</span>(climate_experience_data, Q56, Q0)</span>
+<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>religious_affiliation_ethnicity <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(<span class="fu">as_factor</span>(df))</span>
+<span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(religious_affiliation_ethnicity) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Religion"</span>, <span class="st">"Ethnicity"</span>)</span>
+<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>religious_affiliation_ethnicity_sums <span class="ot">&lt;-</span> religious_affiliation_ethnicity <span class="sc">%&gt;%</span>  </span>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Ethnicity) <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-9-8"><a href="#annotated-cell-9-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(Religion, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="annotated-cell-9-9"><a href="#annotated-cell-9-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Religion =</span> forcats<span class="sc">::</span><span class="fu">fct_rev</span>(forcats<span class="sc">::</span><span class="fu">fct_inorder</span>(Religion)))</span>
+<span id="annotated-cell-9-10"><a href="#annotated-cell-9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-11"><a href="#annotated-cell-9-11" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(religious_affiliation_ethnicity_sums, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> Religion)) <span class="sc">+</span></span>
+<span id="annotated-cell-9-12"><a href="#annotated-cell-9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Ethnicity, <span class="at">scales=</span><span class="st">"free_x"</span>)</span>
+<span id="annotated-cell-9-13"><a href="#annotated-cell-9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-9-14"><a href="#annotated-cell-9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"chart.png"</span>, <span class="at">plot=</span>plot1, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">units=</span><span class="fu">c</span>(<span class="st">"in"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use mutate to put “prefer not to say” at the bottom # Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels</p>
 </section>
 <section id="q56-follow-ups" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Q56 follow-ups</h1>
