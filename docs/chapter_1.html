@@ -572,7 +572,7 @@ div.csl-indent {
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-10" data-code-annotation="2">We’ll re-order the column by size.</span>
+<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="2">We’ll re-order the column by size.</span>
 </dd>
 </dl>
 </div>
@@ -595,19 +595,19 @@ div.csl-indent {
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="1" data-code-cell="annotated-cell-11" data-code-annotation="1">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="1" data-code-annotation="1">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-11" data-code-annotation="2">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
+<span data-code-cell="annotated-cell-11" data-code-lines="3" data-code-annotation="2">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="4" data-code-cell="annotated-cell-11" data-code-annotation="3">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="3">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="5" data-code-cell="annotated-cell-11" data-code-annotation="4">Now plot it out and have a look!</span>
+<span data-code-cell="annotated-cell-11" data-code-lines="5" data-code-annotation="4">Now plot it out and have a look!</span>
 </dd>
 </dl>
 </div>
