@@ -1,4 +1,4 @@
-# Mapping churches: geospatial data science
+## Mapping churches: geospatial data science
 
 Until recently, most data science books didn't have a section on geospatial data. It was considered a specialist form of research best left to GIS technicians who tended to use proprietary tools like ArcGIS. This has changed significantly in the past five years, but you'll still be hard pressed to find an introduction to the subject which strays very far from a few simple data sets (mostly of the USA) and relatively uncomplicated geospatial operations. I actually first began learning R, back in 2013, right when open source geospatial research tools were beginning to be developed with quite a lot more energy and geospatial data is my personal favourite data science playground, so in this book we're going to go much deeper than is usual. There are also good reasons to take things a few steps further in the particular forms of data and inquiry that religion takes us into.
 
@@ -17,7 +17,7 @@ GeoJSON: a file format commonly used in other forms of coding, the "JSON" (an ac
 
 Now that you have a sense of some of the basic aspects of geospatial data, let's dive in and do a bit of learning in action.
 
-# Administrative shapes - the UK
+## Administrative shapes - the UK
 
 A good starting point is to aquire some adminstrative data. This is a way of referring to political boundaries, whether country borders or those of a local authority or some other administrative unit. For our purposes, we're going to import several different types of administrative boundary which will be used at different points in our visualisations below. It's worth noting that the data we use here was prepared to support the 2011 census, and make use of the shapefile format.
 
@@ -63,7 +63,7 @@ Before we move on, let's plot a simple map and have a look at one of our adminis
 ggplot(uk_countries) + geom_sf()
 ```
 
-# Load in Ordnance Survey OpenMap Points Data
+## Load in Ordnance Survey OpenMap Points Data
 
 ```{r}
 # Note: for more advanced reproducible scripts which demonstrate how these data surces have been 
@@ -142,7 +142,7 @@ https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistic
 
 Calculate proximity to pubs
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 ::: {#refs}
 :::

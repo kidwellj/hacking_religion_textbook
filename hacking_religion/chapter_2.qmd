@@ -8,7 +8,7 @@ While I've framed my comments above in terms of climate change research, it is a
 
 We've decided to open up access to our data and I'm highlighting it in this book because it's a unique opportunitiy to explore a dataset that emphasises diversity from the start, and by extension, provides some really interesting ways to use data science techniques to explore religion in the UK.
 
-# Loading in some data
+## Loading in some data
 
 ```{r, results = 'hide'}
 # R Setup -----------------------------------------------------------------
@@ -23,7 +23,7 @@ climate_experience_data <- read_sav(here("example_data", "climate_experience_dat
 
 The first thing to note here is that we've drawn in a different type of data file, this time from an `.sav` file, usully produced by the statistics software package SPSS. This uses a different R Library (I use `haven` for this). The upside is that in some cases where you have survey data with both a code and a value like "1" is eqivalent to "very much agree" this will preserve both in the R dataframe that is created. Now that you've loaded in data, you have a new R dataframe called "climate_experience_data" with a lot of columns with just under 1000 survey responses.
 
-# How can you ask about religion?
+## How can you ask about religion?
 
 One of the challenges we faced when running this study is how to gather responsible data from surveys regarding religious identity. We'll dive into this in depth as we do analysis and look at some of the agreements and conflicts in terms of respondent attribution. Just to set the stage, we used the following kinds of question to ask about religion and spirituality:
 
@@ -120,6 +120,7 @@ ggsave("chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
 
 ```
 
+<!--
 Use mutate to put "prefer not to say" at the bottom
 # Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels
 
@@ -331,9 +332,10 @@ climate_experience_data <- climate_experience_data %>%
     ) %>% factor(levels = c("low", "medium", "high"))
   )
 
+-->
 
 ::: {.callout-tip}
-## What is Religion?
+### What is Religion?
 Content tbd
 :::
 
@@ -341,7 +343,7 @@ Content tbd
 
 
 ::: {.callout-tip}
-## Hybrid Religious Identity
+### Hybrid Religious Identity
 Content tbd
 :::
 
@@ -350,11 +352,11 @@ Content tbd
 
 
 ::: {.callout-tip}
-## What is Secularisation?
+### What is Secularisation?
 Content tbd
 :::
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 ::: {#refs}
 :::
