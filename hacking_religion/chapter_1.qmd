@@ -13,9 +13,21 @@ In the example below, we're going to read in data from a comma separated value f
 #| include: true
 #| label: fig-polar
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
-library(here) # much better way to manage working paths in R across multiple instances
-library(tidyverse)
+library(here)  |> suppressPackageStartupMessages()
+library(tidyverse)  |> suppressPackageStartupMessages()
 here::i_am("chapter_1.qmd")
+
+# Set up local workspace:
+if (dir.exists("data") == FALSE) {
+  dir.create("data") 
+}
+if (dir.exists("figures") == FALSE) {
+  dir.create("figures") 
+}
+if (dir.exists("derivedData") == FALSE) {
+  dir.create("derivedData")
+}
+
 uk_census_2021_religion <- read.csv(here("example_data", "census2021-ts030-rgn.csv")) 
 ```
 
@@ -196,27 +208,14 @@ One element of R data analysis that can get really interesting is working with m
 
 For the UK, census data is made available for programmatic research like this via an organisation called NOMIS. Luckily for us, there is an R library you can use to access nomis directly which greatly simplifies the process of pulling data down from the platform. It's worth noting that if you're not in the UK, there are similar options for other countries. Nearly every R textbook I've ever seen works with USA census data, so you'll find plenty of documentation available on the tools you can use for US Census data. Similarly for the EU, Canada, Austrailia etc.
 
-Here's the process to identify a dataset within the nomis platform:
-
-```{r}
-# Process to explore nomis() data for specific datasets
-library(nomisr)
-# temporarily commenting out until renv can be implemented and runtime errors in other environments avoided:
-#religion_search <- nomis_search(name = "*Religion*")
-#religion_measures <- nomis_get_metadata("ST104", "measures")
-#tibble::glimpse(religion_measures)
-#religion_geography <- nomis_get_metadata("NM_529_1", "geography", "TYPE")
-```
+If you want to draw some data from the nomis platform yourself in R, have a look at the [companion cookbook repository](https://github.com/kidwellj/hacking_religion_cookbook/blob/main/nomis.R). 
 
 :::
 
 
 ```{r}
-library(nomisr)
 # Get table of Census 2011 religion data from nomis
-# temporarily commenting out until renv can be implemented and runtime errors in other environments avoided:
-#z <- nomis_get_data(id = "NM_529_1", time = "latest", geography = "TYPE499", measures=c(20301))
-#saveRDS(z, file = "z.rds")
+# Note: for reproducible code used to generate the dataset used in the book, see the cookbook here: 
 z <- readRDS(file = (here("example_data", "z.rds")))
 
 # Filter down to simplified dataset with England / Wales and percentages without totals
@@ -228,10 +227,6 @@ plot1 <- ggplot(uk_census_2011_religion, aes(x = C_RELPUK11_NAME, y = OBS_VALUE)
 # ggsave(filename = "plot.png", plot = plot1)
 
 # grab daata from nomis for 2001 census religion / ethnicity
-
-# temporarily commenting out until renv can be implemented and runtime errors in other environments avoided:
-#z0 <- nomis_get_data(id = "NM_1872_1", time = "latest", geography = "TYPE499", measures=c(20100))
-#saveRDS(z0, file = "z0.rds")
 z0 <- readRDS(file = (here("example_data", "z0.rds")))
 
 # select relevant columns
@@ -242,9 +237,6 @@ uk_census_2001_religion_ethnicity <- filter(uk_census_2001_religion_ethnicity, G
 uk_census_2001_religion_ethnicity <- uk_census_2001_religion_ethnicity %>% filter(grepl('Total', C_ETHHUK11_NAME))
 
 # grab data from nomis for 2011 census religion / ethnicity table
-# commenting out nomis_get temporarily until I can get renv working properly here
-#z1 <- nomis_get_data(id = "NM_659_1", time = "latest", geography = "TYPE499", measures=c(20100))
-#saveRDS(z1, file = "z1.rds")
 z1 <- readRDS(file = (here("example_data", "z1.rds")))
 
 # select relevant columns
@@ -255,8 +247,6 @@ uk_census_2011_religion_ethnicity <- filter(uk_census_2011_religion_ethnicity, G
 uk_census_2011_religion_ethnicity <- uk_census_2011_religion_ethnicity %>% filter(grepl('Total', C_ETHPUK11_NAME))
 
 # grab data from nomis for 2021 census religion / ethnicity table
-#z2 <- nomis_get_data(id = "NM_2131_1", time = "latest", geography = "TYPE499", measures=c(20100))
-#saveRDS(z2, file = "z2.rds")
 z2 <- readRDS(file = (here("example_data", "z2.rds")))
 
 # select relevant columns
@@ -355,7 +345,7 @@ ggplot(uk_census_merged_religion_ethnicity_nonwhite, aes(fill=Year, x=Religion, 
 There are a few formatting issues which remain. Our y-axis number labels are in scientific format which isn't really very easy to read. You can use the very powerful and flexible `scales()` library to bring in some more readable formatting of numbers in a variety of places in R including in ggplot visualizations. 
 
 ```{r}
-library(scales)
+library(scales) |> suppressPackageStartupMessages()
 ggplot(uk_census_merged_religion_ethnicity_nonwhite, aes(fill=Year, x=Religion, y=Value)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~Ethnicity, ncol = 2) + scale_fill_brewer(palette = "Set1") + scale_y_continuous(labels = unit_format(unit = "M", scale = 1e-6), breaks = breaks_extended(8)) + ggtitle("Religious Affiliation in the 2001-2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 # https://ggplot2-book.org/scales-position#sec-position-continuous-breaks

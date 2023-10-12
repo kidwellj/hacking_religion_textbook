@@ -1,6 +1,6 @@
-# Theology, Religious Studies, and Data Science
+# Hacking Religion
 
-An open textbook introducing data science to religious studies.
+An open textbook introducing data science to religious studies (or vice versa)
 
 You can view a live demo of the book here: [https://kidwellj.github.io/hacking_religion_textbook/intro.html]
 
@@ -24,6 +24,10 @@ Directory structure includes:
 2. [install quarto](https://quarto.org/docs/get-started/)
 3. change to the `hacking_religion` subdirectory and run `quarto preview`
 4. alternatively you can render a copy of the book using `quarto render`
+
+# Cookbook
+
+There is a companion repository which contains recipes which will replicate the example data used in the book. This can be found here: [https://github.com/kidwellj/hacking_religion_cookbook]
 
 # Copyright
 
