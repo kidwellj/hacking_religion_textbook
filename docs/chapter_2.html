@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Hacking Religion: TRS &amp; Data Science in Action - 3&nbsp; Survey Data: Spotlight Project</title>
+<title>Hacking Religion: TRS &amp; Data Science in Action - 2&nbsp; Survey Data: Spotlight Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter_2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter_2.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -163,31 +163,37 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction: Hacking Religion</span></span></a>
+ <span class="menu-text">Introduction: Hacking Religion</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_2.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mapping churches: geospatial data science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mapping churches: geospatial data science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data scraping, corpus analysis and wordclouds</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data scraping, corpus analysis and wordclouds</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -212,33 +218,33 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#loading-in-some-data" id="toc-loading-in-some-data" class="nav-link active" data-scroll-target="#loading-in-some-data"><span class="header-section-number">4</span> Loading in some data</a></li>
-  <li><a href="#how-can-you-ask-about-religion" id="toc-how-can-you-ask-about-religion" class="nav-link" data-scroll-target="#how-can-you-ask-about-religion"><span class="header-section-number">5</span> How can you ask about religion?</a></li>
-  <li><a href="#q56-follow-ups" id="toc-q56-follow-ups" class="nav-link" data-scroll-target="#q56-follow-ups"><span class="header-section-number">6</span> Q56 follow-ups</a></li>
-  <li><a href="#religious-affiliation-c---muslim-denomination-subquestion" id="toc-religious-affiliation-c---muslim-denomination-subquestion" class="nav-link" data-scroll-target="#religious-affiliation-c---muslim-denomination-subquestion"><span class="header-section-number">7</span> Religious Affiliation c - Muslim Denomination Subquestion</a></li>
-  <li><a href="#q57" id="toc-q57" class="nav-link" data-scroll-target="#q57"><span class="header-section-number">8</span> Q57</a></li>
-  <li><a href="#religiosity" id="toc-religiosity" class="nav-link" data-scroll-target="#religiosity"><span class="header-section-number">9</span> Religiosity</a></li>
-  <li><a href="#q58" id="toc-q58" class="nav-link" data-scroll-target="#q58"><span class="header-section-number">10</span> Q58</a></li>
-  <li><a href="#faceted-plot-working-with-3x3-grid" id="toc-faceted-plot-working-with-3x3-grid" class="nav-link" data-scroll-target="#faceted-plot-working-with-3x3-grid"><span class="header-section-number">11</span> Faceted plot working with 3x3 grid</a></li>
-  <li><a href="#q59" id="toc-q59" class="nav-link" data-scroll-target="#q59"><span class="header-section-number">12</span> Q59</a></li>
-  <li><a href="#faceted-plot-working-with-3x3-grid-1" id="toc-faceted-plot-working-with-3x3-grid-1" class="nav-link" data-scroll-target="#faceted-plot-working-with-3x3-grid-1"><span class="header-section-number">13</span> Faceted plot working with 3x3 grid</a></li>
-  <li><a href="#comparing-with-attitudes-surrounding-climate-change" id="toc-comparing-with-attitudes-surrounding-climate-change" class="nav-link" data-scroll-target="#comparing-with-attitudes-surrounding-climate-change"><span class="header-section-number">14</span> Comparing with attitudes surrounding climate change</a></li>
-  <li><a href="#q6" id="toc-q6" class="nav-link" data-scroll-target="#q6"><span class="header-section-number">15</span> Q6</a></li>
-  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting"><span class="header-section-number">16</span> Subsetting</a>
+  <li><a href="#loading-in-some-data" id="toc-loading-in-some-data" class="nav-link active" data-scroll-target="#loading-in-some-data"><span class="header-section-number">3</span> Loading in some data</a></li>
+  <li><a href="#how-can-you-ask-about-religion" id="toc-how-can-you-ask-about-religion" class="nav-link" data-scroll-target="#how-can-you-ask-about-religion"><span class="header-section-number">4</span> How can you ask about religion?</a></li>
+  <li><a href="#q56-follow-ups" id="toc-q56-follow-ups" class="nav-link" data-scroll-target="#q56-follow-ups"><span class="header-section-number">5</span> Q56 follow-ups</a></li>
+  <li><a href="#religious-affiliation-c---muslim-denomination-subquestion" id="toc-religious-affiliation-c---muslim-denomination-subquestion" class="nav-link" data-scroll-target="#religious-affiliation-c---muslim-denomination-subquestion"><span class="header-section-number">6</span> Religious Affiliation c - Muslim Denomination Subquestion</a></li>
+  <li><a href="#q57" id="toc-q57" class="nav-link" data-scroll-target="#q57"><span class="header-section-number">7</span> Q57</a></li>
+  <li><a href="#religiosity" id="toc-religiosity" class="nav-link" data-scroll-target="#religiosity"><span class="header-section-number">8</span> Religiosity</a></li>
+  <li><a href="#q58" id="toc-q58" class="nav-link" data-scroll-target="#q58"><span class="header-section-number">9</span> Q58</a></li>
+  <li><a href="#faceted-plot-working-with-3x3-grid" id="toc-faceted-plot-working-with-3x3-grid" class="nav-link" data-scroll-target="#faceted-plot-working-with-3x3-grid"><span class="header-section-number">10</span> Faceted plot working with 3x3 grid</a></li>
+  <li><a href="#q59" id="toc-q59" class="nav-link" data-scroll-target="#q59"><span class="header-section-number">11</span> Q59</a></li>
+  <li><a href="#faceted-plot-working-with-3x3-grid-1" id="toc-faceted-plot-working-with-3x3-grid-1" class="nav-link" data-scroll-target="#faceted-plot-working-with-3x3-grid-1"><span class="header-section-number">12</span> Faceted plot working with 3x3 grid</a></li>
+  <li><a href="#comparing-with-attitudes-surrounding-climate-change" id="toc-comparing-with-attitudes-surrounding-climate-change" class="nav-link" data-scroll-target="#comparing-with-attitudes-surrounding-climate-change"><span class="header-section-number">13</span> Comparing with attitudes surrounding climate change</a></li>
+  <li><a href="#q6" id="toc-q6" class="nav-link" data-scroll-target="#q6"><span class="header-section-number">14</span> Q6</a></li>
+  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting"><span class="header-section-number">15</span> Subsetting</a>
   <ul class="collapse">
-  <li><a href="#q57-subsetting-based-on-religiosity" id="toc-q57-subsetting-based-on-religiosity" class="nav-link" data-scroll-target="#q57-subsetting-based-on-religiosity"><span class="header-section-number">16.1</span> Q57 subsetting based on Religiosity ————————————————————–</a></li>
-  <li><a href="#subsetting-based-on-spirituality" id="toc-subsetting-based-on-spirituality" class="nav-link" data-scroll-target="#subsetting-based-on-spirituality"><span class="header-section-number">16.2</span> Subsetting based on Spirituality ————————————————————–</a>
+  <li><a href="#q57-subsetting-based-on-religiosity" id="toc-q57-subsetting-based-on-religiosity" class="nav-link" data-scroll-target="#q57-subsetting-based-on-religiosity"><span class="header-section-number">15.1</span> Q57 subsetting based on Religiosity ————————————————————–</a></li>
+  <li><a href="#subsetting-based-on-spirituality" id="toc-subsetting-based-on-spirituality" class="nav-link" data-scroll-target="#subsetting-based-on-spirituality"><span class="header-section-number">15.2</span> Subsetting based on Spirituality ————————————————————–</a>
   <ul class="collapse">
-  <li><a href="#nature-relatedness" id="toc-nature-relatedness" class="nav-link" data-scroll-target="#nature-relatedness"><span class="header-section-number">16.2.1</span> Nature relatedness ————————————————————–</a></li>
+  <li><a href="#nature-relatedness" id="toc-nature-relatedness" class="nav-link" data-scroll-target="#nature-relatedness"><span class="header-section-number">15.2.1</span> Nature relatedness ————————————————————–</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#calculate-overall-mean-nature-relatedness-score-based-on-six-questions" id="toc-calculate-overall-mean-nature-relatedness-score-based-on-six-questions" class="nav-link" data-scroll-target="#calculate-overall-mean-nature-relatedness-score-based-on-six-questions"><span class="header-section-number">17</span> Calculate overall mean nature-relatedness score based on six questions:</a></li>
-  <li><a href="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation" id="toc-create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation" class="nav-link" data-scroll-target="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation"><span class="header-section-number">18</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</a>
+  <li><a href="#calculate-overall-mean-nature-relatedness-score-based-on-six-questions" id="toc-calculate-overall-mean-nature-relatedness-score-based-on-six-questions" class="nav-link" data-scroll-target="#calculate-overall-mean-nature-relatedness-score-based-on-six-questions"><span class="header-section-number">16</span> Calculate overall mean nature-relatedness score based on six questions:</a></li>
+  <li><a href="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation" id="toc-create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation" class="nav-link" data-scroll-target="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation"><span class="header-section-number">17</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</a>
   <ul class="collapse">
-  <li><a href="#spirituality-scale" id="toc-spirituality-scale" class="nav-link" data-scroll-target="#spirituality-scale"><span class="header-section-number">18.0.1</span> Spirituality scale ————————————————————–</a></li>
+  <li><a href="#spirituality-scale" id="toc-spirituality-scale" class="nav-link" data-scroll-target="#spirituality-scale"><span class="header-section-number">17.0.1</span> Spirituality scale ————————————————————–</a></li>
   </ul></li>
-  <li><a href="#calculate-overall-mean-spirituality-score-based-on-six-questions" id="toc-calculate-overall-mean-spirituality-score-based-on-six-questions" class="nav-link" data-scroll-target="#calculate-overall-mean-spirituality-score-based-on-six-questions"><span class="header-section-number">19</span> Calculate overall mean spirituality score based on six questions:</a></li>
-  <li><a href="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1" id="toc-create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1" class="nav-link" data-scroll-target="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1"><span class="header-section-number">20</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</a></li>
+  <li><a href="#calculate-overall-mean-spirituality-score-based-on-six-questions" id="toc-calculate-overall-mean-spirituality-score-based-on-six-questions" class="nav-link" data-scroll-target="#calculate-overall-mean-spirituality-score-based-on-six-questions"><span class="header-section-number">18</span> Calculate overall mean spirituality score based on six questions:</a></li>
+  <li><a href="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1" id="toc-create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1" class="nav-link" data-scroll-target="#create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1"><span class="header-section-number">19</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -248,7 +254,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></h1>
 </div>
 
 
@@ -267,8 +273,8 @@ div.csl-indent {
 <p>For this chapter, I’m going to walk you through a data set that a colleague (Charles Ogunbode) and I collected in 2021. Another problem with smaller, more selective samples is that researchers can often undersample minoritised ethnic groups. This is particularly the case with climate change research. Until the time we conducted this research, there had not been a single study investigating the specific experiences of people of colour in relation to climate change in the UK. Past researchers had been content to work with large samples, and assumed that if they had done 1000 surveys and 50 of these were completed by people of colour, they could “tick” the box. But 5% is actually well below levels of representation in the UK generally, and even more sharply the case for specific communities. And if we bear in mind that non-white respondents are (of course!) a highly heterogenous group, we’re even more behind in terms of collecting data that can improve our knowledge. Up until recently researchers just haven’t been paying close enough attention to catch the significant neglect of the empirical field that this represents.</p>
 <p>While I’ve framed my comments above in terms of climate change research, it is also the case that, especially in diverse societies like the USA, Canada, the UK etc., paying attention to non-majority groups and people and communities of colour automatically draws in a strongly religious sample. This is highlighted in one recent study done in the UK, the “<a href="https://www.cam.ac.uk/stories/black-british-voices-report">Black British Voices Report</a>” in which the researchers observed that “84% of respondents described themselves as religious and/or spiritual”. My comments above in terms of controlling for other factors remains important here - these same researchers also note that “despire their significant important to the lives of Black Britons, only 7% of survey respondents reported that their religion was more defining of their identity than their race”.</p>
 <p>We’ve decided to open up access to our data and I’m highlighting it in this book because it’s a unique opportunitiy to explore a dataset that emphasises diversity from the start, and by extension, provides some really interesting ways to use data science techniques to explore religion in the UK.</p>
-<section id="loading-in-some-data" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Loading in some data</h1>
+<section id="loading-in-some-data" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Loading in some data</h1>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># R Setup -----------------------------------------------------------------</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion"</span>)</span>
@@ -284,8 +290,8 @@ div.csl-indent {
 </div>
 <p>The first thing to note here is that we’ve drawn in a different type of data file, this time from an <code>.sav</code> file, usully produced by the statistics software package SPSS. This uses a different R Library (I use <code>haven</code> for this). The upside is that in some cases where you have survey data with both a code and a value like “1” is eqivalent to “very much agree” this will preserve both in the R dataframe that is created. Now that you’ve loaded in data, you have a new R dataframe called “climate_experience_data” with a lot of columns with just under 1000 survey responses.</p>
 </section>
-<section id="how-can-you-ask-about-religion" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> How can you ask about religion?</h1>
+<section id="how-can-you-ask-about-religion" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> How can you ask about religion?</h1>
 <p>One of the challenges we faced when running this study is how to gather responsible data from surveys regarding religious identity. We’ll dive into this in depth as we do analysis and look at some of the agreements and conflicts in terms of respondent attribution. Just to set the stage, we used the following kinds of question to ask about religion and spirituality:</p>
 <ol type="1">
 <li>Question 56 asks respondents simply, “What is your religion?” and then provides a range of possible answers. We included follow-up questions regarding denomination for respondents who indicated they were “Christian” or “Muslim”. For respondents who ticked “Christian” we asked, “What is your denomination?” nad for respondents who ticked “Muslim” we asked “Which of the following would you identify with?” and then left a range of possible options which could be ticked such as “Sunni,” “Shia,” “Sufi” etc.</li>
@@ -339,15 +345,15 @@ So <em>who’s</em> religious?
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="annotated-cell-4" data-code-lines="2">First we generate new a dataframe with sums per category and</span>
+<span data-code-annotation="1" data-code-lines="2" data-code-cell="annotated-cell-4">First we generate new a dataframe with sums per category and</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-cell="annotated-cell-4" data-code-lines="3">…sort in descending order</span>
+<span data-code-annotation="2" data-code-lines="3" data-code-cell="annotated-cell-4">…sort in descending order</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-annotation="3" data-code-cell="annotated-cell-4" data-code-lines="5">Then we add new column with percentages based on the sums you’ve just generated</span>
+<span data-code-annotation="3" data-code-lines="5" data-code-cell="annotated-cell-4">Then we add new column with percentages based on the sums you’ve just generated</span>
 </dd>
 </dl>
 </div>
@@ -399,79 +405,79 @@ So <em>who’s</em> religious?
 </div>
 <p>Use mutate to put “prefer not to say” at the bottom # Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels</p>
 </section>
-<section id="q56-follow-ups" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> Q56 follow-ups</h1>
+<section id="q56-follow-ups" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Q56 follow-ups</h1>
 <p>caption &lt;- “Christian Denomination” # TODO: copy plot above for Q56 to add two additional plots using climate_experience_data_named<span class="math inline">\(Q56b and climate_experience_data_named\)</span>Q56c # Religious Affiliation b - Christian Denomination Subquestion christian_denomination &lt;- qualtrics_process_single_multiple_choice(climate_experience_data_named<span class="math inline">\(Q56b) christian_denomination_table &lt;- chart_single_result_flextable(climate_experience_data_named\)</span>Q56b, desc(Count)) christian_denomination_table save_as_docx(christian_denomination_table, path = “./figures/q56_religious_affiliation_xn_denomination.docx”)</p>
 <p>christian_denomination_hi &lt;- filter(climate_experience_data_named, Q56 == “Christian”, Q57_bin == “high”) christian_denomination_hi &lt;- qualtrics_process_single_multiple_choice(christian_denomination_hi$Q56b) christian_denomination_hi</p>
 </section>
-<section id="religious-affiliation-c---muslim-denomination-subquestion" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> Religious Affiliation c - Muslim Denomination Subquestion</h1>
+<section id="religious-affiliation-c---muslim-denomination-subquestion" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Religious Affiliation c - Muslim Denomination Subquestion</h1>
 <p>caption &lt;- “Islamic Identity” # Should the label be different than income since the data examined is the Affiliation? # TODO: adjust plot to factor using numbered responses on this question (perhaps also above) religious_affiliationc &lt;- qualtrics_process_single_multiple_choice(climate_experience_data_named<span class="math inline">\(Q56c) religious_affiliationc_plot &lt;- plot_horizontal_bar(religious_affiliationc) religious_affiliationc_plot &lt;- religious_affiliationc_plot + labs(caption = caption, x = "", y = "") religious_affiliationc_plot ggsave("figures/q56c_religious_affiliation.png", width = 20, height = 10, units = "cm") religious_affiliationc_table &lt;- chart_single_result_flextable(climate_experience_data_named\)</span>Q56c, Count) religious_affiliationc_table save_as_docx(religious_affiliationc_table, path = “./figures/q56_religious_affiliation_islam.docx”)</p>
 </section>
-<section id="q57" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Q57</h1>
+<section id="q57" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Q57</h1>
 </section>
-<section id="religiosity" class="level1" data-number="9">
-<h1 data-number="9"><span class="header-section-number">9</span> Religiosity</h1>
+<section id="religiosity" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Religiosity</h1>
 <p>caption &lt;- “Respondent Religiosity” religiosity &lt;- qualtrics_process_single_multiple_choice(as.character(climate_experience_data_named<span class="math inline">\(Q57_1)) religiosity_plot &lt;- plot_horizontal_bar(religiosity) religiosity_plot &lt;- religiosity_plot + labs(caption = caption, x = "", y = "") religiosity_plot ggsave("figures/q57_religiosity_plot.png", width = 20, height = 10, units = "cm") religiosity_table &lt;- chart_single_result_flextable(climate_experience_data_named\)</span>Q57_1, desc(Variable)) religiosity_table save_as_docx(religious_affiliationc_table, path = “./figures/q57_religiousity.docx”)</p>
 </section>
-<section id="q58" class="level1" data-number="10">
-<h1 data-number="10"><span class="header-section-number">10</span> Q58</h1>
+<section id="q58" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Q58</h1>
 <p>caption &lt;- “Respondent Attendance of Religious Services” religious_service_attend &lt;- qualtrics_process_single_multiple_choice(climate_experience_data_named<span class="math inline">\(Q58) religious_service_attend_plot &lt;- plot_horizontal_bar(religious_service_attend) religious_service_attend_plot &lt;- religious_service_attend_plot + labs(title = caption, x = "", y = "") religious_service_attend_plot ggsave("figures/q58_religious_service_attend.png", width = 20, height = 10, units = "cm") religious_service_attend_table &lt;- chart_single_result_flextable(climate_experience_data_named\)</span>Q58, Count) religious_service_attend_table save_as_docx(religious_service_attend_table, path = “./figures/q58_religious_service_attend.docx”)</p>
 </section>
-<section id="faceted-plot-working-with-3x3-grid" class="level1" data-number="11">
-<h1 data-number="11"><span class="header-section-number">11</span> Faceted plot working with 3x3 grid</h1>
+<section id="faceted-plot-working-with-3x3-grid" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Faceted plot working with 3x3 grid</h1>
 <p>df &lt;- select(climate_experience_data, Q52_bin, Q53_bin, Q57_bin, Q58) names(df) &lt;- c(“Q52_bin”, “Q53_bin”, “Q57_bin”, “response”) facet_names &lt;- c(<code>Q52_bin</code> = “Spirituality”, <code>Q53_bin</code> = “Politics L/R”, <code>Q57_bin</code> = “Religiosity”, <code>low</code>=“low”, <code>medium</code>=“medium”, <code>high</code>=“high”) facet_labeller &lt;- function(variable,value){return(facet_names[value])} df<span class="math inline">\(response &lt;- factor(df\)</span>response, ordered = TRUE, levels = c(“1”, “2”, “3”, “4”, “5”)) df<span class="math inline">\(response &lt;- fct_recode(df\)</span>response, “More than once a week” = “1”, “Once a week” = “2”, “At least once a month” = “3”, “Only on special holy days” = “4”, “Never” = “5”) df %&gt;% # we need to get the data including facet info in long format, so we use pivot_longer() pivot_longer(!response, names_to = “bin_name”, values_to = “b”) %&gt;% # add counts for plot below count(response, bin_name, b) %&gt;% group_by(bin_name,b) %&gt;% mutate(perc=paste0(round(n*100/sum(n),1),“%”)) %&gt;% # run ggplot ggplot(aes(x = n, y = ““, fill = response)) + geom_col(position=position_fill(), aes(fill=response)) + geom_text(aes(label = perc), position = position_fill(vjust=.5), size=2) + scale_fill_brewer(palette =”Dark2”, type = “qual”) + scale_x_continuous(labels = scales::percent_format()) + facet_grid(vars(b), vars(bin_name), labeller=as_labeller(facet_names)) + labs(caption = caption, x = ““, y =”“) + guides(fill = guide_legend(title = NULL)) ggsave(”figures/q58_faceted.png”, width = 30, height = 10, units = “cm”)</p>
 </section>
-<section id="q59" class="level1" data-number="12">
-<h1 data-number="12"><span class="header-section-number">12</span> Q59</h1>
+<section id="q59" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Q59</h1>
 <p>caption &lt;- “Respondent Prayer Outside of Religious Services” prayer &lt;- qualtrics_process_single_multiple_choice(climate_experience_data_named<span class="math inline">\(Q59) prayer_plot &lt;- plot_horizontal_bar(prayer) prayer_plot &lt;- prayer_plot + labs(caption = caption, x = "", y = "") prayer_plot ggsave("figures/q59_prayer.png", width = 20, height = 10, units = "cm") prayer_table &lt;- chart_single_result_flextable(climate_experience_data_named\)</span>Q59, Count) prayer_table save_as_docx(prayer_table, path = “./figures/q59_prayer.docx”)</p>
 </section>
-<section id="faceted-plot-working-with-3x3-grid-1" class="level1" data-number="13">
-<h1 data-number="13"><span class="header-section-number">13</span> Faceted plot working with 3x3 grid</h1>
+<section id="faceted-plot-working-with-3x3-grid-1" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Faceted plot working with 3x3 grid</h1>
 <p>df &lt;- select(climate_experience_data, Q52_bin, Q53_bin, Q57_bin, Q59) names(df) &lt;- c(“Q52_bin”, “Q53_bin”, “Q57_bin”, “response”) facet_names &lt;- c(<code>Q52_bin</code> = “Spirituality”, <code>Q53_bin</code> = “Politics L/R”, <code>Q57_bin</code> = “Religiosity”, <code>low</code>=“low”, <code>medium</code>=“medium”, <code>high</code>=“high”) facet_labeller &lt;- function(variable,value){return(facet_names[value])} df<span class="math inline">\(response &lt;- factor(df\)</span>response, ordered = TRUE, levels = c(“1”, “2”, “3”, “4”, “5”)) df<span class="math inline">\(response &lt;- fct_recode(df\)</span>response, “More than once a week” = “1”, “Once a week” = “2”, “At least once a month” = “3”, “Only on special holy days” = “4”, “Never” = “5”) df %&gt;% # we need to get the data including facet info in long format, so we use pivot_longer() pivot_longer(!response, names_to = “bin_name”, values_to = “b”) %&gt;% # add counts for plot below count(response, bin_name, b) %&gt;% group_by(bin_name,b) %&gt;% mutate(perc=paste0(round(n*100/sum(n),1),“%”)) %&gt;% # run ggplot ggplot(aes(x = n, y = ““, fill = response)) + geom_col(position=position_fill(), aes(fill=response)) + geom_text(aes(label = perc), position = position_fill(vjust=.5), size=2) + scale_fill_brewer(palette =”Dark2”, type = “qual”) + scale_x_continuous(labels = scales::percent_format()) + facet_grid(vars(b), vars(bin_name), labeller=as_labeller(facet_names)) + labs(caption = caption, x = ““, y =”“) + guides(fill = guide_legend(title = NULL)) ggsave(”figures/q59_faceted.png”, width = 30, height = 10, units = “cm”)</p>
 </section>
-<section id="comparing-with-attitudes-surrounding-climate-change" class="level1" data-number="14">
-<h1 data-number="14"><span class="header-section-number">14</span> Comparing with attitudes surrounding climate change</h1>
+<section id="comparing-with-attitudes-surrounding-climate-change" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> Comparing with attitudes surrounding climate change</h1>
 </section>
-<section id="q6" class="level1" data-number="15">
-<h1 data-number="15"><span class="header-section-number">15</span> Q6</h1>
+<section id="q6" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> Q6</h1>
 <p>q6_data &lt;- qualtrics_process_single_multiple_choice_unsorted_streamlined(climate_experience_data$Q6)</p>
 <p>title &lt;- “Do you think the climate is changing?”</p>
 <p>level_order &lt;- c(“Don<e2>&lt;80&gt;&lt;99&gt;t know”, “Definitely not changing”, “Probably not changing”, “Probably changing”, “Definitely changing”) ## code if a specific palette is needed for matching fill = wheel(ochre, num = as.integer(count(q6_data[1]))) # make plot q6_data_plot &lt;- ggplot(q6_data, aes(x = n, y = response, fill = fill)) + geom_col(colour = “white”) + ## add percentage labels geom_text(aes(label = perc), ## make labels left-aligned and white hjust = 1, colour = “black”, size=4) + # use nudge_x = 30, to shift position ## reduce spacing between labels and bars scale_fill_identity(guide = “none”) + ## get rid of all elements except y axis labels + adjust plot margin theme_ipsum_rc() + theme(plot.margin = margin(rep(15, 4))) + easy_center_title() + # with thanks for helpful info on doing wrap here: https://stackoverflow.com/questions/21878974/wrap-long-axis-labels-via-labeller-label-wrap-in-ggplot2 scale_y_discrete(labels = wrap_format(30), limits = level_order) + theme(plot.title = element_text(size =18, hjust = 0.5), axis.text.y = element_text(size =16)) + labs(title = title, x = ““, y =”“)</e2></p>
 <p>q6_data_plot</p>
 <p>ggsave(“figures/q6.png”, width = 18, height = 12, units = “cm”)</p>
 </section>
-<section id="subsetting" class="level1" data-number="16">
-<h1 data-number="16"><span class="header-section-number">16</span> Subsetting</h1>
-<section id="q57-subsetting-based-on-religiosity" class="level2" data-number="16.1">
-<h2 data-number="16.1" class="anchored" data-anchor-id="q57-subsetting-based-on-religiosity"><span class="header-section-number">16.1</span> Q57 subsetting based on Religiosity ————————————————————–</h2>
+<section id="subsetting" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> Subsetting</h1>
+<section id="q57-subsetting-based-on-religiosity" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="q57-subsetting-based-on-religiosity"><span class="header-section-number">15.1</span> Q57 subsetting based on Religiosity ————————————————————–</h2>
 <p>climate_experience_data &lt;- climate_experience_data %&gt;% mutate( Q57_bin = case_when( Q57_1 &gt; mean(Q57_1) + sd(Q57_1) ~ “high”, Q57_1 &lt; mean(Q57_1) - sd(Q57_1) ~ “low”, TRUE ~ “medium” ) %&gt;% factor(levels = c(“low”, “medium”, “high”)) )</p>
 </section>
-<section id="subsetting-based-on-spirituality" class="level2" data-number="16.2">
-<h2 data-number="16.2" class="anchored" data-anchor-id="subsetting-based-on-spirituality"><span class="header-section-number">16.2</span> Subsetting based on Spirituality ————————————————————–</h2>
-<section id="nature-relatedness" class="level3" data-number="16.2.1">
-<h3 data-number="16.2.1" class="anchored" data-anchor-id="nature-relatedness"><span class="header-section-number">16.2.1</span> Nature relatedness ————————————————————–</h3>
+<section id="subsetting-based-on-spirituality" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="subsetting-based-on-spirituality"><span class="header-section-number">15.2</span> Subsetting based on Spirituality ————————————————————–</h2>
+<section id="nature-relatedness" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="nature-relatedness"><span class="header-section-number">15.2.1</span> Nature relatedness ————————————————————–</h3>
 </section>
 </section>
 </section>
-<section id="calculate-overall-mean-nature-relatedness-score-based-on-six-questions" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Calculate overall mean nature-relatedness score based on six questions:</h1>
+<section id="calculate-overall-mean-nature-relatedness-score-based-on-six-questions" class="level1" data-number="16">
+<h1 data-number="16"><span class="header-section-number">16</span> Calculate overall mean nature-relatedness score based on six questions:</h1>
 <p>climate_experience_data$Q51_score &lt;- rowMeans(select(climate_experience_data, Q51_remote_vacation:Q51_heritage))</p>
 </section>
-<section id="create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation" class="level1" data-number="18">
-<h1 data-number="18"><span class="header-section-number">18</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</h1>
+<section id="create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation" class="level1" data-number="17">
+<h1 data-number="17"><span class="header-section-number">17</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</h1>
 <p>climate_experience_data &lt;- climate_experience_data %&gt;% mutate( Q51_bin = case_when( Q51_score &gt; mean(Q51_score) + sd(Q51_score) ~ “high”, Q51_score &lt; mean(Q51_score) - sd(Q51_score) ~ “low”, TRUE ~ “medium” ) %&gt;% factor(levels = c(“low”, “medium”, “high”)) )</p>
-<section id="spirituality-scale" class="level3" data-number="18.0.1">
-<h3 data-number="18.0.1" class="anchored" data-anchor-id="spirituality-scale"><span class="header-section-number">18.0.1</span> Spirituality scale ————————————————————–</h3>
+<section id="spirituality-scale" class="level3" data-number="17.0.1">
+<h3 data-number="17.0.1" class="anchored" data-anchor-id="spirituality-scale"><span class="header-section-number">17.0.1</span> Spirituality scale ————————————————————–</h3>
 </section>
 </section>
-<section id="calculate-overall-mean-spirituality-score-based-on-six-questions" class="level1" data-number="19">
-<h1 data-number="19"><span class="header-section-number">19</span> Calculate overall mean spirituality score based on six questions:</h1>
+<section id="calculate-overall-mean-spirituality-score-based-on-six-questions" class="level1" data-number="18">
+<h1 data-number="18"><span class="header-section-number">18</span> Calculate overall mean spirituality score based on six questions:</h1>
 <p>climate_experience_data$Q52_score &lt;- rowMeans(select(climate_experience_data, Q52a_1:Q52f_1))</p>
 </section>
-<section id="create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1" class="level1" data-number="20">
-<h1 data-number="20"><span class="header-section-number">20</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</h1>
+<section id="create-lowmedhigh-bins-based-on-mean-and-1-1-standard-deviation-1" class="level1" data-number="19">
+<h1 data-number="19"><span class="header-section-number">19</span> Create low/med/high bins based on Mean and +1/-1 Standard Deviation</h1>
 <p>climate_experience_data &lt;- climate_experience_data %&gt;% mutate( Q52_bin = case_when( Q52_score &gt; mean(Q52_score) + sd(Q52_score) ~ “high”, Q52_score &lt; mean(Q52_score) - sd(Q52_score) ~ “low”, TRUE ~ “medium” ) %&gt;% factor(levels = c(“low”, “medium”, “high”)) )</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -759,12 +765,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./chapter_1.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./chapter_3.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mapping churches: geospatial data science</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mapping churches: geospatial data science</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

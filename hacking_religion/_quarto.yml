@@ -4,7 +4,7 @@ project:
 book:
   title: "Hacking Religion: TRS & Data Science in Action"
   author: "Jeremy H. Kidwell"
-  date: "9/29/2023"
+  date: "10/16/2023"
   chapters:
     - index.qmd
     - intro.qmd
@@ -12,6 +12,7 @@ book:
     - chapter_2.qmd
     - chapter_3.qmd
     - chapter_4.qmd
+    - chapter_5.qmd
     - summary.qmd
     - references.qmd
 
@@ -24,5 +25,6 @@ format:
   pdf:
     documentclass: scrreprt
 
-
-
+knitr:
+  opts_chunk:
+    dev: ragg_png

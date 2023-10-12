@@ -371,7 +371,5 @@ plot1 <- ggplot(uk_census_merged_religion_ethnicity, aes(fill=Year, x=Religion, 
 ggsave("chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
 ```
 
-# References {.unnumbered}
-
 ::: {#refs}
 :::

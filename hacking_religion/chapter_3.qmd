@@ -60,8 +60,7 @@ local_authorities_buildings_clip <- st_read(here("data", "infuse_dist_lyr_2011_s
 Before we move on, let's plot a simple map and have a look at one of our administrative layers. We can use ggplot with a new type of shape `geom_sf()` to plot the contents of a geospatial data file with polygons which is loaded as a `simplefeature` in R. 
 
 ```{r}
-library(bench) |> suppressPackageStartupMessages()
-bench_time(ggplot(uk_countries) + geom_sf())
+ggplot(uk_countries) + geom_sf()
 ```
 
 # Load in Ordnance Survey OpenMap Points Data
@@ -72,7 +71,7 @@ bench_time(ggplot(uk_countries) + geom_sf())
 
 os_openmap_pow <- st_read(here("data", "os_openmap_pow.gpkg"), quiet = TRUE)
 
-bench_time(ggplot(os_openmap_pow) + geom_sf())
+ggplot(os_openmap_pow) + geom_sf()
 ```
 
 It's worth noting that the way that you load geospatial data in R has changed quite dramatically since 2020 with the introduction of the simplefeature class in R. Much of the documentation you will come across "out there" will make reference to a set of functions which are now deprecated.

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Hacking Religion: TRS &amp; Data Science in Action - 2&nbsp; The 2021 UK Census</title>
+<title>Hacking Religion: TRS &amp; Data Science in Action - 1&nbsp; The 2021 UK Census</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,7 +127,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter_1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter_1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -161,31 +161,37 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction: Hacking Religion</span></span></a>
+ <span class="menu-text">Introduction: Hacking Religion</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_3.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Mapping churches: geospatial data science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Mapping churches: geospatial data science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data scraping, corpus analysis and wordclouds</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data scraping, corpus analysis and wordclouds</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter_5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -210,17 +216,17 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#your-first-project-the-uk-census" id="toc-your-first-project-the-uk-census" class="nav-link active" data-scroll-target="#your-first-project-the-uk-census"><span class="header-section-number">2.1</span> Your first project: the UK Census</a></li>
-  <li><a href="#examining-data" id="toc-examining-data" class="nav-link" data-scroll-target="#examining-data"><span class="header-section-number">2.2</span> Examining data:</a></li>
-  <li><a href="#parsing-and-exploring-your-data" id="toc-parsing-and-exploring-your-data" class="nav-link" data-scroll-target="#parsing-and-exploring-your-data"><span class="header-section-number">2.3</span> Parsing and Exploring your data</a></li>
-  <li><a href="#making-your-first-data-visulation-the-humble-bar-chart" id="toc-making-your-first-data-visulation-the-humble-bar-chart" class="nav-link" data-scroll-target="#making-your-first-data-visulation-the-humble-bar-chart"><span class="header-section-number">2.4</span> Making your first data visulation: the humble bar chart</a>
+  <li><a href="#your-first-project-the-uk-census" id="toc-your-first-project-the-uk-census" class="nav-link active" data-scroll-target="#your-first-project-the-uk-census"><span class="header-section-number">1.1</span> Your first project: the UK Census</a></li>
+  <li><a href="#examining-data" id="toc-examining-data" class="nav-link" data-scroll-target="#examining-data"><span class="header-section-number">1.2</span> Examining data:</a></li>
+  <li><a href="#parsing-and-exploring-your-data" id="toc-parsing-and-exploring-your-data" class="nav-link" data-scroll-target="#parsing-and-exploring-your-data"><span class="header-section-number">1.3</span> Parsing and Exploring your data</a></li>
+  <li><a href="#making-your-first-data-visulation-the-humble-bar-chart" id="toc-making-your-first-data-visulation-the-humble-bar-chart" class="nav-link" data-scroll-target="#making-your-first-data-visulation-the-humble-bar-chart"><span class="header-section-number">1.4</span> Making your first data visulation: the humble bar chart</a>
   <ul class="collapse">
-  <li><a href="#base-r" id="toc-base-r" class="nav-link" data-scroll-target="#base-r"><span class="header-section-number">2.4.1</span> Base R</a></li>
-  <li><a href="#ggplot" id="toc-ggplot" class="nav-link" data-scroll-target="#ggplot"><span class="header-section-number">2.4.2</span> GGPlot</a></li>
+  <li><a href="#base-r" id="toc-base-r" class="nav-link" data-scroll-target="#base-r"><span class="header-section-number">1.4.1</span> Base R</a></li>
+  <li><a href="#ggplot" id="toc-ggplot" class="nav-link" data-scroll-target="#ggplot"><span class="header-section-number">1.4.2</span> GGPlot</a></li>
   </ul></li>
-  <li><a href="#is-your-chart-accurate-telling-the-truth-in-data-science" id="toc-is-your-chart-accurate-telling-the-truth-in-data-science" class="nav-link" data-scroll-target="#is-your-chart-accurate-telling-the-truth-in-data-science"><span class="header-section-number">2.5</span> Is your chart accurate? Telling the truth in data science</a></li>
-  <li><a href="#making-our-script-reproducible" id="toc-making-our-script-reproducible" class="nav-link" data-scroll-target="#making-our-script-reproducible"><span class="header-section-number">2.6</span> Making our script reproducible</a></li>
-  <li><a href="#multifactor-visualisation" id="toc-multifactor-visualisation" class="nav-link" data-scroll-target="#multifactor-visualisation"><span class="header-section-number">2.7</span> Multifactor Visualisation</a></li>
+  <li><a href="#is-your-chart-accurate-telling-the-truth-in-data-science" id="toc-is-your-chart-accurate-telling-the-truth-in-data-science" class="nav-link" data-scroll-target="#is-your-chart-accurate-telling-the-truth-in-data-science"><span class="header-section-number">1.5</span> Is your chart accurate? Telling the truth in data science</a></li>
+  <li><a href="#making-our-script-reproducible" id="toc-making-our-script-reproducible" class="nav-link" data-scroll-target="#making-our-script-reproducible"><span class="header-section-number">1.6</span> Making our script reproducible</a></li>
+  <li><a href="#multifactor-visualisation" id="toc-multifactor-visualisation" class="nav-link" data-scroll-target="#multifactor-visualisation"><span class="header-section-number">1.7</span> Multifactor Visualisation</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -230,7 +236,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></h1>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The 2021 UK Census</span></h1>
 </div>
 
 
@@ -245,8 +251,8 @@ div.csl-indent {
 
 </header>
 
-<section id="your-first-project-the-uk-census" class="level2 page-columns page-full" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="your-first-project-the-uk-census"><span class="header-section-number">2.1</span> Your first project: the UK Census</h2>
+<section id="your-first-project-the-uk-census" class="level2 page-columns page-full" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="your-first-project-the-uk-census"><span class="header-section-number">1.1</span> Your first project: the UK Census</h2>
 <p>Let’s start by importing some data into R. Because R is what is called an object-oriented programming language, we’ll always take our information and give it a home inside a named object. There are many different kinds of objects, which you can specify, but usually R will assign a type that seems to fit best.</p>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you’d like to explore this all in a bit more depth, you can find a very helpful summary in R for Data Science, chapter 8, <a href="https://r4ds.hadley.nz/data-import#reading-data-from-a-file">“data import”</a>.</span></div></div>
 <p>In the example below, we’re going to read in data from a comma separated value file (“csv”) which has rows of information on separate lines in a text file with each column separated by a comma. This is one of the standard plain text file formats. R has a function you can use to import this efficiently called “read.csv”. Each line of code in R usually starts with the object, and then follows with instructions on what we’re going to put inside it, where that comes from, and how to format it:</p>
@@ -272,8 +278,8 @@ div.csl-indent {
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">here</span>(<span class="st">"example_data"</span>, <span class="st">"census2021-ts030-rgn.csv"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="examining-data" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="examining-data"><span class="header-section-number">2.2</span> Examining data:</h2>
+<section id="examining-data" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="examining-data"><span class="header-section-number">1.2</span> Examining data:</h2>
 <p>What’s in the table? You can take a quick look at either the top of the data frame, or the bottom using one of the following commands:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(uk_census_2021_religion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -535,8 +541,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="parsing-and-exploring-your-data" class="level2 page-columns page-full" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="parsing-and-exploring-your-data"><span class="header-section-number">2.3</span> Parsing and Exploring your data</h2>
+<section id="parsing-and-exploring-your-data" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="parsing-and-exploring-your-data"><span class="header-section-number">1.3</span> Parsing and Exploring your data</h2>
 <p>The first thing you’re going to want to do is to take a smaller subset of a large data set, either by filtering out certain columns or rows. Now let’s say we want to just work with the data from the West Midlands, and we’d like to omit some of the columns. We can choose a specific range of columns using <code>select</code>, like this:</p>
 <p>You can use the <code>filter</code> command to do this. To give an example, <code>filter</code> can pick a single row in the following way:</p>
 <div class="cell">
@@ -546,16 +552,16 @@ div.csl-indent {
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">Some readers will want to pause here and check out Hadley Wickham’s “R For Data Science” book, in the section, <a href="https://r4ds.hadley.nz/data-visualize#introduction">“Data visualisation”</a> to get a fuller explanation of how to explore your data.</span></div></div>
 <p>In keeping with my goal to demonstrate data science through examples, we’re going to move on to producing some snappy looking charts for this data.</p>
 </section>
-<section id="making-your-first-data-visulation-the-humble-bar-chart" class="level2 page-columns page-full" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="making-your-first-data-visulation-the-humble-bar-chart"><span class="header-section-number">2.4</span> Making your first data visulation: the humble bar chart</h2>
+<section id="making-your-first-data-visulation-the-humble-bar-chart" class="level2 page-columns page-full" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="making-your-first-data-visulation-the-humble-bar-chart"><span class="header-section-number">1.4</span> Making your first data visulation: the humble bar chart</h2>
 <p>We’ve got a nice lean set of data, so now it’s time to visualise this. We’ll start by making a pie chart:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_wmids <span class="ot">&lt;-</span> uk_census_2021_religion_wmids <span class="sc">%&gt;%</span> <span class="fu">select</span>(no_religion<span class="sc">:</span>no_response)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_wmids <span class="ot">&lt;-</span> <span class="fu">gather</span>(uk_census_2021_religion_wmids)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are two basic ways to do visualisations in R. You can work with basic functions in R, often called “base R” or you can work with an alternative library called ggplot:</p>
-<section id="base-r" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="base-r"><span class="header-section-number">2.4.1</span> Base R</h3>
+<section id="base-r" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="base-r"><span class="header-section-number">1.4.1</span> Base R</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> uk_census_2021_religion_wmids[<span class="fu">order</span>(uk_census_2021_religion_wmids<span class="sc">$</span>value,<span class="at">decreasing =</span> <span class="cn">TRUE</span>),]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="at">height=</span>df<span class="sc">$</span>value, <span class="at">names=</span>df<span class="sc">$</span>key)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -564,8 +570,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="ggplot" class="level3 page-columns page-full" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="ggplot"><span class="header-section-number">2.4.2</span> GGPlot</h3>
+<section id="ggplot" class="level3 page-columns page-full" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="ggplot"><span class="header-section-number">1.4.2</span> GGPlot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_wmids, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> value)) <span class="sc">+</span></span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -573,7 +579,7 @@ div.csl-indent {
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-10" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-10" data-code-lines="1" data-code-annotation="2">We’ll re-order the column by size.</span>
+<span data-code-cell="annotated-cell-10" data-code-annotation="2" data-code-lines="1">We’ll re-order the column by size.</span>
 </dd>
 </dl>
 </div>
@@ -596,19 +602,19 @@ div.csl-indent {
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="1" data-code-annotation="1">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
+<span data-code-cell="annotated-cell-11" data-code-annotation="1" data-code-lines="1">First, remove the column with region names and the totals for the regions as we want just integer data.</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="3" data-code-annotation="2">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
+<span data-code-cell="annotated-cell-11" data-code-annotation="2" data-code-lines="3">Second calculate the totals. In this example we use the tidyverse library <code>dplyr()</code>, but you can also do this using base R with <code>colsums()</code> like this: <code>uk_census_2021_religion_totals &lt;- colSums(uk_census_2021_religion_totals, na.rm = TRUE)</code>. The downside with base R is that you’ll also need to convert the result into a dataframe for <code>ggplot</code> like this: <code>uk_census_2021_religion_totals &lt;- as.data.frame(uk_census_2021_religion_totals)</code></span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="4" data-code-annotation="3">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
+<span data-code-cell="annotated-cell-11" data-code-annotation="3" data-code-lines="4">In order to visualise this data using ggplot, we need to shift this data from wide to long format. This is a quick job using gather()</span>
 </dd>
 <dt data-target-cell="annotated-cell-11" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-11" data-code-lines="5" data-code-annotation="4">Now plot it out and have a look!</span>
+<span data-code-cell="annotated-cell-11" data-code-annotation="4" data-code-lines="5">Now plot it out and have a look!</span>
 </dd>
 </dl>
 </div>
@@ -674,8 +680,8 @@ div.csl-indent {
 </div>
 </section>
 </section>
-<section id="is-your-chart-accurate-telling-the-truth-in-data-science" class="level2" data-number="2.5">
-<h2 data-number="2.5" class="anchored" data-anchor-id="is-your-chart-accurate-telling-the-truth-in-data-science"><span class="header-section-number">2.5</span> Is your chart accurate? Telling the truth in data science</h2>
+<section id="is-your-chart-accurate-telling-the-truth-in-data-science" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="is-your-chart-accurate-telling-the-truth-in-data-science"><span class="header-section-number">1.5</span> Is your chart accurate? Telling the truth in data science</h2>
 <p>There is some technical work yet to be done fine-tuning the visualisation of our chart here. But I’d like to pause for a moment and consider an ethical question. Is the title of this chart truthful and accurate? On one hand, it is a straight-forward reference to the nature of the question asked on the 2021 census survey instrument. However, as you will see in the next chapter, large data sets from the same year which asked a fairly similar question yield different results. Part of this could be attributed to the amount of non-respose to this specific question which, in the 2021 census is between 5-6% across many demographics. It’s possible (though perhaps unlikely) that all those non-responses were Sikh respondents who felt uncomfortable identifying themselves on such a survey. If even half of the non-responses were of this nature, this would dramatically shift the results especially in comparison to other minority groups. So there is some work for us to do here in representing non-response as a category on the census.</p>
 <p>It’s equally possible that someone might feel uncertain when answering, but nonetheless land on a particular decision marking “Christian” when they wondered if they should instead tick “no religion. Some surveys attempt to capture uncertainty in this way, asking respondents to mark how confident they are about their answers, but the census hasn’t capture this so we simply don’t know. If a large portion of respondents in the”Christian” category were hovering between this and another response, again, they might shift their answers when responding on a different day, perhaps having just had a conversation with a friend which shifted their thinking. Even the inertia of survey design can have an effect on this, so responding to other questions in a particular way, thinking about ethnic identity, for example, can prime a person to think about their religious identity in a different or more focussed way, altering their response to the question. For this reason, some survey instruments randomise the order of questions. This hasn’t been done on the census (which would have been quite hard work given that most of the instruments were printed hard copies!), so again, we can’t really be sure if those answers given are stable.</p>
 <p>Finally, researchers have also found that when people are asked to mark their religious affiliation, sometimes they can prefer to mark more than one answer. A person might consider themselves to be “Muslim” but also “Spiritual but not religious” preferring the combination of those identities. It is also the case that respondents can identify with more unexpected hybrid religious identities, such as “Christian” and “Hindu”. The census only allows respondents to tick a single box for the religion category. It is worth noting that, in contrast, the responses for ethnicity allow for combinations. Given that this is the case, it’s impossible to know which way a person went at the fork in the road as they were forced to choose just one half of this kind of hybrid identity. Finally, it is interesting to wonder exactly what it means for a person when they tick a box like this. Is it because they attend synagogue on a weekly basis? Some persons would consider weekly attendance at workship a prerequisite for membership in a group, but others would not. Indeed we can infer from surveys and research which aims to track rates of participation in weekly worship that many people who tick boxes for particular religious identities on the census have never attended a worship service at all.</p>
@@ -689,12 +695,12 @@ div.csl-indent {
 <p>Change orientation of X axis labels + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))</p>
 <p>Relabel fields Simplify y-axis labels Add percentage text to bars (or maybe save for next chapter?)</p>
 </section>
-<section id="making-our-script-reproducible" class="level2" data-number="2.6">
-<h2 data-number="2.6" class="anchored" data-anchor-id="making-our-script-reproducible"><span class="header-section-number">2.6</span> Making our script reproducible</h2>
+<section id="making-our-script-reproducible" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="making-our-script-reproducible"><span class="header-section-number">1.6</span> Making our script reproducible</h2>
 <p>Let’s take a moment to review our hacker code. I’ve just spent some time addressing how we can be truthful in our data science work. We haven’t done much yet to talk abour reproducibility.</p>
 </section>
-<section id="multifactor-visualisation" class="level2" data-number="2.7">
-<h2 data-number="2.7" class="anchored" data-anchor-id="multifactor-visualisation"><span class="header-section-number">2.7</span> Multifactor Visualisation</h2>
+<section id="multifactor-visualisation" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="multifactor-visualisation"><span class="header-section-number">1.7</span> Multifactor Visualisation</h2>
 <p>One element of R data analysis that can get really interesting is working with multiple variables. Above we’ve looked at the breakdown of religious affiliation across the whole of England and Wales (Scotland operates an independent census), and by placing this data alongside a specific region, we’ve already made a basic entry into working with multiple variables but this can get much more interesting. Adding an additional quantative variable (also known as bivariate data) into the mix, however can also generate a lot more information and we have to think about visualising it in different ways which can still communicate with visual clarity in spite of the additional visual noise which is inevitable with enhanced complexity. Let’s have a look at the way that religion in England and Wales breaks down by ethnicity.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1117,12 +1123,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./intro.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction: Hacking Religion</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction: Hacking Religion</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./chapter_2.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
