@@ -21,7 +21,7 @@ Now that you have a sense of some of the basic aspects of geospatial data, let's
 
 A good starting point is to aquire some adminstrative data. This is a way of referring to political boundaries, whether country borders or those of a local authority or some other administrative unit. For our purposes, we're going to import several different types of administrative boundary which will be used at different points in our visualisations below. It's worth noting that the data we use here was prepared to support the 2011 census, and make use of the shapefile format.
 
-```{R}
+```{r, results = 'hide'}
 library(sf) |> suppressPackageStartupMessages()
 library(here)  |> suppressPackageStartupMessages()
 library(tidyverse)  
@@ -36,46 +36,43 @@ if (file.exists(here("data", "infuse_uk_2011_clipped.shp")) == FALSE) {
 download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_uk_2011_clipped.zip", destfile = "data/infuse_uk_2011_clipped.zip")
 unzip("data/infuse_uk_2011_clipped.zip", exdir = "data")
 }
-uk_countries <- st_read(here("data", "infuse_uk_2011_clipped.shp"))
+uk_countries <- st_read(here("data", "infuse_uk_2011_clipped.shp"), quiet = TRUE)
 
 # Download administrative boundaries for whole UK at regions level
 if (file.exists(here("data", "infuse_rgn_2011_clipped.shp")) == FALSE) {
 download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_rgn_2011_clipped.zip", destfile = "data/infuse_rgn_2011_clipped.zip")
 unzip("data/infuse_rgn_2011_clipped.zip", exdir = "data")
 }
-uk_rgn <- st_read(here("data", "infuse_rgn_2011_clipped.shp"))
+uk_rgn <- st_read(here("data", "infuse_rgn_2011_clipped.shp"), quiet = TRUE)
 
 # Download administrative boundaries for whole UK at local authority level
 if (file.exists(here("data", "infuse_dist_lyr_2011_clipped.shp")) == FALSE) {
 download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_dist_lyr_2011_clipped.zip", destfile = "data/infuse_dist_lyr_2011_clipped.zip")
 unzip("data/infuse_dist_lyr_2011_clipped.zip", exdir = "data")
 }
-local_authorities <- st_read(here("data", "infuse_dist_lyr_2011_clipped.shp"))
+local_authorities <- st_read(here("data", "infuse_dist_lyr_2011_clipped.shp"), quiet = TRUE)
 
 # Download building outlines for whole UK
 if (file.exists(here("data", "infuse_dist_lyr_2011_simplified_100m_buildings_simplified.gpkg")) == FALSE) {
   download.file("https://zenodo.org/record/6395804/files/infuse_dist_lyr_2011_simplified_100m_buildings_overlay_simplified.gpkg", destfile = here("data", "infuse_dist_lyr_2011_simplified_100m_buildings_simplified.gpkg"))}
-local_authorities_buildings_clip <- st_read(here("data", "infuse_dist_lyr_2011_simplified_100m_buildings_simplified.gpkg"))
+local_authorities_buildings_clip <- st_read(here("data", "infuse_dist_lyr_2011_simplified_100m_buildings_simplified.gpkg"), quiet = TRUE)
 ```
 Before we move on, let's plot a simple map and have a look at one of our administrative layers. We can use ggplot with a new type of shape `geom_sf()` to plot the contents of a geospatial data file with polygons which is loaded as a `simplefeature` in R. 
 
 ```{r}
-ggplot(uk_countries) +
-  geom_sf()
+library(bench) |> suppressPackageStartupMessages()
+bench_time(ggplot(uk_countries) + geom_sf())
 ```
 
 # Load in Ordnance Survey OpenMap Points Data
 
 ```{r}
-
 # Note: for more advanced reproducible scripts which demonstrate how these data surces have been 
 # obtained, see the companion cookbook here: https://github.com/kidwellj/hacking_religion_cookbook/blob/main/ordnance_survey.R
 
-os_openmap_pow <- st_read(here("data", "os_openmap_pow.gpkg"))
+os_openmap_pow <- st_read(here("data", "os_openmap_pow.gpkg"), quiet = TRUE)
 
-ggplot(os_openmap_pow) +
-  geom_sf()
-
+bench_time(ggplot(os_openmap_pow) + geom_sf())
 ```
 
 It's worth noting that the way that you load geospatial data in R has changed quite dramatically since 2020 with the introduction of the simplefeature class in R. Much of the documentation you will come across "out there" will make reference to a set of functions which are now deprecated.
@@ -87,6 +84,7 @@ Let's use that data we've just loaded to make our first map:
 # using temporary palette here so that 0s are white
 library(tmap) |> suppressPackageStartupMessages()
 # palette <- c(white, "#a8ddb5", "#43a2ca")
+
 map1 <- tm_shape(local_authorities) + 
 #  tm_fill(col = "surveys_count", , palette = palette, title = "Concentration of survey respondents") +
   tm_borders(alpha=.5, lwd=0.1) +
@@ -116,14 +114,15 @@ map1
 tmap_save(map1, here("figures", "map.png"), width=1920, height=1080, asp=0)
 ```
 
-```{r}
+```{r, results = 'hide'}
 # subsetting ordnance survey openmap data for measuring clusters and proximity
 
-os_openmap_important_buildings <- st_read(here("data", "os_openmap_important_buildings.gpkg"))
+os_openmap_important_buildings <- st_read(here("data", "os_openmap_important_buildings.gpkg"), quiet = TRUE)
 
 # add pubs, check_cashing, pawnbrokers, SSSI
 ## subsets
 ```
+1. Count the number of churches in Local Authorities
 
 
 ```{r}

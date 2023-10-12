@@ -9,7 +9,7 @@ Let's start by importing some data into R. Because R is what is called an object
 In the example below, we're going to read in data from a comma separated value file ("csv") which has rows of information on separate lines in a text file with each column separated by a comma. This is one of the standard plain text file formats. R has a function you can use to import this efficiently called "read.csv". Each line of code in R usually starts with the object, and then follows with instructions on what we're going to put inside it, where that comes from, and how to format it:
 
 
-```{r}
+```{r, results = 'hide'}
 #| include: true
 #| label: fig-polar
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
@@ -92,8 +92,8 @@ barplot(height=df$value, names=df$key)
 ### GGPlot
 
 ```{r}
-ggplot(uk_census_2021_religion_wmids, aes(x = key, y = value)) +   # <1>
-  geom_bar(stat = "identity")                   # <1>
+ggplot(uk_census_2021_religion_wmids, aes(x = key, y = value)) + # <1>
+  geom_bar(stat = "identity") # <1>
 ggplot(uk_census_2021_religion_wmids, aes(x= reorder(key,-value),value)) + geom_bar(stat ="identity") # <2>
 ```
 
@@ -215,7 +215,6 @@ If you want to draw some data from the nomis platform yourself in R, have a look
 
 ```{r}
 # Get table of Census 2011 religion data from nomis
-# Note: for reproducible code used to generate the dataset used in the book, see the cookbook here: 
 z <- readRDS(file = (here("example_data", "z.rds")))
 
 # Filter down to simplified dataset with England / Wales and percentages without totals

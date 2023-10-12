@@ -10,12 +10,13 @@ We've decided to open up access to our data and I'm highlighting it in this book
 
 # Loading in some data
 
-```{r}
+```{r, results = 'hide'}
 # R Setup -----------------------------------------------------------------
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
-library(here)
-library(tidyverse)
-library(haven) # used for importing SPSS .sav files
+library(here)  |> suppressPackageStartupMessages()
+library(tidyverse)  |> suppressPackageStartupMessages()
+# used for importing SPSS .sav files
+library(haven)   |> suppressPackageStartupMessages()
 here::i_am("chapter_2.qmd")
 climate_experience_data <- read_sav(here("example_data", "climate_experience_data.sav"))
 ```
