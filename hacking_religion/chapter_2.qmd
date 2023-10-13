@@ -131,7 +131,6 @@ plot1 <- ggplot(religious_affiliation_ethnicity_sums, aes(x = n, y = Religion)) 
   geom_col(colour = "white") + facet_wrap(~Ethnicity, scales="free_x")
 
 ggsave("chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
-
 ```
 
 ## Working With a Continum: Religiosity and Spirituality
@@ -161,14 +160,13 @@ caption <- "Respondent Religiosity"
 ggplot(religiosity_sums, aes(x = response, y = n, color=response)) +
   geom_col(colour = "white", aes(fill = response)) +   # <1>
   ## get rid of all elements except y axis labels + adjust plot margin
-  coord_flip() +  # <1>
+  coord_flip() +  # <2>
   theme(plot.margin = margin(rep(15, 4))) +
   labs(caption = caption)
 ```
 
-We've added a few elements here:
-1. Colors, because colours are fun.
-2. `coord_flip` to rotate the chart so we have bars going horizontally
+1. We've added colors, because colours are fun.
+2. Also new here is `coord_flip` to rotate the chart so we have bars going horizontally
 
 Since we're thinking about how things look just now, let's play with themes for a minute. `ggplot` is a really powerful tool for visualising information, but it also has some quite nice features for making things look pretty. 
 
@@ -214,14 +212,32 @@ climate_experience_data$Q52_score <- rowMeans(select(climate_experience_data, Q5
 Like we did in chapter 1, let's start by exploring the data and get a bit of a sense of the character of the responses overall. One good place to start is to find out the mean response for our two continum questions:
 
 ```{r}
+# Spirituality first:
+mean(climate_experience_data$Q52_score)
+
+# Then religiosity
+mean(climate_experience_data$Q57_1)
+```
+
+
+
+```{r}
 # t_testing and means
 
 # Spirituality scale
+library(rstatix)
+religiosity_stats <- as.tibble(climate_experience_data$Q57_1) 
+spirituality_stats <- as.tibble(climate_experience_data$Q52_score)
+
+plot(religiosity_stats ~ spirituality_stats, data=CO2)
+
+stats %>% get_summary_stats(value, type="mean_sd")
+
 
 # JK note to self: need to fix stat_summary plot here
-
 # stat_summary(climate_experience_data$Q52_score)
-mean(climate_experience_data$Q52_score)
+
+
 
 # Q57 Regardless of whether you belong to a particular religion, how religious would you say you are?
 # 0-10, Not religious at all => Very religious; mean=5.58

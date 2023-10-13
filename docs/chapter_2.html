@@ -336,15 +336,15 @@ So <em>Who’s</em> Religious?
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-4" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="annotated-cell-4" data-code-lines="2">First we generate new a dataframe with sums per category and</span>
+<span data-code-lines="2" data-code-cell="annotated-cell-4" data-code-annotation="1">First we generate new a dataframe with sums per category and</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-annotation="2" data-code-cell="annotated-cell-4" data-code-lines="3">…sort in descending order</span>
+<span data-code-lines="3" data-code-cell="annotated-cell-4" data-code-annotation="2">…sort in descending order</span>
 </dd>
 <dt data-target-cell="annotated-cell-4" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-annotation="3" data-code-cell="annotated-cell-4" data-code-lines="5">Then we add new column with percentages based on the sums you’ve just generated</span>
+<span data-code-lines="5" data-code-cell="annotated-cell-4" data-code-annotation="3">Then we add new column with percentages based on the sums you’ve just generated</span>
 </dd>
 </dl>
 </div>
@@ -413,25 +413,36 @@ So <em>Who’s</em> Religious?
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-8" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-annotation="1" data-code-cell="annotated-cell-8" data-code-lines="5">Note: we have removed <code>sort = TRUE</code> in the above statement as it will enforce sorting the data by quantities rather than the factor order. It wouldn’t really make sense to plot this chart in the order of response.</span>
+<span data-code-lines="5" data-code-cell="annotated-cell-8" data-code-annotation="1">Note: we have removed <code>sort = TRUE</code> in the above statement as it will enforce sorting the data by quantities rather than the factor order. It wouldn’t really make sense to plot this chart in the order of response.</span>
 </dd>
 </dl>
 </div>
 </div>
 <p>Now, let’s plot that data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a>caption <span class="ot">&lt;-</span> <span class="st">"Respondent Religiosity"</span></span>
+<div class="sourceCode cell-code" id="annotated-cell-9"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-9-1"><a href="#annotated-cell-9-1" aria-hidden="true" tabindex="-1"></a>caption <span class="ot">&lt;-</span> <span class="st">"Respondent Religiosity"</span></span>
 <span id="annotated-cell-9-2"><a href="#annotated-cell-9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(religiosity_sums, <span class="fu">aes</span>(<span class="at">x =</span> response, <span class="at">y =</span> n, <span class="at">color=</span>response)) <span class="sc">+</span></span>
-<span id="annotated-cell-9-3"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="fu">aes</span>(<span class="at">fill =</span> response)) <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-9-3" class="code-annotation-target"><a href="#annotated-cell-9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="fu">aes</span>(<span class="at">fill =</span> response)) <span class="sc">+</span></span>
 <span id="annotated-cell-9-4"><a href="#annotated-cell-9-4" aria-hidden="true" tabindex="-1"></a>  <span class="do">## get rid of all elements except y axis labels + adjust plot margin</span></span>
-<span id="annotated-cell-9-5"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-9" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-9-5" class="code-annotation-target"><a href="#annotated-cell-9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
 <span id="annotated-cell-9-6"><a href="#annotated-cell-9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="fu">rep</span>(<span class="dv">15</span>, <span class="dv">4</span>))) <span class="sc">+</span></span>
-<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> caption)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="annotated-cell-9-7"><a href="#annotated-cell-9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> caption)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-9" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="3" data-code-cell="annotated-cell-9" data-code-annotation="1">We’ve added colors, because colours are fun.</span>
+</dd>
+<dt data-target-cell="annotated-cell-9" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="5" data-code-cell="annotated-cell-9" data-code-annotation="2">Also new here is <code>coord_flip</code> to rotate the chart so we have bars going horizontally</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output-display">
 <p><img src="chapter_2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We’ve added a few elements here: 1. Colors, because colours are fun. 2. <code>coord_flip</code> to rotate the chart so we have bars going horizontally</p>
 <p>Since we’re thinking about how things look just now, let’s play with themes for a minute. <code>ggplot</code> is a really powerful tool for visualising information, but it also has some quite nice features for making things look pretty.</p>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="">If you’d like to take a proper deep dive on all this theme stuff, R-Charts has a great set of examples showing you how a number of different theme packages look in practice, <a href="https://r-charts.com/ggplot2/themes/">“R-Charts on Themes”</a>.</span></div></div>
 <p>R has a number of built-in themes, but these are mostly driven by functional concerns, such as whether you might want to print your chart or have a less heavy look overall. So for example you might use <code>theme_light()</code> in the following way:</p>
@@ -479,8 +490,10 @@ So <em>Who’s</em> Religious?
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Spirituality scale</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># stat_summary(climate_experience_data$Q52_score)</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(climate_experience_data<span class="sc">$</span>Q52_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># JK note to self: need to fix stat_summary plot here</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># stat_summary(climate_experience_data$Q52_score)</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(climate_experience_data<span class="sc">$</span>Q52_score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6.047454</code></pre>
 </div>
