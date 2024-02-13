@@ -2,17 +2,18 @@
 
 In this chapter, we'll explore the diverse variety of ways you can frame collecting data around religion. Before we dive into that all, however, you might be wondering, why does it all really matter? Can't we just use the census data and assume that's a reasonably accurate approximation? I'll explore the importance of getting the framing right, or better yet, working with data that seeks to unpack religious belonging, identity, and beliefs (or unbelief) in a variety of ways, but an example might serve to explain why this is important.
 
-The 2016 presidential election result in the USA came as a surprise to many data analysts and pollsters. And as the dust settled, a number of analysis scrambled to make sense of things and identify some hidden factor that might have tipped the balance away from the expected winner Hilary Clinton. One of the most widely circulated data points was the role of "evangelical" Christians in supporting Trump. Exit polls reported that 81% of this constituency voted for Trump. Many major media outlets reported this figure prominently and public intellectuals weighed in on the social direction of evangelical Christianity.
+The 2016 presidential election result in the USA came as a surprise to many data analysts and pollsters. As the dust settled, a number of analysis scrambled to make sense of things and identify some hidden factor that might have tipped the balance away from the expected winner Hilary Clinton. One of the most widely circulated data points was the role of white evangelical Christians in supporting Trump. Exit polls reported that 81% of this constituency voted for Trump and many major media outlets reported this figure prominently, with public commentary from many religious leaders on the meaning this figure had the social direction of evangelical Christianity.
 
-Far too few observers paused to ask what those exit polls were measuring, and a closer look at that information reveals some interesting nuances. First, it may be helpful to know that there is only a single firm that runs exit polling in the USA, Edison Research, and they are contracted to do this work by a consortium of major media news outlets. It's not a process driven by slow, nuanced, scholarly researchers. 
+Far too few observers paused to ask what those exit polls were measuring and a closer look at that information reveals some interesting nuances. There is only a single firm that runs exit polling in the USA, Edison Research, who is contracted to do this work by a consortium of major media news outlets ("the National Election Pool"), which represents ABC News, Associated Press, CBS News, CNN, Fox News, and NBC News. It's not a process driven by slow, nuanced, scholarly researchers strapped for funding, it's a rapid high-stakes data collection exercise meant to provide data which can feed into the election week news cycle. The poll doesn't ask respondents simply if they are "evangelical" it uses a broader proxy question to do this: "Would you describe yourself as a born-again or evangelical Christian?" This term "born-again" can be a useful proxy, but it can also prove misleading. When asked if they are "born again" people who identify with a number of non-Christian religions, and people who might describe themselves as non-religious will also often answer "yes". This is particularly salient given the 2016 exit survey asked this question before asking specifically what a person's religion was, so as Pew Research reported, "everyone who takes the exit poll (including religious “nones” and adherents of non-Christian faiths) has the opportunity to identify as a born-again or evangelical Christian." 
 
+While the "born-again" Christian category tends to correlate to high levels of attendance at worship services, in this case some researchers found that white protestant Christian voters for Trump tended to have low levels of participation in activities. We don't have access to the underlying data, and ultimately the exit polling was quite limited in scope (in some instances respondents weren't even asked about religion), so we'll never really have a proper understanding of what happened demographically in that election. But it's an interesting puzzle to consider how different ways to record participation in religion might fit together, or even be in tension with one another. For this chapter, we're going to take a look at another dataset which gives us exactly this kind of opportunity, to see how different kinds of measurement might reinforce or relate with one another.
 
 
 # Survey Data: Spotlight Project
 
-In the last chapter we explored some high level data about religion in the UK. This was a census sample, which usually refers to an attempt to get as comprehensive a sample as possible. But this is actually fairly unusual in practice. Depending on how complex a subject is, and how representative we want our data to be, it's much more common to use selective sampling, that is survey responses at n=100 or n=1000 at a maximum. The advantage of a census sample is that you can explore how a wide range of other factors - particularly demographics - intersect with your question. And this can be really valuable in the study of religion, particularly as you will see as we go along that responses to some questions are more strongly correlated to things like economic status or educational attainment than they are to religious affiliation. It can be hard to tell if this is the case unless you have enough of a sample to break down into a number of different kinds of subsets. But census samples are complex and expensive to gather, so they're quite rare in practice. 
+In the last chapter we explored some high level data about religion in the UK. This was a census sample, which usually refers to an attempt to get as comprehensive a sample as possible. But this is actually fairly unusual in practice. Depending on how complex a subject is and how representative we want our data to be, it's much more common to use selective sampling, that is survey responses at n=100 or n=1000 at a maximum. The advantage of a census sample is that you can explore how a wide range of other factors - particularly demographics - intersect with your question. And this can be really valuable in the study of religion, particularly as you will see as we go along that responses to some questions are more strongly correlated to things like economic status or educational attainment than they are to religious affiliation. It can be hard to tell if this is the case unless you have enough of a sample to break down into a number of different kinds of subsets. But census samples are complex and expensive to gather, so they're quite rare in practice. 
 
-For this chapter, I'm going to walk you through a data set that a colleague (Charles Ogunbode) and I collected in 2021. Another problem with smaller, more selective samples is that researchers can often undersample minoritised ethnic groups. This is particularly the case with climate change research. Until the time we conducted this research, there had not been a single study investigating the specific experiences of people of colour in relation to climate change in the UK. Past researchers had been content to work with large samples, and assumed that if they had done 1000 surveys and 50 of these were completed by people of colour, they could "tick" the box. But 5% is actually well below levels of representation in the UK generally, and even more sharply the case for specific communities. And if we bear in mind that non-white respondents are (of course!) a highly heterogenous group, we're even more behind in terms of collecting data that can improve our knowledge. Up until recently researchers just haven't been paying close enough attention to catch the significant neglect of the empirical field that this represents.
+For this chapter, I'm going to walk you through a data set that a colleague (Charles Ogunbode) and I collected in 2021. Another problem with smaller, more selective samples is that researchers can often undersample minoritised ethnic groups. This is particularly the case with climate change research. Until the time we conducted this research, there had not been a single study investigating the specific experiences of people of colour in relation to climate change in the UK. Past researchers had been content to work with large samples, and assumed that if they had done 1000 surveys and 50 of these were completed by people of colour, they could "tick" the box. But 5% is actually well below levels of representation in the UK generally, and even more sharply the case for specific communities and regions in the UK. And if we bear in mind that non-white respondents are (of course!) a highly heterogenous group, we're even more behind in terms of collecting data that can improve our knowledge. Up until recently researchers just haven't been paying close enough attention to catch the significant neglect of the empirical field that this represents.
 
 While I've framed my comments above in terms of climate change research, it is also the case that, especially in diverse societies like the USA, Canada, the UK etc., paying attention to non-majority groups and people and communities of colour automatically draws in a strongly religious sample. This is highlighted in one recent study done in the UK, the "[Black British Voices Report](https://www.cam.ac.uk/stories/black-british-voices-report)" in which the researchers observed that "84% of respondents described themselves as religious and/or spiritual". My comments above in terms of controlling for other factors remains important here - these same researchers also note that "despire their significant important to the lives of Black Britons, only 7% of survey respondents reported that their religion was more defining of their identity than their race".
 
@@ -31,42 +32,28 @@ here::i_am("chapter_2.qmd")
 climate_experience_data <- read_sav(here("example_data", "climate_experience_data.sav"))
 ```
 
-The first thing to note here is that we've drawn in a different type of data file, this time from an `.sav` file, usully produced by the statistics software package SPSS. This uses a different R Library (I use `haven` for this). The upside is that in some cases where you have survey data with both a code and a value like "1" is eqivalent to "very much agree" this will preserve both in the R dataframe that is created. Now that you've loaded in data, you have a new R dataframe called "climate_experience_data" with a lot of columns with just under 1000 survey responses.
+The first thing to note here is that we've drawn in a different type of data file, this time from an `.sav` file, which is usually produced by the statistics software package SPSS. This uses a different R Library (I use `haven` for this). The upside is that in some cases where you have survey data with both a code like "very much agree" which corresponds to a value (like "1") this package will preserve both in the R dataframe that is created. Now that you've loaded in data, you have a new R dataframe called "climate_experience_data" with a lot of columns with just under 1000 survey responses.
 
 ## How can you ask about religion?
 
 One of the challenges we faced when running this study is how to gather responsible data from surveys regarding religious identity. We'll dive into this in depth as we do analysis and look at some of the agreements and conflicts in terms of respondent attribution. Just to set the stage, we used the following kinds of question to ask about religion and spirituality:
 
-::: {.callout-tip}
-### What is Religion?
-
-Breakout box about beliefs in the paranormal:
-
-World Values survey - cf. paranormal belief breakdown by generation analysis by Bobby Duffy (KCL)
-God heaven hell afterlife
-
-Draw on European 
-
-Theos, Faith of the Faithless Report (2012)
-:::
-
-
-
 
 ### "What is your religion?"
 
-1. Question 56 asks respondents simply, "What is your religion?" and then provides a range of possible answers. We included follow-up questions regarding denomination for respondents who indicated they were "Christian" or "Muslim". For respondents who ticked "Christian" we asked, "What is your denomination?" nad for respondents who ticked "Muslim" we asked "Which of the following would you identify with?" and then left a range of possible options which could be ticked such as "Sunni," "Shia," "Sufi" etc.
+The first, and perhaps most obvious question (Question 56 in the dataset) asks respondents simply, "What is your religion?" and then provides a range of possible answers. We included follow-up questions regarding denomination for respondents who indicated they were "Christian" or "Muslim". For respondents who ticked "Christian" we asked, "What is your denomination?" and for respondents who ticked "Muslim" we asked "Which of the following would you identify with?" and then left a range of possible options which could be ticked such as "Sunni," "Shia," "Sufi" etc.
 
 This is one way of measuring religion, that is, to ask a person if they consider themselves formally affiliated with a particular group. This kind of question has some (serious) limitations, but we'll get to that in a moment.
 
+
 ### "How religious would you say you are?"
 
-We also asked respondents (Q57): "Regardless of whether you belong to a particular religion, how religious would you say you are?" and then provided a slider from 0 (not religious at all) to 10 (very religious). 
+We also asked respondents (Q57): "Regardless of whether you belong to a particular religion, how religious would you say you are?" and then provided a sliding scale from 0 (not religious at all) to 10 (very religious). Seen in this way, we had a tradition-neutral measurement of religious intensity.
 
 
 ### Participation in Worship
 
-We included some classic indicators about how often respondents go to worship (Q58): Apart from weddings, funerals and other special occasions, how often do you attend religious services? and (Q59): "Q59 Apart from when you are at religious services, how often do you pray?"
+We included some classic indicators about how often respondents go to worship (Q58): "Apart from weddings, funerals and other special occasions, how often do you attend religious services?" and (Q59): "Apart from when you are at religious services, how often do you pray?"
 
 - More than once a week  (1) 
 - Once a week  (2) 
@@ -74,7 +61,7 @@ We included some classic indicators about how often respondents go to worship (Q
 - Only on special holy days  (4) 
 - Never  (5)
 
-Each of these measures a particular kind of dimension, and it is interesting to note that sometimes there are stronger correlations between how often a person attends worship services (weekly versus once a year) and a particular view, than there is between their affiliation (if they are Christian or Pagan). We'll do some exploratory work shortly to see how this is the case in our sample. 
+Each of these measures a particular kind of dimension, and it is interesting to note that sometimes there are stronger correlations between how often a person attends worship services (weekly versus once a year) and a particular view (in the case of our survey on environmental issues), than there is between their affiliation (if they are Christian or Pagan). We'll do some exploratory work shortly to see how this is the case in our sample. 
 
 ### Spirituality
 
@@ -101,13 +88,15 @@ names(religious_affiliation) <- c("response")  # <2>
 religious_affiliation <- filter(religious_affiliation, !is.na(response)) # <3>
 ```
 
-There are few things we need to do here to get the data into initial proper shape. This might be called "cleaning" the data:
+There are few things we need to do here to get the data into initial proper shape. This is often referred to as "cleaning" the data:
 
-1. Because we imported this data from an SPSS `.sav` file format using the R `haven()` library, we need to start by adapting the data into a format that our visualation engine ggplot can handle (a dataframe).
+1. Because we imported this data from an SPSS `.sav` file format using the R `haven()` library, we need to start by adapting the data into a format that our visualation engine `ggplot` can handle (a dataframe).
 2. Next we'll rename the columns so these names are a bit more useful.
 3. We need to omit non-responses so these don't mess with the counting (these are `NA` in R)
 
-If we pause at this point to view the data, you'll see it's basically just a long list of survey responses. What we need is a count of each unique response (or `factor`). This will take a few more steps:
+As in the previous chapter, I've provided sample data here that needs a bit of work. This gives you a chance to see what this all looks like in practice, and offers some examples you can apply later to your own datasets.
+
+If we pause at this point to view the data, you'll see it's basically just a long list of survey responses. What we need is a count of each unique response (these are sometimes called a `factor`). This will take a few more steps:
 
 ```{r}
 religious_affiliation_sums <- religious_affiliation %>%  
@@ -127,6 +116,7 @@ That should give us a tidy table of results, which you can see if you view the c
 head(religious_affiliation_sums)
 ```
 
+We can view this as a bar chart using `ggplot` in ways that are similar to the exercises in the last chapter:
 
 ```{r}
 # make plot
@@ -137,7 +127,7 @@ ggplot(religious_affiliation_sums, aes(x = n, y = response)) +
             ## make labels left-aligned and white
             hjust = 1, nudge_x = -.5, colour = "white", size=3)
 ```
-I've added one feature to our chart that wasn't in the bar charts in chapter 1, text labels with the actual value on each bar. 
+You may notice that I've added one feature to our chart that wasn't in the bar charts in chapter 1, text labels with the actual value on each bar using `geom_text`.
 
 You may be thinking about the plots we've just finished in chapter 1 and wondering how they compare. Let's use the same facet approach that we've just used to render this data in a subsetted way.
 
@@ -152,11 +142,14 @@ religious_affiliation_ethnicity_sums <- religious_affiliation_ethnicity %>%
   dplyr::count(Religion, sort = TRUE) %>% # <1>
   dplyr::mutate(Religion = forcats::fct_rev(forcats::fct_inorder(Religion)))
 
-plot1 <- ggplot(religious_affiliation_ethnicity_sums, aes(x = n, y = Religion)) +
-  geom_col(colour = "white") + facet_wrap(~Ethnicity, scales="free_x")
+religious_affiliation_ethnicity_plot <- ggplot(religious_affiliation_ethnicity_sums, aes(x = n, y = Religion)) + geom_col(colour = "white") + facet_wrap(~Ethnicity, scales = "free_x", labeller = label_wrap_gen(width = 24)) + theme(strip.text.x = element_text(size = 8)) + theme(strip.text.y = element_text(size = 6))
 
-ggsave("chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
+religious_affiliation_ethnicity_plot
+
+ggsave("figures/spotlight_religious_affiliation_ethnicity.png", plot=religious_affiliation_ethnicity_plot, width = 8, height = 10, units=c("in"))
 ```
+You'll notice that I've tweaked the display of facet titles a bit here so that the text wraps using `labeller = label_wrap_gen(width = 24)`, since there are a lot of facets here, which are all interesting, I've also reduced the size of text for x- and y- axes using `theme(strip.text.x = element_text()`.
+
 
 ## Working With a Continum: Religiosity and Spirituality
 
@@ -193,6 +186,8 @@ ggplot(religiosity_sums, aes(x = response, y = n, color=response)) +
 1. We've added colors, because colours are fun.
 2. Also new here is `coord_flip` to rotate the chart so we have bars going horizontally
 
+### Quick excursus: making things pretty with themes
+
 Since we're thinking about how things look just now, let's play with themes for a minute. `ggplot` is a really powerful tool for visualising information, but it also has some quite nice features for making things look pretty. 
 
 [If you'd like to take a proper deep dive on all this theme stuff, R-Charts has a great set of examples showing you how a number of different theme packages look in practice, ["R-Charts on  Themes"](https://r-charts.com/ggplot2/themes/).]{.aside}
@@ -228,28 +223,107 @@ ggplot(religiosity_sums, aes(x = response, y = n, color=response)) + geom_col(co
   theme_ipsum_pub() +
   scale_fill_pander()
 ```
-We're going to come back to this chart, but let's set it to one side for a moment and build up a visualisation of the spirituality scale data. The spirituality scale questions come from research by ___ and ___. These researchers developed a series of questions which they asked respondents in a survey. The advantage here is that you're getting at the question of spirituality from a lot of different angles, and then you combine the scores from all the questions to get a mean "spirituality score". 
+We're going to come back to this chart, but let's set it to one side for a moment and build up a visualisation of an adjacent measure we used in this study which focussed on spirituality.
+
+::: {.callout-tip}
+### What is the difference between Spirituality and Religion?
+
+Though the terms can tend to be used interchangeable in many cases, some scholars in religious studies and psychology have sought to develop the concept (and measurement of) spirituality as a counterpoint to religion. In some cases, scholars argue that religion is extrinsic (something outside us that we participate in) and spirituality is intrinsic (something inside ourselves that we engage with). Another way of contrasting the two concepts is to suggest that religion is social whereas spirituality is personal. As Hodge puts it, “spirituality refers to an individual’s relationship with God (or perceived Transcendence), while religion is defined as a particular set of beliefs, practices, and rituals that have been developed in community by people who share similar exis- tential experiences of transcendent reality.” Of course, as you'll have noticed, there are many people who think of themselves as religious, but are opposed to participation in a formal religious tradition, or a social institution like a church, mosque, or denomination. So these differentiations can't be sharply made in a conclusive way. And it's likely that many respondents will have their own way to relate to these terms, whether it is affection or aversion.
+
+:::
+
+For our study, we made use of a six-item intrinsic spirituality scale that was developed by David R. Hodge which is based on another instrument intended to measure "intrinsic religion" by Allport and Ross (1967). These researchers developed a series of questions which they asked respondents in a survey. The advantage here is that you're getting at the question of spirituality from a lot of different angles and then you combine the scores from all the questions to get a mean "spirituality score". There are many other ways that psychologists have developed to measure intrinsic religion or spirituality, and we'd encourage you to try them out (there are some references to get you started in Appendix B).
 
 ```{r}
 ### Spirituality scale  --------------------------------------------------------------
 # Calculate overall mean spirituality score based on six questions:
 climate_experience_data$Q52_score <- rowMeans(select(climate_experience_data, Q52a_1:Q52f_1))
+# Calculate overall mean nature relatedness score based on six questions:
+climate_experience_data$Q51_score <- rowMeans(select(climate_experience_data, Q51_heritage:Q51_remote_vacation))
+
 ```
 
-Like we did in chapter 1, let's start by exploring the data and get a bit of a sense of the character of the responses overall. One good place to start is to find out the mean response for our two continum questions:
+
+Like we did in chapter 1, let's start by exploring the data and get a bit of a sense of the character of the responses overall. One good place to start is to find out the mean response for our two continum questions. We can start with religiosity:
 
 ```{r}
-# Spirituality first:
-mean(climate_experience_data$Q52_score)
-
-# Then religiosity
 mean(climate_experience_data$Q57_1)
+```
+Now let's compare this with the overall mean score for our whole survey pool around spirituality:
+
+```{r}
+mean(climate_experience_data$Q52_score)
 ```
 
 
 
 ```{r}
 # t_testing and means
+
+# Calculate the Pearson correlation coefficient, 
+# Positive correlation: If r is close to +1, it indicates a strong positive linear relationship.
+# Negative correlation: If r is close to -1, it indicates a strong negative linear relationship.
+# No correlation: If r is close to 0, there is no linear relationship.
+# The closer the value of r is to -1 or +1, the stronger the correlation.
+
+# Religious intensity to happiness - minimal positive
+cor(climate_experience_data$Q57_1, climate_experience_data$Q49)
+# Religious intensity to life satisfaction - minimal positive
+cor(climate_experience_data$Q57_1, climate_experience_data$Q50)
+# Religious intensity to spirituality - strong positive
+cor(climate_experience_data$Q57_1, climate_experience_data$Q52_score)
+# Religious intensity to interest in nature relatedness/spirituality - minimal positive
+cor(climate_experience_data$Q57_1, climate_experience_data$Q51_spirituality)
+# Religious intensity to politics - strong positive
+cor(climate_experience_data$Q57_1, climate_experience_data$Q54)
+# Religious intensity to participation in services - strong positive (because reverse in scales)
+cor(climate_experience_data$Q57_1, climate_experience_data$Q58)
+# Religious intensity to participation in activity - even stronger positive (because reverse in scales)
+cor(climate_experience_data$Q57_1, climate_experience_data$Q59)
+
+cor.test(climate_experience_data$Q57_1, climate_experience_data$Q59)
+p_value <- result$p.value
+# Format the p-value without scientific notation
+format(p_value, scientific = FALSE)
+
+# Religious intensity to happiness - minimal positive
+cor(climate_experience_data$Q52_score, climate_experience_data$Q49)
+# Religious intensity to life satisfaction - minimal positive
+cor(climate_experience_data$Q52_score, climate_experience_data$Q50)
+# Religious intensity to spirituality - strong positive
+cor(climate_experience_data$Q52_score, climate_experience_data$Q57_1)
+# Religious intensity to interest in politics - very minimal positive
+cor(climate_experience_data$Q52_score, climate_experience_data$Q51_spirituality)
+# Religious intensity to nature relatedness - strong positive
+cor(climate_experience_data$Q52_score, climate_experience_data$Q54)
+# Religious intensity to participation in services - strong positive (because reverse in scales)
+cor(climate_experience_data$Q52_score, climate_experience_data$Q58)
+# Religious intensity to participation in activity - even stronger positive (because reverse in scales)
+cor(climate_experience_data$Q57_1, climate_experience_data$Q59)
+
+
+religiosity - Q57_1
+spirituality - Q52_score
+nature relatedness - Q51 
+attendance at worship - Q58
+prayer - Q59 - from never = 5 to lots=1
+
+sample_size <- length(climate_experience_data$Q57_1)
+t_score <- correlation_coefficient * sqrt(sample_size - 2) / sqrt(1 - correlation_coefficient^2)
+pt(t_score, df = sample_size - 2, lower.tail = FALSE) * 2
+
+# Assuming you have already performed the t-test
+result <- t.test(climate_experience_data$Q57_1, climate_experience_data$Q58)
+
+# Extract the p-value
+p_value <- result$p.value
+
+# Format the p-value without scientific notation
+formatted_p_value <- format(p_value, scientific = FALSE)
+
+# Print the formatted p-value
+print(formatted_p_value)
+
 
 # Spirituality scale
 library(rstatix)
