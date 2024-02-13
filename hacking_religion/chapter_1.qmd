@@ -208,17 +208,17 @@ One element of R data analysis that can get really interesting is working with m
 
 For the UK, census data is made available for programmatic research like this via an organisation called NOMIS. Luckily for us, there is an R library you can use to access nomis directly which greatly simplifies the process of pulling data down from the platform. It's worth noting that if you're not in the UK, there are similar options for other countries. Nearly every R textbook I've ever seen works with USA census data, so you'll find plenty of documentation available on the tools you can use for US Census data. Similarly for the EU, Canada, Austrailia etc.
 
-If you want to draw some data from the nomis platform yourself in R, have a look at the [companion cookbook repository](https://github.com/kidwellj/hacking_religion_cookbook/blob/main/nomis.R). 
+If you want to draw some data from the nomis platform yourself in R, have a look at the nomis script in our [companion cookbook repository](https://github.com/kidwellj/hacking_religion_cookbook/blob/main/nomis.R). For now, we'll provide some data extracts for you to use.
 
 :::
 
 
 ```{r}
 # Get table of Census 2011 religion data from nomis
-z <- readRDS(file = (here("example_data", "z.rds")))
+nomis_extract_census2011a <- readRDS(file = (here("example_data", "nomis_extract_census2011a.rds")))
 
 # Filter down to simplified dataset with England / Wales and percentages without totals
-uk_census_2011_religion <- filter(z, GEOGRAPHY_NAME=="England and Wales" & RURAL_URBAN_NAME=="Total" & C_RELPUK11_NAME != "All categories: Religion")
+uk_census_2011_religion <- filter(nomis_extract_census2011a, GEOGRAPHY_NAME=="England and Wales" & RURAL_URBAN_NAME=="Total" & C_RELPUK11_NAME != "All categories: Religion")
 # Drop unnecessary columns
 uk_census_2011_religion <- select(uk_census_2011_religion, C_RELPUK11_NAME, OBS_VALUE)
 # Plot results
@@ -226,30 +226,30 @@ plot1 <- ggplot(uk_census_2011_religion, aes(x = C_RELPUK11_NAME, y = OBS_VALUE)
 # ggsave(filename = "plot.png", plot = plot1)
 
 # grab daata from nomis for 2001 census religion / ethnicity
-z0 <- readRDS(file = (here("example_data", "z0.rds")))
+nomis_extract_census2001 <- readRDS(file = (here("example_data", "nomis_extract_census2001.rds")))
 
 # select relevant columns
-uk_census_2001_religion_ethnicity <- select(z0, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHHUK11_NAME, OBS_VALUE)
+uk_census_2001_religion_ethnicity <- select(nomis_extract_census2001, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHHUK11_NAME, OBS_VALUE)
 # Filter down to simplified dataset with England / Wales and percentages without totals
 uk_census_2001_religion_ethnicity <- filter(uk_census_2001_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C_RELPUK11_NAME != "All categories: Religion")
 # Simplify data to only include general totals and omit subcategories
 uk_census_2001_religion_ethnicity <- uk_census_2001_religion_ethnicity %>% filter(grepl('Total', C_ETHHUK11_NAME))
 
 # grab data from nomis for 2011 census religion / ethnicity table
-z1 <- readRDS(file = (here("example_data", "z1.rds")))
+nomis_extract_census2011b <- readRDS(file = (here("example_data", "nomis_extract_census2011b.rds")))
 
 # select relevant columns
-uk_census_2011_religion_ethnicity <- select(z1, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHPUK11_NAME, OBS_VALUE)
+uk_census_2011_religion_ethnicity <- select(nomis_extract_census2011b, GEOGRAPHY_NAME, C_RELPUK11_NAME, C_ETHPUK11_NAME, OBS_VALUE)
 # Filter down to simplified dataset with England / Wales and percentages without totals
 uk_census_2011_religion_ethnicity <- filter(uk_census_2011_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C_RELPUK11_NAME != "All categories: Religion" & C_ETHPUK11_NAME != "All categories: Ethnic group")
 # Simplify data to only include general totals and omit subcategories
 uk_census_2011_religion_ethnicity <- uk_census_2011_religion_ethnicity %>% filter(grepl('Total', C_ETHPUK11_NAME))
 
 # grab data from nomis for 2021 census religion / ethnicity table
-z2 <- readRDS(file = (here("example_data", "z2.rds")))
+nomis_extract_census2021 <- readRDS(file = (here("example_data", "nomis_extract_census2021.rds")))
 
 # select relevant columns
-uk_census_2021_religion_ethnicity <- select(z2, GEOGRAPHY_NAME, C2021_RELIGION_10_NAME, C2021_ETH_8_NAME, OBS_VALUE)
+uk_census_2021_religion_ethnicity <- select(nomis_extract_census2021, GEOGRAPHY_NAME, C2021_RELIGION_10_NAME, C2021_ETH_8_NAME, OBS_VALUE)
 # Filter down to simplified dataset with England / Wales and percentages without totals
 uk_census_2021_religion_ethnicity <- filter(uk_census_2021_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C2021_RELIGION_10_NAME != "Total" & C2021_ETH_8_NAME != "Total")
 # 2021 census includes white sub-groups so we need to omit those so we just have totals:

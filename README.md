@@ -6,8 +6,13 @@ You can view a live demo of the book here: [https://kidwellj.github.io/hacking_r
 
 The course here has been compiled with [quarto](https://quarto.org/), and so the live instance of the course is compiled from openly accessible resources located in this repository. If you're interested in doing something similar, there are a number of other options, some of which have lamentably turned commercial, including:  [bookdown](https://github.com/rstudio/bookdown), [gitbook](https://docs.gitbook.com/), [mkdocs](https://www.mkdocs.org/), [readthedocs](https://readthedocs.org) which technically uses [Sphinx](http://www.sphinx-doc.org/en/master/) or [daux](https://daux.io/).
 
-Directory structure includes:
+Top level files and directories in this repository are:
 * `README.md` this README file displayed on Github
+* `hacking_religion` a folder containing the quarto code and accompanying files which are used to render the book in html and .pdf formats
+* `docs` a rendered sample version of the most recent version of the book (used for )
+
+
+Directory structure includes:
 * `_book` a folder containing the compiled book in html and .pdf formats
 * `references.bib` a bibliography of items used for the course in [BibTeX format](http://www.bibtex.org/Format/)
 * `preface.qmd` Preface
@@ -22,8 +27,13 @@ Directory structure includes:
 
 1. clone this repository using `git clone https://github.com/kidwellj/hacking_religion_textbook.git` ([install git](https://git-scm.com/downloads) if you haven't already)
 2. [install quarto](https://quarto.org/docs/get-started/)
-3. change to the `hacking_religion` subdirectory and run `quarto preview`
-4. alternatively you can render a copy of the book using `quarto render`
+3. install the necessary pre-requisite R libraries, including `knitr` and `rmarkdown`. This can be done by running the following commands in an RStudio console:
+    ```{r}
+    install.packages("knitr")
+    install.packages("rmarkdown")
+    ```
+4. change to the `hacking_religion` subdirectory and run `quarto preview` to get a temporary preview of the book as a website running on your local PC.
+5. alternatively you can render a copy of the book using `quarto render`.
 
 # Cookbook
 

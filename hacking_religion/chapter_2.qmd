@@ -210,6 +210,8 @@ ggplot(religiosity_sums, aes(x = response, y = n, color=response)) + geom_col(co
 
 Or, you might try the well-crafted typgraphy from `hbrthemes` in the `theme_ipsum_pub` theme:
 
+Note: this library will expect your system to have certain fonts installed and available for RStudio to use. You may want to run the following command to import your system fonts to R so they are available: `extrafont::font_import()`. This will take a bit of time to run. The package will also save fonts to a folder on your PC so you can install them if you don't already have them, you can run `import_public_sans()` to get the path for these files and install in R.
+
 ```{r}
 library(hrbrthemes)  |> suppressPackageStartupMessages()
 ggplot(religiosity_sums, aes(x = response, y = n, color=response)) + geom_col(colour = "white", aes(fill = response)) + coord_flip() + theme(plot.margin = margin(rep(15, 4))) + labs(caption = caption) + 
