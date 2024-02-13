@@ -116,7 +116,7 @@ tmap_save(map1, here("figures", "map.png"), width=1920, height=1080, asp=0)
 ```{r, results = 'hide'}
 # subsetting ordnance survey openmap data for measuring clusters and proximity
 
-os_openmap_important_buildings <- st_read(here("data", "os_openmap_important_buildings.gpkg"), quiet = TRUE)
+os_openmap_important_buildings <- st_read(here("example_data", "os_openmap_important_buildings.gpkg"), quiet = TRUE)
 
 # add pubs, check_cashing, pawnbrokers, SSSI
 ## subsets
