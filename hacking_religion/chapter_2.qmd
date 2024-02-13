@@ -1,3 +1,13 @@
+# Getting into the nitty-gritty details
+
+In this chapter, we'll explore the diverse variety of ways you can frame collecting data around religion. Before we dive into that all, however, you might be wondering, why does it all really matter? Can't we just use the census data and assume that's a reasonably accurate approximation? I'll explore the importance of getting the framing right, or better yet, working with data that seeks to unpack religious belonging, identity, and beliefs (or unbelief) in a variety of ways, but an example might serve to explain why this is important.
+
+The 2016 presidential election result in the USA came as a surprise to many data analysts and pollsters. And as the dust settled, a number of analysis scrambled to make sense of things and identify some hidden factor that might have tipped the balance away from the expected winner Hilary Clinton. One of the most widely circulated data points was the role of "evangelical" Christians in supporting Trump. Exit polls reported that 81% of this constituency voted for Trump. Many major media outlets reported this figure prominently and public intellectuals weighed in on the social direction of evangelical Christianity.
+
+Far too few observers paused to ask what those exit polls were measuring, and a closer look at that information reveals some interesting nuances. First, it may be helpful to know that there is only a single firm that runs exit polling in the USA, Edison Research, and they are contracted to do this work by a consortium of major media news outlets. It's not a process driven by slow, nuanced, scholarly researchers. 
+
+
+
 # Survey Data: Spotlight Project
 
 In the last chapter we explored some high level data about religion in the UK. This was a census sample, which usually refers to an attempt to get as comprehensive a sample as possible. But this is actually fairly unusual in practice. Depending on how complex a subject is, and how representative we want our data to be, it's much more common to use selective sampling, that is survey responses at n=100 or n=1000 at a maximum. The advantage of a census sample is that you can explore how a wide range of other factors - particularly demographics - intersect with your question. And this can be really valuable in the study of religion, particularly as you will see as we go along that responses to some questions are more strongly correlated to things like economic status or educational attainment than they are to religious affiliation. It can be hard to tell if this is the case unless you have enough of a sample to break down into a number of different kinds of subsets. But census samples are complex and expensive to gather, so they're quite rare in practice. 

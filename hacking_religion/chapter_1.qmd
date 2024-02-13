@@ -100,8 +100,7 @@ barplot(height=df$value, names=df$key)
 ### GGPlot
 
 ```{r}
-ggplot(uk_census_2021_religion_wmids, aes(x = key, y = value)) + # <1>
-  geom_bar(stat = "identity") # <1>
+ggplot(uk_census_2021_religion_wmids, aes(x = key, y = value)) + geom_bar(stat = "identity") # <1>
 ggplot(uk_census_2021_religion_wmids, aes(x= reorder(key,-value),value)) + geom_bar(stat ="identity") # <2>
 ```
 
@@ -388,6 +387,8 @@ ggsave("figures/chart.png", plot=uk_census_merged_religion_ethnicity_plot, width
 ```
 
 That's a pretty good day's work. We've covered bifactorial analysis of the census data, compared this across years, and checked in each case to be sure that we're representing the data accurately in the various visual elements of our charts. For the next chapter, we're going to explore a wider range of ways to measure and represent religion.
+
+In the meantime, if you want to download the R code without all the commentary here so you can try running it in a browser, you can download that from the cookbook repository.
 
 ::: {#refs}
 :::
