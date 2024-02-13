@@ -27,6 +27,21 @@ The first thing to note here is that we've drawn in a different type of data fil
 
 One of the challenges we faced when running this study is how to gather responsible data from surveys regarding religious identity. We'll dive into this in depth as we do analysis and look at some of the agreements and conflicts in terms of respondent attribution. Just to set the stage, we used the following kinds of question to ask about religion and spirituality:
 
+::: {.callout-tip}
+### What is Religion?
+
+Breakout box about beliefs in the paranormal:
+
+World Values survey - cf. paranormal belief breakdown by generation analysis by Bobby Duffy (KCL)
+God heaven hell afterlife
+
+Draw on European 
+
+Theos, Faith of the Faithless Report (2012)
+:::
+
+
+
 
 ### "What is your religion?"
 
