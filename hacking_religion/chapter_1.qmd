@@ -276,7 +276,7 @@ uk_census_2001_religion_ethnicity <- filter(uk_census_2001_religion_ethnicity, G
 uk_census_2011_religion_ethnicity <- filter(uk_census_2011_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C_RELPUK11_NAME != "All categories: Religion" & C_ETHPUK11_NAME != "All categories: Ethnic group")  # <2>
 uk_census_2001_religion_ethnicity <- uk_census_2001_religion_ethnicity %>% filter(grepl('Total', C_ETHHUK11_NAME)) # <3>
 uk_census_2011_religion_ethnicity <- uk_census_2011_religion_ethnicity %>% filter(grepl('Total', C_ETHPUK11_NAME)) # <3>
-uk_census_2011_religion_plot <- ggplot(uk_census_2011_religion, aes(x = C_RELPUK11_NAME, y = OBS_VALUE)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+uk_census_2011_religion_plot <- ggplot(uk_census_2011_religion_ethnicity, aes(x = C_RELPUK11_NAME, y = OBS_VALUE)) + geom_bar(stat = "identity") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
 1. Select columns 
