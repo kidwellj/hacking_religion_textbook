@@ -368,7 +368,7 @@ In case you want to print this plot out and hang it on your wall, you can use th
 ```{r}
 plot1 <- ggplot(uk_census_merged_religion_ethnicity, aes(fill=Year, x=Religion, y=Percent)) + geom_bar(position="dodge", stat ="identity", colour = "black") + facet_wrap(~Ethnicity, scales="free_x") + scale_fill_brewer(palette = "Set1") + scale_y_continuous(labels = scales::percent) + ggtitle("Religious Affiliation in the 2001-2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-ggsave("chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
+ggsave("figures/chart.png", plot=plot1, width = 8, height = 10, units=c("in"))
 ```
 
 ::: {#refs}
