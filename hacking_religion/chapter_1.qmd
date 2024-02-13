@@ -1,6 +1,8 @@
-```{r}
-# A note if you are reading raw code here rather than the book. You can ignore the code provided here below, as this is just intended to set up the basic workspace for our future work and is also necessary for the `quarto` application we use to build this book. Quarto is an application which blends together text and blocks of code. The text begins below at "The 2021 UK Census"
+# Preamble
 
+We'll get to the good stuff in a moment, but first we need to do a bit of setup. The code provided here is intended to set up your workspace and is also necessary for the `quarto` application we use to build this book. Quarto is an application which blends together text and blocks of code. You can ignore most of it for now, though if you're running the code as we go along, you'll definitely want to include these lines, as they create directories where your files will go as you create charts and extract data below and tells R where to find those files:
+
+```{r}
 #| include: true
 #| label: fig-polar
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
