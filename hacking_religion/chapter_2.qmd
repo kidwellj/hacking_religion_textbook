@@ -355,25 +355,33 @@ spirituality_combined %>%
 ggsave("figures/spirituality_boxplot.png", width = 20, height = 10, units = "cm")
 ```
 
-We've done a pretty reasonable exploration of these two questions. Now it's time to visualise how they correlate to one another.
-
-One thing that might be interesting to test here is whether spirituality and religiosity are similar for our respondents.
+We've done a pretty reasonable exploration of these two questions. Now it's time to visualise how they correlate to one another. We'll work with the combined spirituality scale score for this example, but you could just as easily work with individual elements. What we're wondering, in particular, is whether whether spirituality and religiosity are similar for our respondents. You'll see that in this chart, I've handled the `geom_point` styling separately for each point so that we can tell them apart.
 
 ```{r}
-ggplot(climate_experience_data, aes(x=spirituality_score, y=Q57_1, color=)) + labs(x="Spirituality Scale Score", y = "Religiosity") +
-  geom_point(size=1, alpha=0.3) + geom_smooth(method="auto", se=TRUE, fullrange=FALSE, level=0.95)
-
-# Create a scatterplot with different colors for x and y points
 ggplot(climate_experience_data, aes(x = spirituality_score, y = Q57_1)) +
-  geom_point(aes(color = "x"), size = 1, alpha = 0.3) +
-  geom_point(aes(color = "y"), size = 1, alpha = 0.3) +
+  geom_point(aes(color = "x"), size = 0.2, alpha = 0.2) +
+  geom_point(aes(color = "y"), size = 0.2, alpha = 0.2) +
   geom_smooth(method = "auto", se = TRUE, fullrange = FALSE, level = 0.95) +
   labs(x = "Spirituality Scale Score", y = "Religiosity") +
   scale_color_manual(values = c("x" = "red", "y" = "blue"))
+```
 
+If you really want to get a visual sense of how each respondent's two answers relate, you can connect them with a visual line. Since we have over 1000 responses on this survey, it's going to be impossible to represent the full dataset coherently, so let's take a sample just for the sake of this experiment:
 
-# using http://sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
+```{r}
+climate_experience_data_selection <- head(climate_experience_data, 40)
+ggplot(climate_experience_data_selection, aes(x = spirituality_score, y = Q57_1)) +
+  geom_point(aes(color = "x"), size = 0.2, alpha = 0.2) +
+  geom_point(aes(color = "y"), size = 0.2, alpha = 0.2) +
+  geom_line(aes(group = row_number()), color = "gray", alpha = 0.5) +
+  geom_smooth(method = "auto", se = TRUE, fullrange = FALSE, level = 0.95) +
+  labs(x = "Spirituality Scale Score", y = "Religiosity") +
+  scale_color_manual(values = c("x" = "red", "y" = "blue"))
+```
 
+As an alternative we can view this as a heatmap:
+
+```{r}
 ggplot(climate_experience_data, aes(x=spirituality_score, y=Q57_1)) +
   labs(x="Spirituality Scale Score", y = "How Religious?") +
   geom_point(size=1, alpha=0.3) + stat_density_2d(aes(fill = ..level..), geom="polygon", alpha=0.3)+
