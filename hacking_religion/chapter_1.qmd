@@ -227,6 +227,8 @@ nomis_extract_census2021 <- readRDS(file = (here("example_data", "nomis_extract_
 I'm hoping that readers of this book will feel free to pause along the way and "hack" the code to explore questions of their own, perhaps in this case probing the NOMIS data for answers to their own questions. If I tidy things up too much, however, you're likely to be surprised when you get to the real life data sets. So that you can use the code in this book in a reproducible way, I've started this exercise with what is a more or less raw dump from NOMIS. This means that the data is a bit messy and needs to be filtered down quite a bit so that it only includes the basic stuff that we'd like to examine for this particular question. The upside of this is that you can modify this code to draw in different columns etc.
 
 ```{r}
+#| column: margin
+
 uk_census_2021_religion_ethnicity <- select(nomis_extract_census2021, GEOGRAPHY_NAME, C2021_RELIGION_10_NAME, C2021_ETH_8_NAME, OBS_VALUE)  # <1>
 uk_census_2021_religion_ethnicity <- filter(uk_census_2021_religion_ethnicity, GEOGRAPHY_NAME=="England and Wales" & C2021_RELIGION_10_NAME != "Total" & C2021_ETH_8_NAME != "Total") # <2>
 uk_census_2021_religion_ethnicity <- filter(uk_census_2021_religion_ethnicity, C2021_ETH_8_NAME != "White: English, Welsh, Scottish, Northern Irish or British" & C2021_ETH_8_NAME != "White: Irish" & C2021_ETH_8_NAME != "White: Gypsy or Irish Traveller, Roma or Other White") # <3>
@@ -240,7 +242,17 @@ ggplot(uk_census_2021_religion_ethnicity, aes(fill=C2021_ETH_8_NAME, x=C2021_REL
 
 The trouble with using grouped bars here, as you can see, is that there are quite sharp disparities which make it hard to compare in meaningful ways. We could use [logarithmic](https://en.wikipedia.org/wiki/Logarithm#Probability_theory_and_statistics) rather than linear scaling as an option, but this is hard for many general public audiences to appreciate without guidance. One alternative quick fix is to extract data from "white" respondents which can then be placed in a separate chart with a different scale.
 
+::: {.callout-note collapse="true"}
+
+## Statistics 101: Logarithmic Visualisation
+
+Content TBD.
+
+:::
+
 ```{r}
+#| column: margin
+
 uk_census_2021_religion_ethnicity_white <- filter(uk_census_2021_religion_ethnicity, C2021_ETH_8_NAME == "White") # <1>
 uk_census_2021_religion_ethnicity_nonwhite <- filter(uk_census_2021_religion_ethnicity, C2021_ETH_8_NAME != "White") # <2>
 ggplot(uk_census_2021_religion_ethnicity_nonwhite, aes(fill=C2021_ETH_8_NAME, x=C2021_RELIGION_10_NAME, y=OBS_VALUE)) + geom_bar(position="dodge", stat ="identity", colour = "black") + scale_fill_brewer(palette = "Set1") + ggtitle("Religious Affiliation in the 2021 Census of England and Wales") + xlab("") + ylab("") + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) # <3>
