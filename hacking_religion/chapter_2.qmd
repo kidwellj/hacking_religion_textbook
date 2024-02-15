@@ -30,6 +30,7 @@ Here's how you can load in the sample data I've provided for this chapter:
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
 library(here)  |> suppressPackageStartupMessages()
 library(tidyverse)  |> suppressPackageStartupMessages()
+library(haven)
 here::i_am("chapter_2.qmd")
 climate_experience_data <- read_sav(here("example_data", "climate_experience_data.sav"))
 ```
@@ -240,6 +241,14 @@ Though the terms can tend to be used interchangeable in many cases, some scholar
 
 For our study, we made use of a six-item intrinsic spirituality scale that was developed by David R. Hodge which is based on another instrument intended to measure "intrinsic religion" by Allport and Ross (1967). These researchers developed a series of questions which they asked respondents in a survey. The advantage here is that you're getting at the question of spirituality from a lot of different angles and then you combine the scores from all the questions to get a mean "spirituality score". There are many other ways that psychologists have developed to measure intrinsic religion or spirituality, and we'd encourage you to try them out (there are some references to get you started in Appendix B).
 
+::: {.callout-note collapse="true"}
+
+## Statistics 101: Statistical Mean
+
+Content TBD.
+
+:::
+
 ```{r}
 ### Spirituality scale  --------------------------------------------------------------
 # Calculate overall mean spirituality score based on six questions:
@@ -252,6 +261,7 @@ climate_experience_data$Q51_score <- rowMeans(select(climate_experience_data, Q5
 Like we did in chapter 1, let's start by exploring the data and get a bit of a sense of the character of the responses overall. One good place to start is to find out the mean response for our two continum questions. We can start with religiosity:
 
 ```{r}
+### Calculating mean  --------------------------------------------------------------
 mean(climate_experience_data$Q57_1)
 ```
 Now let's compare this with the overall mean score for our whole survey pool around spirituality:
@@ -267,6 +277,7 @@ This is quite a blunt measure, telling us how the whole average of all the respo
 Now let's try out some visualisations, staring with the religiosity data.
 
 ```{r}
+### Plotting religiosity  --------------------------------------------------------------
 ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
   geom_point() +
   labs(x = NULL, y = "Q57_1")
@@ -298,7 +309,15 @@ ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
 ```
 I've flipped this chart on its side using `coord_flip()` because I just feel like these plot are easier to read from left to right. I also needed to adjust the concealment of labels to the y-axis.
 
-The boxplot show us two things: the mean for the overall data using the black vertical line, and then the [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) (the boxes extend to the minimum and maximum values within 1.5 times of the IQR). This is helpful for us to see because, while the mean of all the values is a bit further to the right, the points we have to the left of the mean are more widely distributed. 
+The boxplot show us two things: the mean for the overall data using the black vertical line, and then the [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) (the boxes extend to the minimum and maximum values within 1.5 times of the IQR). This is helpful for us to see because, while the mean of all the values is a bit further to the right, the points we have to the left of the mean are more widely distributed.
+
+::: {.callout-note collapse="true"}
+
+## Statistics 101: Range and getting into Quartiles, Quintiles, Deciles etc.
+
+Content TBD.
+
+:::
 
 I think it would be nice if we could see all the points on our chart with the boxes as you can really see how this is the case, and that's not hard to do. We can also add a theme to make the points stand out a bit more:
 
@@ -339,7 +358,7 @@ spirituality_combined <- spirituality_combined %>%
 ```{r}
 spirituality_combined %>%
   mutate(text = fct_reorder(text, value)) %>% # Reorder data
-  ggplot( aes(x=text, y=value, fill=text, color=text)) +
+  ggplot(aes(x=text, y=value, fill=text, color=text)) +
   geom_boxplot() +
   geom_jitter(color="black", size=0.2, alpha=0.2) +
   theme_ipsum() +
@@ -359,24 +378,24 @@ We've done a pretty reasonable exploration of these two questions. Now it's time
 
 ```{r}
 ggplot(climate_experience_data, aes(x = spirituality_score, y = Q57_1)) +
-  geom_point(aes(color = "x"), size = 0.2, alpha = 0.2) +
-  geom_point(aes(color = "y"), size = 0.2, alpha = 0.2) +
+  geom_point(aes(color = "x"), size = 1, alpha = 0.2, shape = 15) +
+  geom_point(aes(color = "y"), size = 1, alpha = 0.2, shape = 17) +
   geom_smooth(method = "auto", se = TRUE, fullrange = FALSE, level = 0.95) +
   labs(x = "Spirituality Scale Score", y = "Religiosity") +
   scale_color_manual(values = c("x" = "red", "y" = "blue"))
 ```
 
-If you really want to get a visual sense of how each respondent's two answers relate, you can connect them with a visual line. Since we have over 1000 responses on this survey, it's going to be impossible to represent the full dataset coherently, so let's take a sample just for the sake of this experiment:
+It may be helpful to add a few more visual elements to help someone understand this data. Let's try adding a density plot:
 
 ```{r}
-climate_experience_data_selection <- head(climate_experience_data, 40)
-ggplot(climate_experience_data_selection, aes(x = spirituality_score, y = Q57_1)) +
-  geom_point(aes(color = "x"), size = 0.2, alpha = 0.2) +
-  geom_point(aes(color = "y"), size = 0.2, alpha = 0.2) +
-  geom_line(aes(group = row_number()), color = "gray", alpha = 0.5) +
-  geom_smooth(method = "auto", se = TRUE, fullrange = FALSE, level = 0.95) +
+library(ggExtra)
+p <- ggplot(climate_experience_data, aes(x = spirituality_score, y = Q57_1)) +
+  geom_point(aes(color = "x"), size = 1, alpha = 0.2) +
+  geom_point(aes(color = "y"), size = 1, alpha = 0.2, shape = 17) +
   labs(x = "Spirituality Scale Score", y = "Religiosity") +
   scale_color_manual(values = c("x" = "red", "y" = "blue"))
+p_with_density <- ggMarginal(p, type = "histogram")
+p_with_density
 ```
 
 As an alternative we can view this as a heatmap:
@@ -391,113 +410,121 @@ ggplot(climate_experience_data, aes(x=spirituality_score, y=Q57_1)) +
 
 # Correlation testing and means
 
+What you may be starting to see in the charts we've plotted so far is that there is a bit of a similar trend between the religiosity values and spirituality scores for our survey responses. This book isn't going to aim to provide an introduction to statistics, but we will highlight a few possibilities and the way they are handled in R to whet your appetite for further study. We've already mentioned mean values a bit above, and most readers will likely be familiar with the calculation of basic statistical functions, like mean and range. Below, we're going to explore two further concepts, of "correlation" and "standard deviation".
+
+Let's start by assessing the correlation between these two elements of the data that were featured in the previous section. Suffice it to say that there are different ways to measure correlation, depending on how the two data sources you're working with are related (or not). For our purposes here, we're going to calculate the Pearson correlation coefficient. In essence this describes the relationship between the two datasets in the form of a number from -1 to 1. If the value is close to zero, there is simply non relationship between the two sets of data. The closer your value gets to +1, the stronger the indication that there is a positive linear relationship, in other words, if a value in set A is high, the corresponding value in set B is also going to be high. The closer your value gets to -1, the strong the indication that there is a negative linear relationship, so they are definitely related, but like magnets flipped in the wrong direction, so rather than attract each other, they move in opposing ways, so a high value in set A will likely correlate to a low value in set B.
+
+
+::: {.callout-note collapse="true"}
+
+## Statistics 101: Correlation
+
+Content TBD.
+
+Discuss Pearson correlation coefficient
+
+:::
+
+To caluclate the correlation in R, you can use the function `cor()` like this:
+
 ```{r}
-# t_testing and means
+cor(climate_experience_data$Q57_1, climate_experience_data$spirituality_score)
+```
+In this case, we've got a positive value, which is closer to 1 than 0. This indicates there is a positive correlation between these two values. How high must this number be before we call it a "strong" or "very strong" positive correlation? Well, this really depends on the kind of data you're working with. In some physcial sciences with very precise calculations, we might want to see something over 0.8 or even 0.9 before we'd call it a strong correlation. But with surveys, that number is generally taken to be a bit lower. I'd be tempted to call this a "strongly positive correlation" in our survey between spirituality scores and religiosity.
 
-# Calculate the Pearson correlation coefficient, 
-# Positive correlation: If r is close to +1, it indicates a strong positive linear relationship.
-# Negative correlation: If r is close to -1, it indicates a strong negative linear relationship.
-# No correlation: If r is close to 0, there is no linear relationship.
-# The closer the value of r is to -1 or +1, the stronger the correlation.
+We can see the range of possibility by examining correlation between some other elements of our survey. We asked respondents to report on their "happiness" and "life satisfaction" - it would be interesting to see if there's a correlation here:
 
+```{r}
 # Religious intensity to happiness - minimal positive
 cor(climate_experience_data$Q57_1, climate_experience_data$Q49)
 # Religious intensity to life satisfaction - minimal positive
 cor(climate_experience_data$Q57_1, climate_experience_data$Q50)
-# Religious intensity to spirituality - strong positive
-cor(climate_experience_data$Q57_1, climate_experience_data$spirituality_score)
-# Religious intensity to interest in nature relatedness/spirituality - minimal positive
-cor(climate_experience_data$Q57_1, climate_experience_data$Q51_spirituality)
-# Religious intensity to politics - strong positive
+```
+
+As you can see if you run this analysis yourself, the correlation is mildly positive, but not particularly strong. Better to say these responses don't have a correlation. 
+
+Just to look at another example, let's take a quick look at the relationship in our survey between religiosity and how interested a given respondent said they were in politics:
+
+```{r}
 cor(climate_experience_data$Q57_1, climate_experience_data$Q54)
+```
+
+Same situation - no meaningful correlation.
+
+Returning to the adjacent data on religion in the survey, let's examine whether religiosity corresponds in our sample to participation in worship or more private expressions such as prayer:
+
+```{r}
 # Religious intensity to participation in services - strong positive (because reverse in scales)
 cor(climate_experience_data$Q57_1, climate_experience_data$Q58)
 # Religious intensity to participation in activity - even stronger positive (because reverse in scales)
 cor(climate_experience_data$Q57_1, climate_experience_data$Q59)
+```
+Here we have a quite different result, showing a strongly negative (even stronger than the correlation to spirituality) relationship. It's worth reminding readers of a feature of this data that I mentioned a while back. These two scales were represented numerically with a descending scale of intensity, while the religiosity data is an ascending scale. So actually, while the pearson test shows a negative correlation, the opposite is actually the case.
 
-as.factor(climate_experience_data)
-df<-as.factor(as.data.frame(climate_experience_data))
+You can test for correlations in similar ways around the spirituality score
 
-
-cor.test(climate_experience_data$Q57_1, climate_experience_data$Q59)
-p_value <- result$p.value
-# Format the p-value without scientific notation
-format(p_value, scientific = FALSE)
-
-# Religious intensity to happiness - minimal positive
+```{r}
 cor(climate_experience_data$spirituality_score, climate_experience_data$Q49)
-# Religious intensity to life satisfaction - minimal positive
-cor(climate_experience_data$spirituality_score, climate_experience_data$Q50)
-# Religious intensity to spirituality - strong positive
-cor(climate_experience_data$spirituality_score, climate_experience_data$Q57_1)
-# Religious intensity to interest in politics - very minimal positive
-cor(climate_experience_data$spirituality_score, climate_experience_data$Q51_spirituality)
-# Religious intensity to nature relatedness - strong positive
-cor(climate_experience_data$spirituality_score, climate_experience_data$Q54)
+```
+
+As before, no correlation to happiness. What about politics? 
+
+```{r}
+cor(climate_experience_data$spirituality_score, climate_experience_data$Q53_1)
+```
+We can see here that the value is on the low side, probably not a significannt correlation.
+
+And looking at our two participation scales (social and personal) we can see that the results are a bit different from religiosity:
+
+```{r}
 # Religious intensity to participation in services - strong positive (because reverse in scales)
 cor(climate_experience_data$spirituality_score, climate_experience_data$Q58)
 # Religious intensity to participation in activity - even stronger positive (because reverse in scales)
 cor(climate_experience_data$Q57_1, climate_experience_data$Q59)
-
-
-religiosity - Q57_1
-spirituality - spirituality_score
-nature relatedness - Q51 
-attendance at worship - Q58
-prayer - Q59 - from never = 5 to lots=1
-
-sample_size <- length(climate_experience_data$Q57_1)
-t_score <- correlation_coefficient * sqrt(sample_size - 2) / sqrt(1 - correlation_coefficient^2)
-pt(t_score, df = sample_size - 2, lower.tail = FALSE) * 2
-
-# Assuming you have already performed the t-test
-result <- t.test(climate_experience_data$Q57_1, climate_experience_data$Q58)
-
-# Extract the p-value
-p_value <- result$p.value
-
-# Format the p-value without scientific notation
-formatted_p_value <- format(p_value, scientific = FALSE)
-
-# Print the formatted p-value
-print(formatted_p_value)
-
-
-# Spirituality scale
-library(rstatix)
-religiosity_stats <- as.tibble(climate_experience_data$Q57_1) 
-spirituality_stats <- as.tibble(climate_experience_data$spirituality_score)
-
-plot(religiosity_stats ~ spirituality_stats, data=CO2)
-
-stats %>% get_summary_stats(value, type="mean_sd")
-
-
-# JK note to self: need to fix stat_summary plot here
-# stat_summary(climate_experience_data$spirituality_score)
-
-
-
-# Q57 Regardless of whether you belong to a particular religion, how religious would you say you are?
-# 0-10, Not religious at all => Very religious; mean=5.58
-
-mean(climate_experience_data$Q57_1) # religiosity
-
-# Q58 Apart from weddings, funerals and other special occasions, how often do you attend religious services?
-# coded at 1-5, lower value = stronger mean=3.439484
-
-mean(climate_experience_data$Q58) # service attendance
-
-# Q59 Apart from when you are at religious services, how often do you pray?
-# coded at 1-5, lower = stronger mean=2.50496
-
-mean(climate_experience_data$Q59)
 ```
 
-Because the responses to these two questions, about spirituality and religiosity are on a continuum, we can also use them, like we did in previous charts, to subset other datasets. A simple way of doing this is to separate our respondents into "high," "medium," and "low" bins for the two questions. Rather than working with hard values, like assigning 0-3, 4-6 and 7-10 for low medium and high, we'll work with the range of values that respondents actually chose. This is particularly appropriate as the median answer to these questions was not "5". So we'll use the statistical concept of standard deviation, which R can calculate almost magically for us, in the following way:
+This is just barely scratching the surface in terms of the kinds of analysis you can do in R around correlation, and very bare bones in terms of statistical concepts. You can, for example, run a more annnotated correlation test using `cor.test()`, `t.test()` and `anova()` in R which are better suited to other kinds of analysis and which may give a wider array of information such as the p_value. I'm not going to dive into this material now, but I'd encourage readers to explore some of the resources listed in the appendix, and continue to dive deeper into the world of correlation testing in R.
 
 ```{r}
-# Create low/med/high bins based on Mean and +1/-1 Standard Deviation
+# Sample car.test:
+result <- cor.test(climate_experience_data$Q57_1, climate_experience_data$Q59)
+# Extract p_value:
+p_value <- result$p.value
+# Format the p-value without scientific notation
+format(p_value, scientific = FALSE)
+# Sample t-test
+result <- t.test(climate_experience_data$Q57_1, climate_experience_data$Q58)
+```
+
+# Using scale values for subsetting
+
+Because the responses to these two questions about spirituality and religiosity are on a numeric continuum, we can also use them to subset other variables in this dataset. A simple way of doing this is to separate our respondents into "high," "medium," and "low" bins for the two questions.
+
+::: {.callout-note collapse="true"}
+
+## Statistics 101: Subsetting
+
+Content TBD.
+
+:::
+
+One way to do this would be to simply sort responses into bins based on their numeric value, like assigning 0-3, 4-6 and 7-10 for low medium and high. But this is a bit problematic in practice and can risk misrepresenting your data. Remember above that when we calculated the mean for each of these two datasets, it wasn't straight in the middle of the 0-10 range (e.g. 5), but a bit above that. This means that if we divided the actual responses into proportional bins, the point at which we might divide them should be shifted a bit. What we want to do ultimately is work with the range of values that respondents actually chose. 
+
+::: {.callout-note collapse="true"}
+
+## Statistics 101: Standard Deviation
+
+Content TBD.
+
+:::
+
+Luckily, this is easy to do in R using the statistical concept of standard deviation, which R can calculate almost magically for us, in the following way:
+
+::: {.panel-tabset}
+
+## Spirituality bins
+
+```{r}
 climate_experience_data <- climate_experience_data %>%
   mutate(
     spirituality_bin = case_when(
@@ -506,9 +533,15 @@ climate_experience_data <- climate_experience_data %>%
       TRUE ~ "medium"
     ) %>% factor(levels = c("low", "medium", "high"))
   )
+```
 
+1. We start by using `mutate` to add a new column, `spirituality_bin` to our existing dataframe
+2. We use a case_when loop to test the data against a series of conditions, and then fill the new column with the text "high" or "low" depending on whether the spirituality_score value fits the evaluation. You can see we've used a bit of math here to evaluate the score three times: The first test evaluates whether a given row in that column is greater than the mean plus one standard deviation above the mean. Assuming our value doesn't match that first evaluation, we next test whether a value is a standard deviation above the mean (or more). Our final test, which results in a value for the "medium" category is easy as it's just anything that hasn't already been put into one of the other two bins.
+3. We finish by converting this data to a factor so it's not just treated by R as a column with text that happens to repeat a lot.
 
-## Q57 subsetting based on Religiosity --------------------------------------------------------------
+## Religiosity bins
+
+```{r}
 climate_experience_data <- climate_experience_data %>%
   mutate(
     religiosity_bin = case_when(
@@ -517,15 +550,19 @@ climate_experience_data <- climate_experience_data %>%
       TRUE ~ "medium"
     ) %>% factor(levels = c("low", "medium", "high"))
   )
-
 ```
 
+1. We start by using `mutate` to add a new column, `religiosity_bin` to our existing dataframe
+2. We use a case_when loop to evaluate the value and fill in text "high", "low", or medium.
+3. We finish by converting this data to a factor so it's not just treated by R as a column with text that happens to repeat a lot.
 
-As in the previous chapter, it's useful to explore multiple factors when possible. So I'd like us to take the data about political affiliation to visualise alongside our religion and spirituality data. this will help us to see where effects are more or less significant and give us a point of comparison.
+:::
+
+As I've mentioned in the previous chapter, good analysis draws on multiple factors when possible and when we're trying to hack religion carefully, it can be useful to assess how a given datapoint relates to non-religious categories as well. For our exercise here, I'd like us to take the data about political affiliation to visualise alongside our religion and spirituality data. this will help us to see where effects we are measuring are more or less significant and give us a point of comparison. This is particularly important for research into climate change as various studies have highlighted religious affiliation as an important factor correlating to climate change attitudes, only for later studies to highlight much larger correlations that had been missed by too myopic a research methodology.
+
+Question 53 in the survey asked respondents to place themselves on a political spectrum from "Left" to "Right" so the low bin will represent Left here, high Right and medium a "centrist". 
 
 ```{r}
-## Q53 subsetting based on Political LR orientation --------------------------------------------------------------
-# Generate low/med/high bins based on Mean and SD
 climate_experience_data <- climate_experience_data %>%
   mutate(
     Q53_bin = case_when(
@@ -534,20 +571,22 @@ climate_experience_data <- climate_experience_data %>%
       TRUE ~ "medium"
     ) %>% factor(levels = c("low", "medium", "high"))
   )
-
 ```
 
-
-Now let's use those bins to explore some of the responses about attitudes towards climate change:
+Now let's use those bins to explore some of the responses and see how responses may be different depending on spirituality, religiosity and political orientation. We'll start with Question 58 data, which asked respondents about how often the attend weekly worship services. Using ggplot we'll also draws on the facet technique we used in the last chapter, this time to inflect our data with those bins as separate plots.
 
 ```{r}
-# Faceted plot working with 3x3 grid
-df <- select(climate_experience_data, spirituality_bin, Q53_bin, religiosity_bin, Q58)
-names(df) <- c("spirituality_bin", "Q53_bin", "religiosity_bin", "response")
-facet_names <- c(`spirituality_bin` = "Spirituality", `Q53_bin` = "Politics L/R", `religiosity_bin` = "Religiosity", `low`="low", `medium`="medium", `high`="high")
-facet_labeller <- function(variable,value){return(facet_names[value])}
-df$response <- factor(df$response, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
-df$response <- fct_recode(df$response, "More than once a week" = "1", "Once a week" = "2", "At least once a month" = "3", "Only on special holy days" = "4", "Never" = "5")
+df <- select(climate_experience_data, spirituality_bin, Q53_bin, religiosity_bin, Q58) # [1]
+
+names(df) <- c("spirituality_bin", "Q53_bin", "religiosity_bin", "response") # [2]
+facet_names <- c(`spirituality_bin` = "Spirituality", `Q53_bin` = "Politics L/R", `religiosity_bin` = "Religiosity", `low`="low", `medium`="medium", `high`="high") # [2]
+facet_labeller <- function(variable,value){return(facet_names[value])} # [2]
+
+df$response <- factor(df$response, ordered = TRUE, levels = c("1", "2", "3", "4", "5")) # [3]
+df$response <- fct_recode(df$response, "More than once a week" = "1", "Once a week" = "2", "At least once a month" = "3", "Only on special holy days" = "4", "Never" = "5") # [3]
+
+caption <- "Frequency of Attendance at Worship Services"
+
 df %>% 
   # we need to get the data including facet info in long format, so we use pivot_longer()
   pivot_longer(!response, names_to = "bin_name", values_to = "b") %>% 
@@ -559,96 +598,30 @@ df %>%
   ggplot(aes(x = n, y = "", fill = response)) +
   geom_col(position=position_fill(), aes(fill=response)) +
   geom_text(aes(label = perc), position = position_fill(vjust=.5), size=2) +
-  scale_fill_brewer(palette = "Dark2", type = "qual") +
   scale_x_continuous(labels = scales::percent_format()) +
+  scale_fill_brewer(type = "qual") +
   facet_grid(vars(b), vars(bin_name), labeller=as_labeller(facet_names)) + 
   labs(caption = caption, x = "", y = "") + 
-  guides(fill = guide_legend(title = NULL))
-ggsave("figures/q58_faceted.png", width = 30, height = 10, units = "cm")
+  guides(fill = guide_legend(title = NULL)) +
+  coord_flip() # [4]
 ```
+
+1. First we need to draw in relevant data for the plot.
+2. Now we need to add some formatting with names for columns and facets.
+3. Next, we'll recode the response values so that they're factors and tidy up the representation of those factors for our legend.
+4. Finally, we convert this data from wide into long format and plot using ggplot.
 
 <!--
 Use mutate to put "prefer not to say" at the bottom
 # Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels
+-->
 
+Have a look over the columns and you can see how there are some clear differences across each of the different kinds of bins we've used and these shift in intensity. It seems like spirituality and religiosity are similar in profile here but political "right" also seems to correlate with a higher level of attendance at weekly worship.
 
-# Q56 follow-ups
-caption <- "Christian Denomination"
-# TODO: copy plot above for Q56 to add two additional plots using climate_experience_data_named$Q56b and climate_experience_data_named$Q56c
-# Religious Affiliation b - Christian Denomination Subquestion
-christian_denomination <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q56b)
-christian_denomination_table <- chart_single_result_flextable(climate_experience_data_named$Q56b, desc(Count))
-christian_denomination_table
-save_as_docx(christian_denomination_table, path = "./figures/q56_religious_affiliation_xn_denomination.docx")
+We can run the same faceted plots on other questions and observe the results:
 
-christian_denomination_hi <- filter(climate_experience_data_named, Q56 == "Christian", religiosity_bin == "high")
-christian_denomination_hi <- qualtrics_process_single_multiple_choice(christian_denomination_hi$Q56b)
-christian_denomination_hi
-
-# Religious Affiliation c - Muslim Denomination Subquestion
-caption <- "Islamic Identity"
-# Should the label be different than income since the data examined is the Affiliation?
-# TODO: adjust plot to factor using numbered responses on this question (perhaps also above)
-religious_affiliationc <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q56c)
-religious_affiliationc_plot <- plot_horizontal_bar(religious_affiliationc)
-religious_affiliationc_plot <- religious_affiliationc_plot + labs(caption = caption, x = "", y = "")
-religious_affiliationc_plot
-ggsave("figures/q56c_religious_affiliation.png", width = 20, height = 10, units = "cm")
-religious_affiliationc_table <- chart_single_result_flextable(climate_experience_data_named$Q56c, Count)
-religious_affiliationc_table
-save_as_docx(religious_affiliationc_table, path = "./figures/q56_religious_affiliation_islam.docx")
-
-
-# Q58
-
-caption <- "Respondent Attendance of Religious Services"
-religious_service_attend <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q58)
-religious_service_attend_plot <- plot_horizontal_bar(religious_service_attend)
-religious_service_attend_plot <- religious_service_attend_plot + labs(title = caption, x = "", y = "")
-religious_service_attend_plot
-ggsave("figures/q58_religious_service_attend.png", width = 20, height = 10, units = "cm")
-religious_service_attend_table <- chart_single_result_flextable(climate_experience_data_named$Q58, Count)
-religious_service_attend_table
-save_as_docx(religious_service_attend_table, path = "./figures/q58_religious_service_attend.docx")
-
-# Faceted plot working with 3x3 grid
-df <- select(climate_experience_data, spirituality_bin, Q53_bin, religiosity_bin, Q58)
-names(df) <- c("spirituality_bin", "Q53_bin", "religiosity_bin", "response")
-facet_names <- c(`spirituality_bin` = "Spirituality", `Q53_bin` = "Politics L/R", `religiosity_bin` = "Religiosity", `low`="low", `medium`="medium", `high`="high")
-facet_labeller <- function(variable,value){return(facet_names[value])}
-df$response <- factor(df$response, ordered = TRUE, levels = c("1", "2", "3", "4", "5"))
-df$response <- fct_recode(df$response, "More than once a week" = "1", "Once a week" = "2", "At least once a month" = "3", "Only on special holy days" = "4", "Never" = "5")
-df %>% 
-  # we need to get the data including facet info in long format, so we use pivot_longer()
-  pivot_longer(!response, names_to = "bin_name", values_to = "b") %>% 
-  # add counts for plot below
-  count(response, bin_name, b) %>%
-  group_by(bin_name,b) %>%
-  mutate(perc=paste0(round(n*100/sum(n),1),"%")) %>% 
-  # run ggplot
-  ggplot(aes(x = n, y = "", fill = response)) +
-  geom_col(position=position_fill(), aes(fill=response)) +
-  geom_text(aes(label = perc), position = position_fill(vjust=.5), size=2) +
-  scale_fill_brewer(palette = "Dark2", type = "qual") +
-  scale_x_continuous(labels = scales::percent_format()) +
-  facet_grid(vars(b), vars(bin_name), labeller=as_labeller(facet_names)) + 
-  labs(caption = caption, x = "", y = "") + 
-  guides(fill = guide_legend(title = NULL))
-ggsave("figures/q58_faceted.png", width = 30, height = 10, units = "cm")
-
-# Q59
-
+```{r}
 caption <- "Respondent Prayer Outside of Religious Services"
-prayer <- qualtrics_process_single_multiple_choice(climate_experience_data_named$Q59)
-prayer_plot <- plot_horizontal_bar(prayer)
-prayer_plot <- prayer_plot + labs(caption = caption, x = "", y = "")
-prayer_plot
-ggsave("figures/q59_prayer.png", width = 20, height = 10, units = "cm")
-prayer_table <- chart_single_result_flextable(climate_experience_data_named$Q59, Count)
-prayer_table
-save_as_docx(prayer_table, path = "./figures/q59_prayer.docx")
-
-# Faceted plot working with 3x3 grid
 df <- select(climate_experience_data, spirituality_bin, Q53_bin, religiosity_bin, Q59)
 names(df) <- c("spirituality_bin", "Q53_bin", "religiosity_bin", "response")
 facet_names <- c(`spirituality_bin` = "Spirituality", `Q53_bin` = "Politics L/R", `religiosity_bin` = "Religiosity", `low`="low", `medium`="medium", `high`="high")
@@ -666,124 +639,10 @@ df %>%
   ggplot(aes(x = n, y = "", fill = response)) +
   geom_col(position=position_fill(), aes(fill=response)) +
   geom_text(aes(label = perc), position = position_fill(vjust=.5), size=2) +
-  scale_fill_brewer(palette = "Dark2", type = "qual") +
+  scale_fill_brewer(type = "qual") +
   scale_x_continuous(labels = scales::percent_format()) +
   facet_grid(vars(b), vars(bin_name), labeller=as_labeller(facet_names)) + 
   labs(caption = caption, x = "", y = "") + 
-  guides(fill = guide_legend(title = NULL))
-ggsave("figures/q59_faceted.png", width = 30, height = 10, units = "cm")
-
-
-
-
-
-
-
-
-# Comparing with attitudes surrounding climate change
-
-
-# Q6
-
-q6_data <- qualtrics_process_single_multiple_choice_unsorted_streamlined(climate_experience_data$Q6)
-
-title <- "Do you think the climate is changing?"
-
-level_order <- c("Don’t know",
-                 "Definitely not changing",
-                 "Probably not changing", 
-                 "Probably changing",
-                 "Definitely changing")
-## code if a specific palette is needed for matching
-fill = wheel(ochre, num = as.integer(count(q6_data[1])))
-# make plot
-q6_data_plot <- ggplot(q6_data, aes(x = n, y = response, fill = fill)) +
-  geom_col(colour = "white") +
-  ## add percentage labels
-  geom_text(aes(label = perc),
-            ## make labels left-aligned and white
-            hjust = 1, colour = "black", size=4) + # use nudge_x = 30, to shift position
-  ## reduce spacing between labels and bars
-  scale_fill_identity(guide = "none") +
-  ## get rid of all elements except y axis labels + adjust plot margin
-  theme_ipsum_rc() +
-  theme(plot.margin = margin(rep(15, 4))) +
-  easy_center_title() + 
-  # with thanks for helpful info on doing wrap here: https://stackoverflow.com/questions/21878974/wrap-long-axis-labels-via-labeller-label-wrap-in-ggplot2
-  scale_y_discrete(labels = wrap_format(30), limits = level_order) + 
-  theme(plot.title = element_text(size =18, hjust = 0.5), axis.text.y = element_text(size =16)) +
-  labs(title = title, x = "", y = "")
-
-q6_data_plot 
-
-ggsave("figures/q6.png", width = 18, height = 12, units = "cm")
-
-
-
-
-
-
-
-
-
-# Subsetting
-
-## Q57 subsetting based on Religiosity --------------------------------------------------------------
-climate_experience_data <- climate_experience_data %>%
-  mutate(
-    religiosity_bin = case_when(
-      Q57_1 > mean(Q57_1) + sd(Q57_1) ~ "high",
-      Q57_1 < mean(Q57_1) - sd(Q57_1) ~ "low",
-      TRUE ~ "medium"
-    ) %>% factor(levels = c("low", "medium", "high"))
-  )
-
-## Subsetting based on Spirituality --------------------------------------------------------------
-
-### Nature relatedness --------------------------------------------------------------
-# Calculate overall mean nature-relatedness score based on six questions:
-climate_experience_data$Q51_score <- rowMeans(select(climate_experience_data, Q51_remote_vacation:Q51_heritage))
-
-# Create low/med/high bins based on Mean and +1/-1 Standard Deviation
-climate_experience_data <- climate_experience_data %>%
-  mutate(
-    Q51_bin = case_when(
-      Q51_score > mean(Q51_score) + sd(Q51_score) ~ "high",
-      Q51_score < mean(Q51_score) - sd(Q51_score) ~ "low",
-      TRUE ~ "medium"
-    ) %>% factor(levels = c("low", "medium", "high"))
-  )
-
-
--->
-
-::: {.callout-tip}
-### What is Religion?
-Content tbd
-:::
-
-
-
-
-::: {.callout-tip}
-### Hybrid Religious Identity
-Content tbd
-:::
-
-
-
-
-
-::: {.callout-tip}
-### What is Secularisation?
-Content tbd
-:::
-
-## References {.unnumbered}
-
-::: {#refs}
-:::
-
-
-
-
+  guides(fill = guide_legend(title = NULL)) +
+  coord_flip() 
+```
