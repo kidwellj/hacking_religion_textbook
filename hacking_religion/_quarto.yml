@@ -27,3 +27,7 @@ format:
 knitr:
   opts_chunk:
     dev: ragg_png
+
+comments:
+  utterances:
+    repo: kidwellj/hacking_religion_textbook

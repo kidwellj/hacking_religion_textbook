@@ -145,6 +145,8 @@ If you're looking closely, you will notice that I've added two elements to our p
 
 If you inspect our chart, you can see that we're getting closer, but it's not really that helpful to compare the totals. What we need to do is get percentages that can be compared side by side. This is easy to do using another `dplyr` feature `mutate`:
 
+[You can find a helpful write-up about dplyr by Antoine Soetewey at, ["Stats and R"](https://statsandr.com/blog/introduction-to-data-manipulation-in-r-with-dplyr/).]{.aside}
+
 [It's worth noting that an alternative approach is to leave the numbers intact and simply label them differently so they render as percentages on your charts. You can do this with the `scales() library and the label_percent() function. The downside of this approach is that it won't transfer to tables if you make them.]{.aside}
 
 

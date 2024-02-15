@@ -250,7 +250,6 @@ Content TBD.
 :::
 
 ```{r}
-### Spirituality scale  --------------------------------------------------------------
 # Calculate overall mean spirituality score based on six questions:
 climate_experience_data$spirituality_score <- rowMeans(select(climate_experience_data, Q52a_1:Q52f_1))
 # Calculate overall mean nature relatedness score based on six questions:
@@ -261,7 +260,6 @@ climate_experience_data$Q51_score <- rowMeans(select(climate_experience_data, Q5
 Like we did in chapter 1, let's start by exploring the data and get a bit of a sense of the character of the responses overall. One good place to start is to find out the mean response for our two continum questions. We can start with religiosity:
 
 ```{r}
-### Calculating mean  --------------------------------------------------------------
 mean(climate_experience_data$Q57_1)
 ```
 Now let's compare this with the overall mean score for our whole survey pool around spirituality:
@@ -277,7 +275,6 @@ This is quite a blunt measure, telling us how the whole average of all the respo
 Now let's try out some visualisations, staring with the religiosity data.
 
 ```{r}
-### Plotting religiosity  --------------------------------------------------------------
 ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
   geom_point() +
   labs(x = NULL, y = "Q57_1")
@@ -292,11 +289,13 @@ ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
 
 You'll also notice that we've hidden the x-axis value labels as these are just random numbers and not really something we want to draw attention to. We've also hidden the label for that axis.
 
+This is visually pretty chaotic, but you can see probably see some places where the dots are thicker and get the sense that there are more in the top than the bottom.
+
 Since this is quite a large plot, I'd recommend going one step further and making the dots a bit smaller, and a bit transparent (this is called "alpha" in R). The advantage of this is that we'll be able to tell visually when dots are overlapping and register that there is a cluster. When they're all the same black color, this is impossible to tell.
 
 ```{r}
 ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
-  geom_point(position = position_jitter(width = 1), color="black", size=0.5, alpha=0.3) +
+  geom_point(position = position_jitter(width = 1), color="black", size=1.5, alpha=0.3) +
   labs(x = NULL, y = "Q57_1") + theme(axis.text.x = element_blank())
 ```
 
@@ -386,6 +385,8 @@ ggplot(climate_experience_data, aes(x = spirituality_score, y = Q57_1)) +
 ```
 
 It may be helpful to add a few more visual elements to help someone understand this data. Let's try adding a density plot:
+
+[If you'd like to explore a wider range of correlation plots, you might want to check out Data Analysis and Visualization in R Using smplot2, ["data import"](https://smin95.github.io/dataviz/basics-of-ggplot2-and-correlation-plot.html).]{.aside}
 
 ```{r}
 library(ggExtra)
