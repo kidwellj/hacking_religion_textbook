@@ -174,7 +174,7 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapter_2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting into the nitty-gritty details</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -586,8 +586,7 @@ div.csl-indent {
 <section id="ggplot" class="level3 page-columns page-full" data-number="2.4.2">
 <h3 data-number="2.4.2" class="anchored" data-anchor-id="ggplot"><span class="header-section-number">2.4.2</span> GGPlot</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_wmids, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> value)) <span class="sc">+</span></span>
-<span id="annotated-cell-10-2"><a href="#annotated-cell-10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="annotated-cell-10"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-10-1"><a href="#annotated-cell-10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_wmids, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> value)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-11" data-target-annotation="2">2</dt>
@@ -670,6 +669,7 @@ div.csl-indent {
 </div>
 <p>If you’re looking closely, you will notice that I’ve added two elements to our previous ggplot. I’ve asked ggplot to fill in the columns with reference to the <code>dataset</code> column we’ve just created. Then I’ve also asked ggplot to alter the <code>position="dodge"</code> which places bars side by side rather than stacked on top of one another. You can give it a try without this instruction to see how this works. We will use stacked bars in a later chapter, so remember this feature.</p>
 <p>If you inspect our chart, you can see that we’re getting closer, but it’s not really that helpful to compare the totals. What we need to do is get percentages that can be compared side by side. This is easy to do using another <code>dplyr</code> feature <code>mutate</code>:</p>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">You can find a helpful write-up about dplyr by Antoine Soetewey at, <a href="https://statsandr.com/blog/introduction-to-data-manipulation-in-r-with-dplyr/">“Stats and R”</a>.</span></div></div>
 <div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">It’s worth noting that an alternative approach is to leave the numbers intact and simply label them differently so they render as percentages on your charts. You can do this with the `scales() library and the label_percent() function. The downside of this approach is that it won’t transfer to tables if you make them.</span></div></div>
 <div class="cell">
 <div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode r code-annotation-code code-with-copy"><code class="sourceCode r"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_totals <span class="ot">&lt;-</span> uk_census_2021_religion_totals <span class="sc">%&gt;%</span> </span>
@@ -748,21 +748,24 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="multifactor-visualisation" class="level2" data-number="2.6">
+<section id="multifactor-visualisation" class="level2 page-columns page-full" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="multifactor-visualisation"><span class="header-section-number">2.6</span> Multifactor Visualisation</h2>
 <p>One element of R data analysis of census datasets that can get really interesting is working with multiple variables. Above we’ve looked at the breakdown of religious affiliation across the whole of England and Wales (Scotland operates an independent census), and by placing this data alongside a specific region, we’ve already made a basic entry into working with multiple variables but this can get much more interesting. Adding an additional quantitative variable (also known as bivariate data when you have <em>two</em> variables) into the mix, however can also generate a lot more information and we have to think about visualising it in different ways which can still communicate with visual clarity in spite of the additional visual noise which is inevitable with enhanced complexity. Let’s have a look at the way that religion in England and Wales breaks down by ethnicity.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 What is Nomis?
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For the UK, census data is made available for programmatic research like this via an organisation called NOMIS. Luckily for us, there is an R library you can use to access nomis directly which greatly simplifies the process of pulling data down from the platform. It’s worth noting that if you’re not in the UK, there are similar options for other countries. Nearly every R textbook I’ve ever seen works with USA census data, so you’ll find plenty of documentation available on the tools you can use for US Census data. Similarly for the EU, Canada, Austrailia etc.</p>
 <p>If you want to draw some data from the nomis platform yourself in R, have a look at the nomis script in our <a href="https://github.com/kidwellj/hacking_religion_cookbook/blob/main/nomis.R">companion cookbook repository</a>. For now, we’ll provide some data extracts for you to use.</p>
+</div>
 </div>
 </div>
 <p>Let’s start by loading in some of the enhanced tables from nomis with the 2021 religion / ethnicity tables:</p>
@@ -770,7 +773,7 @@ What is Nomis?
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nomis_extract_census2021 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> (<span class="fu">here</span>(<span class="st">"example_data"</span>, <span class="st">"nomis_extract_census2021.rds"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I’m hoping that readers of this book will feel free to pause along the way and “hack” the code to explore questions of their own, perhaps in this case probing the NOMIS data for answers to their own questions. If I tidy things up too much, however, you’re likely to be surprised when you get to the real life data sets. So that you can use the code in this book in a reproducible way, I’ve started this exercise with what is a more or less raw dump from NOMIS. This means that the data is a bit messy and needs to be filtered down quite a bit so that it only includes the basic stuff that we’d like to examine for this particular question. The upside of this is that you can modify this code to draw in different columns etc.</p>
-<div class="cell">
+<div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="annotated-cell-22"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-22-1" class="code-annotation-target"><a href="#annotated-cell-22-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_ethnicity <span class="ot">&lt;-</span> <span class="fu">select</span>(nomis_extract_census2021, GEOGRAPHY_NAME, C2021_RELIGION_10_NAME, C2021_ETH_8_NAME, OBS_VALUE)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-22-2" class="code-annotation-target"><a href="#annotated-cell-22-2" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_ethnicity <span class="ot">&lt;-</span> <span class="fu">filter</span>(uk_census_2021_religion_ethnicity, GEOGRAPHY_NAME<span class="sc">==</span><span class="st">"England and Wales"</span> <span class="sc">&amp;</span> C2021_RELIGION_10_NAME <span class="sc">!=</span> <span class="st">"Total"</span> <span class="sc">&amp;</span> C2021_ETH_8_NAME <span class="sc">!=</span> <span class="st">"Total"</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-22" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-22-3" class="code-annotation-target"><a href="#annotated-cell-22-3" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_ethnicity <span class="ot">&lt;-</span> <span class="fu">filter</span>(uk_census_2021_religion_ethnicity, C2021_ETH_8_NAME <span class="sc">!=</span> <span class="st">"White: English, Welsh, Scottish, Northern Irish or British"</span> <span class="sc">&amp;</span> C2021_ETH_8_NAME <span class="sc">!=</span> <span class="st">"White: Irish"</span> <span class="sc">&amp;</span> C2021_ETH_8_NAME <span class="sc">!=</span> <span class="st">"White: Gypsy or Irish Traveller, Roma or Other White"</span>)</span>
@@ -795,16 +798,32 @@ What is Nomis?
 </dd>
 </dl>
 </div>
-<div class="cell-output-display">
+
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="chapter_1_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div></div>
 <p>The trouble with using grouped bars here, as you can see, is that there are quite sharp disparities which make it hard to compare in meaningful ways. We could use <a href="https://en.wikipedia.org/wiki/Logarithm#Probability_theory_and_statistics">logarithmic</a> rather than linear scaling as an option, but this is hard for many general public audiences to appreciate without guidance. One alternative quick fix is to extract data from “white” respondents which can then be placed in a separate chart with a different scale.</p>
-<div class="cell">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Statistics 101: Logarithmic Visualisation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Content TBD.</p>
+</div>
+</div>
+</div>
+<div class="cell page-columns page-full">
 <div class="sourceCode cell-code" id="annotated-cell-23"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-23-1" class="code-annotation-target"><a href="#annotated-cell-23-1" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_ethnicity_white <span class="ot">&lt;-</span> <span class="fu">filter</span>(uk_census_2021_religion_ethnicity, C2021_ETH_8_NAME <span class="sc">==</span> <span class="st">"White"</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-23-2" class="code-annotation-target"><a href="#annotated-cell-23-2" aria-hidden="true" tabindex="-1"></a>uk_census_2021_religion_ethnicity_nonwhite <span class="ot">&lt;-</span> <span class="fu">filter</span>(uk_census_2021_religion_ethnicity, C2021_ETH_8_NAME <span class="sc">!=</span> <span class="st">"White"</span>)</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-23" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-23-3" class="code-annotation-target"><a href="#annotated-cell-23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_ethnicity_nonwhite, <span class="fu">aes</span>(<span class="at">fill=</span>C2021_ETH_8_NAME, <span class="at">x=</span>C2021_RELIGION_10_NAME, <span class="at">y=</span>OBS_VALUE)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat =</span><span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Religious Affiliation in the 2021 Census of England and Wales"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -824,14 +843,14 @@ What is Nomis?
 </dd>
 </dl>
 </div>
-<div class="cell-output-display">
+
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="chapter_1_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
-</div>
-</div>
+</div></div></div>
 <p>As you’ll notice, this is a bit better, but this still doesn’t quite render with as much visual clarity and communication as I’d like. For a better look, we can use a technique in R called “faceting” to create a series of small charts which can be viewed alongside one another. This is just intended to whet you appetite for facetted plots, so I won’t break down all the separate elements in great detail as there are other guides which will walk you through the full details of how to use this technique if you want to do a deep dive. For now, you’ll want to observe that we’ve augmented the <code>ggplot</code> with a new element called <code>facet_wrap</code> which takes the ethnicity data column as the basis for rendering separate charts.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(uk_census_2021_religion_ethnicity_nonwhite, <span class="fu">aes</span>(<span class="at">x=</span>C2021_RELIGION_10_NAME, <span class="at">y=</span>OBS_VALUE)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">position=</span><span class="st">"dodge"</span>, <span class="at">stat =</span><span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>C2021_ETH_8_NAME, <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">"Religious Affiliation in the 2021 Census of England and Wales"</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">""</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -993,6 +1012,7 @@ What is Nomis?
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"figures/chart.png"</span>, <span class="at">plot=</span>uk_census_merged_religion_ethnicity_plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">units=</span><span class="fu">c</span>(<span class="st">"in"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>That’s a pretty good day’s work. We’ve covered bifactorial analysis of the census data, compared this across years, and checked in each case to be sure that we’re representing the data accurately in the various visual elements of our charts. For the next chapter, we’re going to explore a wider range of ways to measure and represent religion.</p>
+<p>In the meantime, if you want to download the R code without all the commentary here so you can try running it in a browser, you can download that from the cookbook repository.</p>
 <div id="refs" role="list">
 
 </div>
@@ -1389,6 +1409,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://utteranc.es/client.js" repo="kidwellj/hacking_religion_textbook" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link  aria-label=" introduction:="" hacking="" religion"="">
@@ -1396,8 +1418,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter_2.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Survey Data: Spotlight Project</span>">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Survey Data: Spotlight Project</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chapter_2.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Getting into the nitty-gritty details</span>">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting into the nitty-gritty details</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
