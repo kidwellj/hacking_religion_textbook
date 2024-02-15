@@ -209,7 +209,7 @@ ggplot(uk_census_2021_religion_merged, aes(fill=fct_reorder(dataset, value), x=r
 
 One element of R data analysis of census datasets that can get really interesting is working with multiple variables. Above we've looked at the breakdown of religious affiliation across the whole of England and Wales (Scotland operates an independent census), and by placing this data alongside a specific region, we've already made a basic entry into working with multiple variables but this can get much more interesting. Adding an additional quantitative variable (also known as bivariate data when you have *two* variables) into the mix, however can also generate a lot more information and we have to think about visualising it in different ways which can still communicate with visual clarity in spite of the additional visual noise which is inevitable with enhanced complexity. Let's have a look at the way that religion in England and Wales breaks down by ethnicity.
 
-::: {.callout-tip}
+::: {.callout-tip collapse="true"}
 ## What is Nomis?
 
 For the UK, census data is made available for programmatic research like this via an organisation called NOMIS. Luckily for us, there is an R library you can use to access nomis directly which greatly simplifies the process of pulling data down from the platform. It's worth noting that if you're not in the UK, there are similar options for other countries. Nearly every R textbook I've ever seen works with USA census data, so you'll find plenty of documentation available on the tools you can use for US Census data. Similarly for the EU, Canada, Austrailia etc.
