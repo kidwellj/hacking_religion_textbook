@@ -27,6 +27,7 @@ library(here)  |> suppressPackageStartupMessages()
 library(tidyverse)  
 # better video device, more accurate and faster rendering, esp. on macos. Also should enable system fonts for display
 library(ragg) |> suppressPackageStartupMessages()
+library(tmap) |> suppressPackageStartupMessages()
 
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
 here::i_am("chapter_3.qmd")
@@ -36,14 +37,14 @@ if (file.exists(here("data", "infuse_uk_2011_clipped.shp")) == FALSE) {
 download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_uk_2011_clipped.zip", destfile = "data/infuse_uk_2011_clipped.zip")
 unzip("data/infuse_uk_2011_clipped.zip", exdir = "data")
 }
-uk_countries <- st_read(here("data", "infuse_uk_2011_clipped.shp"), quiet = TRUE)
+uk <- st_read(here("data", "infuse_uk_2011_clipped.shp"), quiet = TRUE)
 
 # Download administrative boundaries for whole UK at regions level
-if (file.exists(here("data", "infuse_rgn_2011_clipped.shp")) == FALSE) {
-download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_rgn_2011_clipped.zip", destfile = "data/infuse_rgn_2011_clipped.zip")
-unzip("data/infuse_rgn_2011_clipped.zip", exdir = "data")
+if (file.exists(here("data", "infuse_ctry_2011_clipped.zip")) == FALSE) {
+download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_ctry_2011_clipped.zip", destfile = "data/infuse_ctry_2011_clipped.zip")
+unzip("data/infuse_ctry_2011_clipped.zip", exdir = "data")
 }
-uk_rgn <- st_read(here("data", "infuse_rgn_2011_clipped.shp"), quiet = TRUE)
+uk_countries <- st_read(here("data", "infuse_ctry_2011_clipped.shp"), quiet = TRUE)
 
 # Download administrative boundaries for whole UK at local authority level
 if (file.exists(here("data", "infuse_dist_lyr_2011_clipped.shp")) == FALSE) {
@@ -60,7 +61,7 @@ local_authorities_buildings_clip <- st_read(here("data", "infuse_dist_lyr_2011_s
 Before we move on, let's plot a simple map and have a look at one of our administrative layers. We can use ggplot with a new type of shape `geom_sf()` to plot the contents of a geospatial data file with polygons which is loaded as a `simplefeature` in R. 
 
 ```{r}
-ggplot(uk_countries) + geom_sf()
+ggplot(uk) + geom_sf()
 ```
 
 ## Load in Ordnance Survey OpenMap Points Data
@@ -73,20 +74,18 @@ ggplot(uk_countries) + geom_sf()
 # obtained, see the companion cookbook here: https://github.com/kidwellj/hacking_religion_cookbook/blob/main/ordnance_survey.R
 
 os_openmap_pow <- st_read(here("example_data", "os_openmap_pow.gpkg"), quiet = TRUE)
-
 ggplot(os_openmap_pow) + geom_sf()
 ```
 
 It's worth noting that the way that you load geospatial data in R has changed quite dramatically since 2020 with the introduction of the simplefeature class in R. Much of the documentation you will come across "out there" will make reference to a set of functions which are no longer used, and are worth avoiding.
 
-We could go a bit further with ggplot(), but for this chapter, we're going to primarily use a tool called tmap(), which works a lot like gpplot, but is much better adapted for geospatial data. As you'll see, tmap() also works by adding layers of data and visual instructions one at a time. So we might begin with `tm_shape(uk_countries)` instead of `ggplot(uk_countries) + geom_sf()`. Whereas ggplot() asks us to define the raw data and the shapes to use, tmap() makes some assumptions about the shapes. 
+We could go a bit further with ggplot(), but for this chapter, we're going to primarily use a tool called tmap(), which works a lot like gpplot, but is much better adapted for geospatial data. As you'll see, tmap() also works by adding layers of data and visual instructions one at a time. So we might begin with `tm_shape(uk)` instead of `ggplot(uk) + geom_sf()`. Whereas ggplot() asks us to define the raw data and the shapes to use, tmap() makes some assumptions about the shapes. 
 
 ```{r}
 #| label: figure-tmap1a
 #| fig-cap: "Our first tmap plot"
 
-library(tmap) |> suppressPackageStartupMessages()
-tm_shape(uk_countries) + tm_borders()
+tm_shape(uk) + tm_borders()
 ```
 In the example above shown in @figure-tmap1a you can see we've just added a polygon with a border. We can do something similar point data and dots as shown in @figure-tmap1b:
 
@@ -105,7 +104,7 @@ Let's see how those layers get added on with an example (@figure-tmap2):
 #| label: figure-tmap2
 #| fig-cap: "A GGPlot of UK Churches"
 
-tm_shape(uk_countries) + 
+tm_shape(uk) + 
   tm_borders(alpha=.5, lwd=0.1) +
   tm_shape(local_authorities) +
   tm_borders(lwd=0.6) +
@@ -128,7 +127,7 @@ Our next step here will be to add all the churches to our map, but there's a pro
 
 tm_shape(os_openmap_pow) + 
   tm_dots() +
-  tm_shape(uk_countries) +
+  tm_shape(uk) +
   tm_borders()
 ```
 
@@ -140,7 +139,7 @@ You'll recall that in previous chapters, we tried some experiments modifying sca
 
 tm_shape(os_openmap_pow) + 
   tm_dots("red", size = .001, alpha = .4) +
-  tm_shape(uk_countries) +
+  tm_shape(uk) +
   tm_borders(alpha=.5, lwd=0.4)
 ```
 
@@ -171,7 +170,7 @@ Now let's visualise this data using tmap, which (now that we have that new colum
 
 tm_shape(uk_rgn) + 
   tm_borders(alpha=.5, lwd=0.4) +
-  tm_fill(col = "churches_count", title = "Concentration of churches")
+  tm_fill(fill = "churches_count", title = "Concentration of churches", tm_scale(breaks = c(0, 30000, 40000, 50000)))
 ```
 Now something strange happened here. We've lost Scotland and Wales! If you look at the legend, you'll see a clue which is that our counts start at 1000 rather than zero, so anything below that threshold in our map simply doesn't exist. This is a problem especially if we are aiming to tell the truth. A quick tweak can ensure that our visualisation 
 
@@ -182,7 +181,7 @@ Now something strange happened here. We've lost Scotland and Wales! If you look 
 #| label: figure-tmap6
 #| fig-cap: "From dots to choropleth"
 
-tm_shape(uk_rgn) + tm_polygons(fill = "red")
+tm_shape(uk_rgn) + tm_fill(fill = "churches_count", tm_scale_intervals(style = "pretty"))
 ```
 
 We can do the same for our more granular local authorities data:
