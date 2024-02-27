@@ -1,25 +1,25 @@
 ## Mapping churches: geospatial data science
 
-Until recently, most data science books didn't have a section on geospatial data. It was considered a specialist form of research best left to GIS technicians who tended to use proprietary tools like ArcGIS. This has changed significantly in the past five years, but you'll still be hard pressed to find an introduction to the subject which strays very far from a few simple data sets (mostly of the USA) and relatively uncomplicated geospatial operations. I actually first began learning R, back in 2013, right when open source geospatial research tools were beginning to be developed with quite a lot more energy and geospatial data is my personal favourite data science playground, so in this book we're going to go much deeper than is usual. There are also good reasons to take things a few steps further in the particular forms of data and inquiry that religion takes us into.
+Until recently, most data science books didn't have a section on geospatial data. It was considered a specialist form of research best left to GIS technicians who tended to use proprietary (and overpriced) tools like ArcGIS. This has changed significantly in the past five years, but you'll still be hard pressed to find an introduction to the subject which strays very far from a few simple data sets (mostly of the USA) and relatively uncomplicated geospatial operations. I actually first began learning R, back in 2013, right when open source geospatial research tools were beginning to be developed with quite a lot more energy and geospatial data is my personal favourite data science playground, so in this book we're going to go much deeper than is usual. There are also good reasons to take things a few steps further in the particular forms of data and inquiry that religion takes us into.
 
 Recommend https://r-spatial.org/book/
 
-Geospatial data is, in the most basic form, working with maps. This means that most of your data can be a quite simple dataframe, e.g. just a list of names or categories associated with a set of X and Y coordinates. Once you have a set of items, however, things get interesting very quickly, as you can layer data sets on top of one another. We're going to begin this chapter by developing a geolocated data set of churches in the UK. This information is readily and freely available online thanks to the UK Ordnance Survey, a quasi-governmental agency which maintains the various (now digital) maps of Britain. Lucky for us, the Ordnance Survey has an open data product that anyone can use!
+Geospatial data is, in the most basic form, working with maps. This means that most of your data can be a quite simple dataframe, e.g. just a list of names or categories associated with a set of X and Y coordinates. Once you have a set of items, however, things get interesting very quickly, as you can layer data sets on top of one another. We're going to begin this chapter by developing a geolocated data set of churches in the UK. This information is readily and freely available online thanks to the UK Ordnance Survey, a quasi-governmental agency which maintains the various (now digital) maps of Britain. Lucky for us, the Ordnance Survey has an open data product that anyone can use.
 
-Before we begin, there are some key things we should note about geospatial data. Geospatial data tends to fall into one of two kinds: points and polygons. Points can be any kind of feature: a house, a church, a pub, someone's favourite ancient oak tree, or some kind of sacred relic. Polygons tend to be associated with wider areas, and as such can be used to describe large features, e.g. an Ocean, a local authority, or a mountain, or also demographic features, like a census Output Area with associated census summaries. Points are very simple data representations, an X and Y coordinate. Polygons are much more complex, often containing dozens or even thousands of points. 
+Before we begin, there are some key things we should note about geospatial data. Geospatial data tends to fall into one of two kinds: points and polygons. Points can be any kind of feature: a house, a church, a pub, someone's favourite ancient oak tree, or some kind of sacred relic. Polygons tend to be associated with wider areas, and as such can be used to describe large features, e.g. an Ocean, a local authority, or a mountain, or also demographic features, like a Census Output Area with associated census summaries. Points are very simple data representations, an X and Y coordinate. Polygons are much more complex, often containing dozens or even thousands of points. To be fair, if you zoom in far enough, every point *should* become a polygon, as that small building has a shape and a footprint, but it's a much simpler way of representing the information and thus quite popular.
 
-The most complex aspect of point data relates to the ways that coordinates are encoded, as they will aways need to be associated with a coordinate reference system (CRS) which describes how they are situated with respect to the planet earth. The most common CRS is the WGS, though for our data sets we'll also come into contact with the BGS, a specifically British coordinate reference system. There are dozens of CRS, usually mapping onto a specific geographical region. Bearing in mind the way that you need to use a CRS to understand how coordinates can be associated with specific parts of the earth, you can see how this is a bit like survey data, where you also need a "codebook" to understand what the specific response values map onto, e.g. a "1" means "strongly agree" and so on. We also saw, in a previous chapter, how some forms of data have the codebook already baked into the factor data, simplifying the process of interpreting the data. In a similar way, some types of geospatial data sets can also come with CRS "baked in" while we'll need to define CRS for other types. Here are some of the most common types of geospatial data files:
+The most complex aspect of point data relates to the ways that coordinates are encoded, as they will always need to be associated with a coordinate reference system (CRS) which describes how they are situated with respect to the planet earth. The most common CRS is the WGS, though for our data sets we'll also come into contact with the BGS, a specifically British coordinate reference system. There are dozens of CRS, usually mapping onto a specific geographical region. Bearing in mind the way that you need to use a CRS to understand how coordinates can be associated with specific parts of the earth, you can see how this is a bit like survey data, where you also need a "codebook" to understand what the specific response values map onto, e.g. a "1" means "strongly agree" and so on. We also saw, in a previous chapter, how some forms of data have the codebook already baked into the factor data, simplifying the process of interpreting the data. In a similar way, some types of geospatial data sets can also come with CRS "baked in" while we'll need to define CRS for other types. Here are some of the most common types of geospatial data files:
 
-CSV: "comma separated values" a plain text file containing various coordinates
-Shapefile: a legacy file format, often still in use, but being replaced by others for a variety of good reasons. For more on this see [http://switchfromshapefile.org/]
-Geopackage: one of the more recent ways of packaging up geospatial data. Geopackages can contain a wide variety of different data and are easily portable.
-GeoJSON: a file format commonly used in other forms of coding, the "JSON" (an acronym for JavaScript Object Notation) is meant to be easily interchangeable across various platforms. GeoJSON is an augmented version of JSON data with coordinates added in.
+- CSV: "comma separated values" a plain text file containing various coordinates
+- Shapefile: a legacy file format, often still in use, but being replaced by others for a variety of good reasons. For more on this see [http://switchfromshapefile.org/]
+- Geopackage: one of the more recent ways of packaging up geospatial data. Geopackages can contain a wide variety of different data and are easily portable.
+- GeoJSON: a file format commonly used in other forms of coding, the "JSON" (an acronym for JavaScript Object Notation) is meant to be easily interchangeable across various platforms. GeoJSON is an augmented version of JSON data with coordinates added in.
 
 Now that you have a sense of some of the basic aspects of geospatial data, let's dive in and do a bit of learning in action.
 
 ## Administrative shapes - the UK
 
-A good starting point is to aquire some adminstrative data. This is a way of referring to political boundaries, whether country borders or those of a local authority or some other administrative unit. For our purposes, we're going to import several different types of administrative boundary which will be used at different points in our visualisations below. It's worth noting that the data we use here was prepared to support the 2011 census, and make use of the shapefile format.
+A good starting point is to aquire some "adminstrative" data. This is a way of referring to political boundaries, whether country borders or those of a local authority or some other "administrative" unit. For our purposes, we're going to import several different types of administrative boundary which will be used at different points in our visualisations below. It's worth noting that the data we use here was prepared to support the 2011 census, and make use of the shapefile format.
 
 ```{r, results = 'hide'}
 library(sf) |> suppressPackageStartupMessages()
@@ -66,54 +66,140 @@ ggplot(uk_countries) + geom_sf()
 ## Load in Ordnance Survey OpenMap Points Data
 
 ```{r}
+#| label: figure-churches
+#| fig-cap: "A GGPlot of UK Churches"
+
 # Note: for more advanced reproducible scripts which demonstrate how these data surces have been 
 # obtained, see the companion cookbook here: https://github.com/kidwellj/hacking_religion_cookbook/blob/main/ordnance_survey.R
 
-os_openmap_pow <- st_read(here("data", "os_openmap_pow.gpkg"), quiet = TRUE)
+os_openmap_pow <- st_read(here("example_data", "os_openmap_pow.gpkg"), quiet = TRUE)
 
 ggplot(os_openmap_pow) + geom_sf()
 ```
 
-It's worth noting that the way that you load geospatial data in R has changed quite dramatically since 2020 with the introduction of the simplefeature class in R. Much of the documentation you will come across "out there" will make reference to a set of functions which are now deprecated.
+It's worth noting that the way that you load geospatial data in R has changed quite dramatically since 2020 with the introduction of the simplefeature class in R. Much of the documentation you will come across "out there" will make reference to a set of functions which are no longer used, and are worth avoiding.
 
-Let's use that data we've just loaded to make our first map:
+We could go a bit further with ggplot(), but for this chapter, we're going to primarily use a tool called tmap(), which works a lot like gpplot, but is much better adapted for geospatial data. As you'll see, tmap() also works by adding layers of data and visual instructions one at a time. So we might begin with `tm_shape(uk_countries)` instead of `ggplot(uk_countries) + geom_sf()`. Whereas ggplot() asks us to define the raw data and the shapes to use, tmap() makes some assumptions about the shapes. 
 
 ```{r}
-# Generate choropleth map of respondent locations
-# using temporary palette here so that 0s are white
-library(tmap) |> suppressPackageStartupMessages()
-# palette <- c(white, "#a8ddb5", "#43a2ca")
+#| label: figure-tmap1a
+#| fig-cap: "Our first tmap plot"
 
-map1 <- tm_shape(local_authorities) + 
-#  tm_fill(col = "surveys_count", , palette = palette, title = "Concentration of survey respondents") +
+library(tmap) |> suppressPackageStartupMessages()
+tm_shape(uk_countries) + tm_borders()
+```
+In the example above shown in @figure-tmap1a you can see we've just added a polygon with a border. We can do something similar point data and dots as shown in @figure-tmap1b:
+
+```{r, results = 'hide'}
+#| label: figure-tmap1b
+#| fig-cap: "A GGPlot of UK Churches"
+
+tm_shape(os_openmap_pow) + tm_dots()
+```
+
+From either of these basic starting points (or both), we stack on additional instructions, defining the different visual attributes or aesthetics, just like in `ggplot`. If you want to fill polygons with colour, we'll add `tm_fill` and if you want to adjust the default lines on your polygons, define this with `tm_borders` like we have in @figure-tmap2 below with an alpha and line width (lwd) instruction. We can also add more shapes on top with an additional `tm_shape` instruction and a follow-on `tm_borders` instruction. To add a bit of flourish, you can drop on a scale bar (`tm_scale_bar`) or share licensing information with prospective readers (I've done this below using `tm_credits`) and add a figure label or title.
+
+Let's see how those layers get added on with an example (@figure-tmap2):
+
+```{r}
+#| label: figure-tmap2
+#| fig-cap: "A GGPlot of UK Churches"
+
+tm_shape(uk_countries) + 
   tm_borders(alpha=.5, lwd=0.1) +
-  # for intermediate polygon geometries
-  # tm_shape(local_authorities) +
-  # tm_borders(lwd=0.6) +
-  # for dots from original dataset
-  # tm_dots("red", size = .05, alpha = .4) +
+  tm_shape(local_authorities) +
+  tm_borders(lwd=0.6) +
   tm_scale_bar(position = c("right", "bottom")) +
   tm_style("gray") +
   tm_credits("Data: UK Data Service (OGL)\n& Jeremy H. Kidwell,\nGraphic is CC-by-SA 4.0", 
              size = 0.4, 
              position = c("left", "bottom"),
              just = c("left", "bottom"),
-             align = "left") +
-  tm_layout(asp = NA,
-            frame = FALSE, 
-            title = "Figure 1a", 
-            title.size = .7,
-            legend.title.size = .7,
-            inner.margins = c(0.1, 0.1, 0.05, 0.05)
-  )
-
-map1
-
-# save image
-tmap_save(map1, here("figures", "map.png"), width=1920, height=1080, asp=0)
+             align = "left")
 ```
 
+That's a quick orientation to the kinds of visual elements we can produce with `tmap`.
+
+Our next step here will be to add all the churches to our map, but there's a problem we need to address first, which is that there are a lot of churches in that dataset. As you may have noticed in @figure-churches above there are so many dots that some parts of the map are just blocks of grey. Let's have a look at how things are with `tmap`:
+
 ```{r, results = 'hide'}
+#| label: figure-tmap3
+#| fig-cap: "A GGPlot of UK Churches"
+
+tm_shape(os_openmap_pow) + 
+  tm_dots() +
+  tm_shape(uk_countries) +
+  tm_borders()
+```
+
+You'll recall that in previous chapters, we tried some experiments modifying scatterplots with a similar problem (e.g. the many dots problem). One solution was to add a bit of "alpha" (transparency) or colour, which we can also do with tmap:
+
+```{r, results = 'hide'}
+#| label: figure-tmap4
+#| fig-cap: "Very teeny dots and some alpha"
+
+tm_shape(os_openmap_pow) + 
+  tm_dots("red", size = .001, alpha = .4) +
+  tm_shape(uk_countries) +
+  tm_borders(alpha=.5, lwd=0.4)
+```
+
+That's about as good as we can get visualising points as dots with a dataset this large I think. You can get a sense of how large the dataset is with a quick length calculation on any of our columns with consistent data in them:
+
+```{R}
+length(os_openmap_pow$classification)
+```
+At nearly 50k points, we're going to need to find an alternative if we want to help someone visualise this data clearly. Lucky for us, we can use R to do some computation for us towards a different kind of map called a choropleth map. You'll probably already have seen many of these before without realising what they're called. Think of it as a kind of heatmap, like we used with our scatterplot before, except in this case the shapes that are being coloured in come from a set of polygons we specify. Our administrative map shape data is perfect for this kind of use.
+
+```{r}
+uk_rgn$churches_count <- lengths(st_covers(uk_rgn, os_openmap_pow))
+uk_rgn$churches_percent <- prop.table(uk_rgn$churches_count)
+```
+
+The sf() library has a host of tools for geospatial data analysis, including the st_covers() calculation which will filter a dataset based on whether points (or shapes) are located inside polygons from another dataset. I'll walk you through what we've done above. First, we want to add a new column with our totals to the administrative shapes. I've used lengths() to fill this column with a simple count of the number of items in a new dataset, which in turn consists of a simple calculation (using `st_covers`) of how many points (from `os_openmap_pow`) are inside each polygon inside that `uk_rgn` dataset. Sometimes it's nice to have percentages close to hand, so I've added another column for this `churches_percent` using the very handy `prop.table` command. We can do the same thing for any set of polygons, including our `local_authorities` data:
+
+```{r}
+local_authorities$churches_count <- lengths(st_covers(local_authorities, os_openmap_pow))
+local_authorities$churches_percent <- prop.table(local_authorities$churches_count)
+```
+
+Now let's visualise this data using tmap, which (now that we have that new column) we can achieve using `tm_fill` specifying the name of our new column:
+
+```{r}
+#| label: figure-tmap5
+#| fig-cap: "From dots to choropleth"
+
+tm_shape(uk_rgn) + 
+  tm_borders(alpha=.5, lwd=0.4) +
+  tm_fill(col = "churches_count", title = "Concentration of churches")
+```
+Now something strange happened here. We've lost Scotland and Wales! If you look at the legend, you'll see a clue which is that our counts start at 1000 rather than zero, so anything below that threshold in our map simply doesn't exist. This is a problem especially if we are aiming to tell the truth. A quick tweak can ensure that our visualisation 
+
+[You can read more about the various customisations available using tm_fill, ["here"](https://r-tmap.github.io/tmap/reference/tm_polygons.html).]{.aside}
+
+
+```{r}
+#| label: figure-tmap6
+#| fig-cap: "From dots to choropleth"
+
+tm_shape(uk_rgn) + tm_polygons(fill = "red")
+```
+
+We can do the same for our more granular local authorities data:
+
+```{r}
+#| label: figure-tmap7
+#| fig-cap: "From dots to choropleth"
+
+tm_shape(local_authorities) + 
+  tm_borders(alpha=.5, lwd=0.4) +
+  tm_fill(col = "churches_count", title = "Concentration of churches")
+```
+
+
+
+```{r}
+
 # subsetting ordnance survey openmap data for measuring clusters and proximity
 
 os_openmap_important_buildings <- st_read(here("example_data", "os_openmap_important_buildings.gpkg"), quiet = TRUE)
@@ -143,6 +229,8 @@ https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistic
 Calculate proximity to pubs
 
 ## References {.unnumbered}
+
+- If you'd like to do an even deeper dive into geospatial operations in R, we recommend another open access textbook [Geocomputation with R](https://r.geocompx.org/) which has a [dedicated chapter on TMap](https://r.geocompx.org/adv-map#adv-map)
 
 ::: {#refs}
 :::

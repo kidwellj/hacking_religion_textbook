@@ -56,7 +56,11 @@ We also asked respondents (Q57): "Regardless of whether you belong to a particul
 
 ## Social and personal participation in activity
 
-We included another classic indicator asking how often respondents go to worship (Q58): "Apart from weddings, funerals and other special occasions, how often do you attend religious services?". The individual counterpart to this question about social participation came next in the form of (Q59): "Apart from when you are at religious services, how often do you pray?" As with the previous question, the answers here also came in an descending scale of intensity:
+We included another classic indicator asking how often respondents go to worship (Q58): "Apart from weddings, funerals and other special occasions, how often do you attend religious services?". 
+
+Musick, M. A., Koenig, H. G., Larson, D. B., & Matthews, D. (1998). Religion and spiritual beliefs. In J. C. Holland (Ed.), Psychooncology (pp. 780-789). New York: Oxford University Press.
+
+The individual counterpart to this question about social participation came next in the form of (Q59): "Apart from when you are at religious services, how often do you pray?" As with the previous question, the answers here also came in an descending scale of intensity:
 
 - More than once a week  (1) 
 - Once a week  (2) 
