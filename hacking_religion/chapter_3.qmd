@@ -27,7 +27,6 @@ A good starting point is to aquire some "adminstrative" data. This is a way of r
 library(sf) |> suppressPackageStartupMessages()
 library(here)  |> suppressPackageStartupMessages()
 library(tidyverse)   |> suppressPackageStartupMessages()
-# better video device, more accurate and faster rendering, esp. on macos. Also should enable system fonts for display
 library(ragg)   |> suppressPackageStartupMessages()
 library(tmap)   |> suppressPackageStartupMessages()
 
@@ -168,6 +167,9 @@ The sf() library has a host of tools for geospatial data analysis, including the
 ```{r}
 local_authorities$churches_count <- lengths(st_covers(local_authorities, os_openmap_pow))
 local_authorities$churches_percent <- prop.table(local_authorities$churches_count)
+
+bbox_brum$churches_count <- lengths(st_covers(bbox_brum, os_openmap_pow))
+bbox_brum$churches_percent <- prop.table(bbox_brum$churches_count)
 ```
 
 Now let's visualise this data using tmap, which (now that we have that new column) we can achieve using `tm_fill` specifying the name of our new column:
@@ -232,7 +234,20 @@ os_openmap_important_buildings <- st_read(here("example_data", "os_openmap_impor
 # OSM
 library(osmdata)
 
-Working off great tutorial here: https://jcoliver.github.io/learn-r/017-open-street-map.html
+uk_pow <- getbb(place_name = "Birmingham") %>%
+  opq() %>%
+  add_osm_feature(key = "amenity", value = "place_of_worship") %>%
+  osmdata_sf()
+length(uk_pow$osm_points)
+
+#Test for counts in OS dataset
+bb_birmingham <- getbb(place_name = "Birmingham united kingdom", format_out = "sf_polygon")
+bb_birmingham <- st_transform(bb_birmingham, crs = 27700)  # CRS for WGS84
+lengths(st_covers(bb_birmingham, os_openmap_pow))
+
+
+
+# Working off great tutorial here: https://jcoliver.github.io/learn-r/017-open-street-map.html
 
 uk_major <- getbb(place_name = "Birmingham") %>%
   opq(timeout = 50) %>%
@@ -259,11 +274,6 @@ street_plot <- street_plot +
 
 street_plot
 
-uk_pow <- getbb(place_name = "Birmingham") %>%
-  opq() %>%
-  add_osm_feature(key = "amenity", value = "place_of_worship") %>%
-  osmdata_sf()
-
 rest_plot <- street_plot +
   geom_sf(data = uk_pow$osm_points,
           inherit.aes = FALSE,
@@ -273,8 +283,9 @@ rest_plot <- street_plot +
 # Print map
 rest_plot
 
+bbox_brum <- getbb(place_name = "Birmingham", format_out = "sf_polygon")
 
-
+tm_shape(bb) + tm_borders()
 
 ```
 
