@@ -21,17 +21,21 @@ Now that you have a sense of some of the basic aspects of geospatial data, let's
 
 A good starting point is to aquire some "adminstrative" data. This is a way of referring to political boundaries, whether country borders or those of a local authority or some other "administrative" unit. For our purposes, we're going to import several different types of administrative boundary which will be used at different points in our visualisations below. It's worth noting that the data we use here was prepared to support the 2011 census, and make use of the shapefile format.
 
+[You can read more about the different UK administrative boundaries, ["here"](https://statistics.ukdataservice.ac.uk/dataset/2011-census-geography-boundaries-local-authorities).]{.aside}
+
 ```{r, results = 'hide'}
 library(sf) |> suppressPackageStartupMessages()
 library(here)  |> suppressPackageStartupMessages()
-library(tidyverse)  
+library(tidyverse)   |> suppressPackageStartupMessages()
 # better video device, more accurate and faster rendering, esp. on macos. Also should enable system fonts for display
-library(ragg) |> suppressPackageStartupMessages()
-library(tmap) |> suppressPackageStartupMessages()
+library(ragg)   |> suppressPackageStartupMessages()
+library(tmap)   |> suppressPackageStartupMessages()
 
 setwd("/Users/kidwellj/gits/hacking_religion_textbook/hacking_religion")
 here::i_am("chapter_3.qmd")
 
+# the output areas file is very large (500mb) so I've set a longer timeout here so it doesn't throw errors
+options(timeout=500)
 # Download administrative boundaries for whole UK at country level
 if (file.exists(here("data", "infuse_uk_2011_clipped.shp")) == FALSE) {
 download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_uk_2011_clipped.zip", destfile = "data/infuse_uk_2011_clipped.zip")
@@ -40,7 +44,7 @@ unzip("data/infuse_uk_2011_clipped.zip", exdir = "data")
 uk <- st_read(here("data", "infuse_uk_2011_clipped.shp"), quiet = TRUE)
 
 # Download administrative boundaries for whole UK at regions level
-if (file.exists(here("data", "infuse_ctry_2011_clipped.zip")) == FALSE) {
+if (file.exists(here("data", "infuse_ctry_2011_clipped.shp")) == FALSE) {
 download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_ctry_2011_clipped.zip", destfile = "data/infuse_ctry_2011_clipped.zip")
 unzip("data/infuse_ctry_2011_clipped.zip", exdir = "data")
 }
@@ -52,6 +56,13 @@ download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebu
 unzip("data/infuse_dist_lyr_2011_clipped.zip", exdir = "data")
 }
 local_authorities <- st_read(here("data", "infuse_dist_lyr_2011_clipped.shp"), quiet = TRUE)
+
+# Download administrative boundaries for whole UK at output area level
+# if (file.exists(here("data", "infuse_oa_lyr_2011_clipped.shp")) == FALSE) {
+# download.file("https://borders.ukdataservice.ac.uk/ukborders/easy_download/prebuilt/shape/infuse_oa_lyr_2011_clipped.zip", destfile = "data/infuse_oa_lyr_2011_clipped.zip")
+# unzip("data/infuse_oa_lyr_2011_clipped.zip", exdir = "data")
+# }
+# uk_outputareas <- st_read(here("data", "infuse_oa_lyr_2011_clipped.shp"), quiet = TRUE)
 
 # Download building outlines for whole UK
 if (file.exists(here("data", "infuse_dist_lyr_2011_simplified_100m_buildings_simplified.gpkg")) == FALSE) {
@@ -77,9 +88,9 @@ os_openmap_pow <- st_read(here("example_data", "os_openmap_pow.gpkg"), quiet = T
 ggplot(os_openmap_pow) + geom_sf()
 ```
 
-It's worth noting that the way that you load geospatial data in R has changed quite dramatically since 2020 with the introduction of the simplefeature class in R. Much of the documentation you will come across "out there" will make reference to a set of functions which are no longer used, and are worth avoiding.
+It's worth noting that the way that you load geospatial data in R has changed quite dramatically since 2020 with the introduction of the simplefeature class in R. Much of the documentation you will come across "out there" will make reference to a set of functions which are no longer used and are worth avoiding.
 
-We could go a bit further with ggplot(), but for this chapter, we're going to primarily use a tool called tmap(), which works a lot like gpplot, but is much better adapted for geospatial data. As you'll see, tmap() also works by adding layers of data and visual instructions one at a time. So we might begin with `tm_shape(uk)` instead of `ggplot(uk) + geom_sf()`. Whereas ggplot() asks us to define the raw data and the shapes to use, tmap() makes some assumptions about the shapes. 
+We could go further with ggplot(), but for this chapter, we're going to primarily use a tool called tmap(), which works a lot like gpplot, but is much better adapted for geospatial data. As you'll see, tmap() also works by adding layers of data and visual instructions one at a time. So we might begin with `tm_shape(uk)` instead of `ggplot(uk) + geom_sf()`. Whereas ggplot() asks us to define the raw data and the shapes to use, tmap() makes some assumptions about the shapes. 
 
 ```{r}
 #| label: figure-tmap1a
@@ -177,14 +188,28 @@ We can do the same for our more granular local authorities data and this is alre
 
 ```{r}
 #| label: figure-tmap7
-#| fig-cap: "From dots to choropleth"
+#| fig-cap: "Using Local Authorities"
 
 tm_shape(local_authorities) + 
   tm_borders(alpha=.5, lwd=0.4) +
-  tm_fill(fill = "churches_count", title = "Concentration of churches")
+  tm_fill(coll = "churches_count", title = "Concentration of churches")
 ```
 
-If we're looking for visual outliers, e.g. places where there are more or less of a feature than we might expect, we need to think carefully about the baseline that we're using to set that expectation. We can definitely normalise using population data, like this:
+If we're looking for visual outliers, e.g. places where there are more or less of a feature than we might expect, we need to think carefully about the baseline that we're using to set that expectation. One option is to use a polygon that is already adjusted to population, like UK Output Areas, which are designed to have roughly the same population (so larger or smaller depending on population density).
+
+```{r}
+#| label: figure-tmap8
+#| fig-cap: "Using Output Areas"
+
+# uk_outputareas$churches_count <- lengths(st_covers(uk_outputareas, os_openmap_pow))
+# uk_outputareas$churches_percent <- prop.table(uk_outputareas$churches_count)
+
+# tm_shape(uk_outputareas) + 
+#   tm_borders(alpha=.5, lwd=0.4) +
+#   tm_fill(fill = "churches_count", title = "Concentration of churches")
+```
+
+If you want to keep the same polygons, we can also normalise using population data. This will require us to import some data to our dataframe as the admin polygon shapefiles provided by the UK government don't have population figures in them.
 
 ```{r}
 ```
@@ -192,37 +217,77 @@ If we're looking for visual outliers, e.g. places where there are more or less o
 But I wonder if it's more interesting to compare this type of building, e.g. a place of worship, to other kinds of buildings, like grocery stores or pubs. Let's draw in some data we can work with here:
 
 ```{r}
-
+# Note: for more advanced reproducible scripts which demonstrate how these data surces have been 
+# obtained, see the companion cookbook here: https://github.com/kidwellj/hacking_religion_cookbook/blob/main/ordnance_survey.R
 
 os_openmap_important_buildings <- st_read(here("example_data", "os_openmap_important_buildings.gpkg"), quiet = TRUE)
 
 # add pubs, check_cashing, pawnbrokers, SSSI
 ## subsets
 ```
-1. Count the number of churches in Local Authorities
+
 
 
 ```{r}
-# OSM data
+# OSM
+library(osmdata)
 
-# Note: for more advanced reproducible scripts which demonstrate how these data surces have been 
-# obtained, see the companion cookbook here: https://github.com/kidwellj/hacking_religion_cookbook/blob/main/ordnance_survey.R
+Working off great tutorial here: https://jcoliver.github.io/learn-r/017-open-street-map.html
+
+uk_major <- getbb(place_name = "Birmingham") %>%
+  opq(timeout = 50) %>%
+  add_osm_feature(key = "highway", 
+                  value = c("motorway", "primary", "secondary")) %>%
+  osmdata_sf()
+
+uk_minor <- getbb(place_name = "Birmingham") %>%
+  opq() %>%
+  add_osm_feature(key = "highway", value = c("tertiary", "residential")) %>%
+  osmdata_sf()
+
+street_plot <- ggplot() +
+  geom_sf(data = uk_major$osm_lines,
+          inherit.aes = FALSE,
+          color = "black",
+          size = 0.2)
+
+street_plot <- street_plot +
+  geom_sf(data = uk_minor$osm_lines,
+          inherit.aes = FALSE,
+          color = "#666666",  # medium gray
+          size = 0.1) # half the width of the major roads
+
+street_plot
+
+uk_pow <- getbb(place_name = "Birmingham") %>%
+  opq() %>%
+  add_osm_feature(key = "amenity", value = "place_of_worship") %>%
+  osmdata_sf()
+
+rest_plot <- street_plot +
+  geom_sf(data = uk_pow$osm_points,
+          inherit.aes = FALSE,
+          size = 1.5,
+          color = "#1B9E77") +
+  theme_void() # remove gray background
+# Print map
+rest_plot
 
 
-# osm_uk_points <- st_read(system.file(here("data", "pow_osm.gpkg", package = "spData")))
-# vector_filepath = system.file("data/osm-gb-2018Aug29_pow_osm.pbf", package = "sf")
-# osm_uk_points = st_read(vector_filepath)
+
+
 ```
+
+1. Count the number of churches in Local Authorities
+
+## References {.unnumbered}
+
+- If you'd like to do an even deeper dive into geospatial operations in R, we recommend another open access textbook [Geocomputation with R](https://r.geocompx.org/) which has a [dedicated chapter on TMap](https://r.geocompx.org/adv-map#adv-map)
 
 Guides to geographies:
 https://rconsortium.github.io/censusguide/
 https://ocsi.uk/2019/03/18/lsoas-leps-and-lookups-a-beginners-guide-to-statistical-geographies/
 
-Calculate proximity to pubs
-
-## References {.unnumbered}
-
-- If you'd like to do an even deeper dive into geospatial operations in R, we recommend another open access textbook [Geocomputation with R](https://r.geocompx.org/) which has a [dedicated chapter on TMap](https://r.geocompx.org/adv-map#adv-map)
 
 ::: {#refs}
 :::
