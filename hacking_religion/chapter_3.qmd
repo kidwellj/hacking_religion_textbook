@@ -211,7 +211,15 @@ If we're looking for visual outliers, e.g. places where there are more or less o
 #   tm_fill(fill = "churches_count", title = "Concentration of churches")
 ```
 
-If you want to keep the same polygons, we can also normalise using population data. This will require us to import some data to our dataframe as the admin polygon shapefiles provided by the UK government don't have population figures in them.
+If you want to keep the same polygons, we can also normalise using population data. This will require us to import some data to our dataframe as the admin polygon shapefiles provided by the UK government don't have population figures in them. Cf. mapping_draft lines 303 onwards.
+
+Demonstrate how to add inset map for dense urban area.
+
+Engage with geospatial demographic data: urban-rural scale, census with OAs, SIMD. 
+
+Engage with geospatial environmental data: proximity to wilderness areas, fracking sites
+
+Demonstrate buffers
 
 ```{r}
 ```
@@ -224,11 +232,11 @@ But I wonder if it's more interesting to compare this type of building, e.g. a p
 
 os_openmap_important_buildings <- st_read(here("example_data", "os_openmap_important_buildings.gpkg"), quiet = TRUE)
 
-# add pubs, check_cashing, pawnbrokers, SSSI
+# add pubs, check_cashing, pawnbrokers, SSSI; cf mapping_Draft lines 1083 onwards
 ## subsets
 ```
 
-
+Get data from openstreetmaps project, compare counts to ordnance survey, show side-by-side map comparison plots. Demonstrate use of bounding box.
 
 ```{r}
 # OSM
@@ -282,14 +290,8 @@ rest_plot <- street_plot +
   theme_void() # remove gray background
 # Print map
 rest_plot
-
-bbox_brum <- getbb(place_name = "Birmingham", format_out = "sf_polygon")
-
-tm_shape(bb) + tm_borders()
-
 ```
 
-1. Count the number of churches in Local Authorities
 
 ## References {.unnumbered}
 
