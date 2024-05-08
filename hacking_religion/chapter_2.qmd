@@ -32,6 +32,10 @@ library(here)  |> suppressPackageStartupMessages()
 library(tidyverse)  |> suppressPackageStartupMessages()
 library(haven)
 here::i_am("chapter_2.qmd")
+
+# download spotlight dataset from zenodo
+if (file.exists(here("example_data", "climate_experience_data.sav")) == FALSE) {
+  download.file("https://zenodo.org/records/11130201/files/climate_experience_data.sav", destfile = here("gits", "spotlight-report", "data", "climate_experience_data.sav"))}
 climate_experience_data <- read_sav(here("example_data", "climate_experience_data.sav"))
 ```
 
