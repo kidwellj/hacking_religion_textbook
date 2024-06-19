@@ -1,4 +1,4 @@
-# Getting into the nitty-gritty details
+# Different ways to measure religion using data science
 
 In this chapter, we'll explore the diverse variety of ways you can frame collecting data around religion. Before we dive into that all, however, you might be wondering, why does it all really matter? Can't we just use the census data and assume that's a reasonably accurate approximation? I'll explore the importance of getting the framing right, or better yet, working with data that seeks to unpack religious belonging, identity, and beliefs (or unbelief) in a variety of ways, but an example might serve to explain why this is important.
 
@@ -426,11 +426,13 @@ Let's start by assessing the correlation between these two elements of the data 
 
 ::: {.callout-note collapse="true"}
 
-## Statistics 101: Correlation
+## Statistics 101: Correlation and Colonialism
 
 Content TBD.
 
 Discuss Pearson correlation coefficient
+
+Include commentary on the importance of Eugenics as a focal point for early statistics; highlight the turn away from significance testing in modern statistical analysis - note helpful commentary in https://nautil.us/how-eugenics-shaped-statistics-238014/
 
 :::
 
