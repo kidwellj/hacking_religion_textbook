@@ -59,9 +59,7 @@ We also asked respondents (Q57): "Regardless of whether you belong to a particul
 
 ## Social and personal participation in activity
 
-We included another classic indicator asking how often respondents go to worship (Q58): "Apart from weddings, funerals and other special occasions, how often do you attend religious services?". 
-
-Musick, M. A., Koenig, H. G., Larson, D. B., & Matthews, D. (1998). Religion and spiritual beliefs. In J. C. Holland (Ed.), Psychooncology (pp. 780-789). New York: Oxford University Press.
+We included another classic indicator which asked how often respondents attend worship services (Q58): "Apart from weddings, funerals and other special occasions, how often do you attend religious services?". 
 
 The individual counterpart to this question about social participation came next in the form of (Q59): "Apart from when you are at religious services, how often do you pray?" As with the previous question, the answers here also came in an descending scale of intensity:
 
@@ -75,16 +73,16 @@ Do note the descending order here, which is different from the ascending scale f
 
 ## Spirituality
 
-We also included a series of questions about spirituality in Q52 and used a slightly overlapping nature relatedness scale Q51 which we'll unpack a bit further below. There are many other types of question you can ask. In fact, in my teaching, one of my favourite exercises is to ask a student group to brainstorm as many ways as possible to ask a person about their religion whilst using a different word for religion in each question. We've managed to come up with dozens, possibly hundreds over the year, exploring faith, ritual, spirituality, transcendence, connection, belief, unbelief, sacredness and more. The key thing is that these questions are not directly interchangeable, but they will almost inevitably overlap. If you want to make constructive claims about how religion relates to some aspect of daily life, you will need to carefully consider how you can relate to this plurality in framing everyday experience. In the best case scenario, I think, you should find ways to capture a variety of dimensions and then test for correlations and clusters among your data. We'll do some exploration further below so you can see a bit of what I mean.
+We also included a series of questions about spirituality in Q52 and used a slightly overlapping nature relatedness scale Q51 which we'll unpack a bit further below. For the spotlight study, we made use of a six-item intrinsic spirituality scale that was developed by David R. Hodge which is based on another instrument intended to measure "intrinsic religion" by Allport and Ross (1967). These researchers developed a series of questions which they asked respondents in a survey. The advantage here is that you're getting at the question of spirituality from a lot of different angles and then you combine the scores from all the questions to get a mean "spirituality score". There are many other ways that psychologists have developed to measure intrinsic religion or spirituality, and we'd encourage you to try them out (there are some references to get you started in Appendix B).
 
-You'll find that many surveys will only use one of these forms of question and ignore the rest. I think this is a really bad idea as religious belonging, identity, and spirituality are far too complex to work off a single form of response. We can also test out how these different attributions relate to other demographic features, like interest in politics, economic attainment, etc. so it's equally important to test for non-religion factors that may have a stronger bearing on someone's actions or sentiments.
+As you can already see from this list, there are a lot of different ways to ask a person about their religion, perhaps even an endless variety! In my teaching, one of my favourite exercises is to ask a student group to brainstorm as many ways as possible to ask a person about their religion whilst using a different word for religion in each question. We've managed to come up with hundreds of possible questions over the years, exploring faith, ritual, spirituality, transcendence, connection, belief, unbelief, sacredness and more. The key thing is that these questions are not directly interchangeable, but they will almost inevitably overlap. If you want to make constructive claims about how religion relates to some aspect of daily life, you will need to carefully consider how you can relate to this plurality in framing everyday experience. In the best case scenario, I think, you should find ways to capture a variety of dimensions and then test for correlations and clusters among your data. We'll do some exploration further below so you can see a bit of what I mean. In practice, many surveys only use one of these forms of question and ignore the rest. I think this is a really bad idea as religious belonging, identity, and spirituality are far too complex to work off a single form of response. There's also a potential relationship between religiosity and other demographic features, as noted in the Black British Voices Report I referred to above, so it's also a good idea to test out how these different attributions relate to other demographic features, like interest in politics, economic attainment, etc. You should consider ways to test for non-religion factors that may have a stronger bearing on someone's actions or sentiments.
 
 ::: {.callout-tip}
 # So *Who's* Religious?
 
-As I've already hinted in the previous chapter, measuring religiosity is complicated. I suspect some readers may be wondering something like, "what's the right question to ask?" here. Do we get the most accurate representation by asking people to self-report their religious affiliation? Or is it more accurate to ask individuals to report on how religious they are? Is it, perhaps, better to assume that the indirect query about practice, e.g. how frequently one attends services at a place of worship may be the most reliable proxy?
+As I've already hinted in the previous chapter, measuring religiosity is complicated. Some readers may be wondering something like, "what's the right question to ask?" here. Do we get the most accurate representation by asking people to self-report their religious affiliation? Or is it more accurate to ask individuals to report on how religious they are? Is it, perhaps, better to assume that the indirect query about practice, e.g. how frequently one attends services at a place of worship, may be the most reliable proxy?
 
-In the past scholars have worked with a minimalist definition of religion, e.g. measuring only those people who participate in worship services with a high level of frequency, or demonstrate a high level of commitment to a range of pre-determined doctrinal positions or beliefs. This relates to a suspicion which was popular in the 20th century, that with the advent of modernity, religion would naturally decline. This has not proven to be the case, with a range of resurgence and transformation of "old" religions and a similar multiplication of new religious and spiritual movements. Scholars tend to refer to this awareness as relating to a post-secular study of religion, and this kind of study tends to be more maximal in orientation, finding religion, belief, and spirituality in a variety of unexpected forms and places (like football, cooking, capitalism, and popular culture). Scholars here also emphasise the ways that religion can be hidden or "tacit," and may also be non-exclusive, with individual persons adhering to a range of religious traditions in more creative forms of appropriation. We find Christian animists and spiritual atheists, and doctrinal positions which overlap and migrate. One place that scholars have found this to be widely the case is in contemporary belief in paranormal phenomena, which can transcend particular religious identities, and be quite widespread (over 80%) even in so-called advanced scientific societies.
+In the past scholars have worked with a minimalist definition of religion, e.g. measuring only those people who participate in worship services with a high level of frequency, or demonstrate a high level of commitment to a range of pre-determined doctrinal positions or beliefs. This relates to a suspicion which was popular in the 20th century, sometimes referred to as the "secularisation thesis" that with the advent of modernity, religion would naturally decline. This has not proven to be the case, with a range of resurgence and transformation of "old" religions and a similar multiplication of new religious and spiritual movements. Scholars tend to refer to this new awareness and diversity as relating to a post-secular study of religion, and this kind of study tends to be more maximal in orientation, finding religion, belief, and spirituality in a variety of both expected and unexpected forms and places (like football, church, cooking, capitalism, and popular culture). Scholars here also emphasise the ways that religion can be hidden or "tacit," and may also be non-exclusive, with individual persons adhering to a range of religious traditions in more creative forms of appropriation and combination. We find Christian animists and spiritual atheists. Doctrinal positions can overlap and migrate.
 
 :::
 
@@ -242,17 +240,17 @@ We're going to come back to this data around religiosity, but let's set it to on
 ::: {.callout-tip}
 ## What is the difference between Spirituality and Religion?
 
-Though the terms can tend to be used interchangeable in many cases, some scholars in religious studies and psychology have sought to develop the concept (and measurement of) spirituality as a counterpoint to religion. In some cases, scholars argue that religion is extrinsic (something outside us that we participate in) and spirituality is intrinsic (something inside ourselves that we engage with). Another way of contrasting the two concepts is to suggest that religion is social whereas spirituality is personal. As Hodge puts it, “spirituality refers to an individual’s relationship with God (or perceived Transcendence), while religion is defined as a particular set of beliefs, practices, and rituals that have been developed in community by people who share similar exis- tential experiences of transcendent reality.” Of course, as you'll have noticed, there are many people who think of themselves as religious, but are opposed to participation in a formal religious tradition, or a social institution like a church, mosque, or denomination. So these differentiations can't be sharply made in a conclusive way. And it's likely that many respondents will have their own way to relate to these terms, whether it is affection or aversion.
+Though the terms can tend to be used interchangeably in many cases, some scholars in religious studies and psychology have sought to develop the concept (and measurement of) spirituality as a counterpoint to religion. In some cases, scholars argue that religion is extrinsic (something outside us that we participate in) and spirituality is intrinsic (something inside ourselves that we engage with). Another way of contrasting the two concepts is to suggest that religion is social whereas spirituality is personal. As Hodge puts it, “spirituality refers to an individual’s relationship with God (or perceived Transcendence), while religion is defined as a particular set of beliefs, practices, and rituals that have been developed in community by people who share similar existential experiences of transcendent reality.” Of course, as you'll have noticed, there are many people who think of themselves as religious, but are opposed to participation in a formal religious tradition, or a social institution like a church, mosque, or denomination. Regardless of how scholars have defined these terms, there will be a contrast between the ways that scholars define terms and their everyday use. So these differentiations can't be sharply made in a conclusive way when we're parsing out how people respond to terms. It's important to keep an open mind as it's likely that many respondents will have their own way to relate to these terms, whether it is affection or aversion.
 
 :::
 
-For our study, we made use of a six-item intrinsic spirituality scale that was developed by David R. Hodge which is based on another instrument intended to measure "intrinsic religion" by Allport and Ross (1967). These researchers developed a series of questions which they asked respondents in a survey. The advantage here is that you're getting at the question of spirituality from a lot of different angles and then you combine the scores from all the questions to get a mean "spirituality score". There are many other ways that psychologists have developed to measure intrinsic religion or spirituality, and we'd encourage you to try them out (there are some references to get you started in Appendix B).
+
 
 ::: {.callout-note collapse="true"}
 
 ## Statistics 101: Statistical Mean
 
-Content TBD.
+Of all the different statistical concepts you'll encounter, the one most people will have seen before is the statistical mean. This is often referred to in everyday usage as an "average". To calculate the mean, you simply add up all the values and divide by the number of values you have. Let's say that you had responses to a question with values from 1-5 and got the following eight responses to your survey: "3 5 1 5 4 5 2". The total of this group is 20, diving that by 8 gives us a statistical mean for this group of 4.375. It's even easier in R, of course, as you can just use a function like rowMeans() as below to calculate the mean. A similar concept to the mean is the statistical median of a list of values. Let's say you have a range of test score results from a class. If you arranged those scores from the lowest to highest, the median would be the number in the very middle of your list.
 
 :::
 
@@ -286,7 +284,7 @@ ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
   geom_point() +
   labs(x = NULL, y = "Q57_1")
 ```
-This is pretty disappointing, as ggplot doesn't know what to do with the x-axis as our points are 1-dimensional, e.g. they only have one value. But it's easy to fix! You can ask R to add random numbers for the x-axis so that we can see more of the dots and they aren't overlapping. This is called jitter:
+This is visually pretty useless. There are hundreds of dots here, but they are all overlapping because ggplot doesn't know what to do with the x-axis as our points are 1-dimensional, e.g. they only have one value. But it's easy to fix! You can ask R to add random numbers for the x-axis so that we can see more of the dots and they aren't overlapping. This is called jitter:
 
 ```{r}
 ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
@@ -294,11 +292,7 @@ ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
   labs(x = NULL, y = "Q57_1") + theme(axis.text.x = element_blank())
 ```
 
-You'll also notice that we've hidden the x-axis value labels as these are just random numbers and not really something we want to draw attention to. We've also hidden the label for that axis.
-
-This is visually pretty chaotic, but you can see probably see some places where the dots are thicker and get the sense that there are more in the top than the bottom.
-
-Since this is quite a large plot, I'd recommend going one step further and making the dots a bit smaller, and a bit transparent (this is called "alpha" in R). The advantage of this is that we'll be able to tell visually when dots are overlapping and register that there is a cluster. When they're all the same black color, this is impossible to tell.
+That's a bit better, as we can now see a greater number of the points and their location across the x-axis. You'll notice that I've hidden the x-axis value labels as these are just random numbers and not really something we want to draw attention to. We've also hidden the label for that axis. This is visually pretty chaotic, but you can see probably see some places where the dots are thicker and get the sense that there are more in the top than the bottom. Since this is quite a large plot, I'd recommend going one step further and making the dots a bit smaller, and a bit transparent (this is called "alpha" in R). The advantage of this is that we'll be able to tell visually when dots are overlapping and register that there is a cluster. When they're all the same black color, this is impossible to tell.
 
 ```{r}
 ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
@@ -313,15 +307,13 @@ ggplot(climate_experience_data, aes(x = 1, y = Q57_1)) +
   geom_boxplot(color = "black", fill = "lightblue", alpha = 0.7) +
   labs(x = NULL, y = "Q57_1") + coord_flip() + theme(axis.text.y = element_blank())
 ```
-I've flipped this chart on its side using `coord_flip()` because I just feel like these plot are easier to read from left to right. I also needed to adjust the concealment of labels to the y-axis.
-
-The boxplot show us two things: the mean for the overall data using the black vertical line, and then the [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) (the boxes extend to the minimum and maximum values within 1.5 times of the IQR). This is helpful for us to see because, while the mean of all the values is a bit further to the right, the points we have to the left of the mean are more widely distributed.
+I've flipped this chart on its side using `coord_flip()` because I just feel like these plot are easier to read from left to right. I also needed to adjust the concealment of labels to the y-axis. The boxplot show us two things: the mean for the overall data using the black vertical line, and then the [interquartile range](https://en.wikipedia.org/wiki/Interquartile_range) (the boxes extend to the minimum and maximum values within 1.5 times of the IQR). This is helpful for us to see because, while the mean of all the values is a bit further to the right, the points we have to the left of the mean are more widely distributed.
 
 ::: {.callout-note collapse="true"}
 
 ## Statistics 101: Range and getting into Quartiles, Quintiles, Deciles etc.
 
-Content TBD.
+The next thing one generally hears about after the statistical mean is the concept of "range". The range is essentially a way of capturing the full *range* of values that respondents provide. After all, you may allow for a 10 point scale, but if your respondents completely ignore options 1, 2, 3, 8, 9 and 10, those potential responses aren't as valid. When you are working with a set of data values that have a really large possible range of values, it can be convenient to summarise them as groups. So if you had a thousand possible values, you might consider dividing the responses into just four main groups based on the values of their responses, from 1-250, 251-500, 501-750, and 751-1000. But the median of a given set of survey responses is rarely right in the middle of those four groups, and it's likely that responses will have clusters of values which provide more weight to certain sets of values for your dataset. You can see how this is the case in the scatterplot chart above. Taking this uneven distribution into account, it makes more sense in statistics to look at the distribution bins based on the *quantity* of responses rather than their values. We refer to these bins as quartiles when a distribution is divided evenly among the total population of responses, so if we arrange everything in numeric order, the first 25% of the responses will count as Quartile 1, the next boundary will be at 50%, an so on with each quartile containing a quarter of the population. When there are four population groups, we refer to this as a "quartile". There are a number of different kinds of "bins" you can use with large groups of numbers, but the most commonly used are quartiles (4 groups), quintiles (5 groups) and deciles (10 groups). So if we try to visually represent the quartiles for our data, the interquartile range displays a line for the median, and then the range of the two quartiles (e.g. Q2 and Q3) which are nearest to the median. In the chart we've just made above, the boxplot shows us an interquartile range which is much larger for the responses that were less than the median than above. This means that, while our responses were generally on the high side (being a mean of greater than 5), the distribution for lower than average responses was actually a lot wider than those above the average.
 
 :::
 
@@ -375,6 +367,8 @@ spirituality_combined %>%
   scale_x_discrete(labels = function(x) str_wrap(x, width = 45))
 ```
 
+Here's the final plot of responses we had to the spirituality scale questions.
+
 ```{r}
 # using gridExtra to specify explicit dimensions for printing
 ggsave("figures/spirituality_boxplot.png", width = 20, height = 10, units = "cm")
@@ -418,20 +412,18 @@ ggplot(climate_experience_data, aes(x=spirituality_score, y=Q57_1)) +
 
 # Correlation testing and means
 
-What you may be starting to see in the charts we've plotted so far is that there is a bit of a similar trend between the religiosity values and spirituality scores for our survey responses. This book isn't going to aim to provide an introduction to statistics, but we will highlight a few possibilities and the way they are handled in R to whet your appetite for further study. We've already mentioned mean values a bit above, and most readers will likely be familiar with the calculation of basic statistical functions, like mean and range. Below, we're going to explore two further concepts, of "correlation" and "standard deviation".
+What you may be starting to see in the charts we've plotted so far is that there is a bit of a similar trend between the religiosity values and spirituality scores for our survey responses. This book isn't going to aim to provide a comprehensive introduction to statistics, but we will highlight a few possibilities and the way they are handled in R to whet your appetite for further study. We've already mentioned mean values a bit above, and most readers will likely be familiar with the calculation of basic statistical functions, like mean and range. Below, we're going to explore two further concepts, of "correlation" and "standard deviation".
 
-Let's start by assessing the correlation between these two elements of the data that were featured in the previous section. Suffice it to say that there are different ways to measure correlation, depending on how the two data sources you're working with are related (or not). For our purposes here, we're going to calculate the Pearson correlation coefficient. In essence this describes the relationship between the two datasets in the form of a number from -1 to 1. If the value is close to zero, there is simply non relationship between the two sets of data. The closer your value gets to +1, the stronger the indication that there is a positive linear relationship, in other words, if a value in set A is high, the corresponding value in set B is also going to be high. The closer your value gets to -1, the strong the indication that there is a negative linear relationship, so they are definitely related, but like magnets flipped in the wrong direction, so rather than attract each other, they move in opposing ways, so a high value in set A will likely correlate to a low value in set B.
+Let's start by assessing the correlation between these two elements of the data that were featured in the previous section. Suffice it to say that there are different ways to measure correlation, depending on how the two data sources you're working with are related (or not). For our purposes here, we're going to calculate the Pearson correlation coefficient. In essence this describes the relationship between the two datasets in the form of a number from -1 to 1. If the value is close to zero, there is simply no relationship between the two sets of data. The closer your value gets to +1, the stronger the indication that there is a positive linear relationship, in other words, if a value in set A is high, the corresponding value in set B is also going to be high, or vice versa. The closer your value gets to -1, the strong the indication that there is a negative linear relationship, so they are definitely related, but like magnets flipped in the wrong direction, so rather than attract each other, they move in opposing ways, so a high value in set A will likely correlate to a low value in set B.
 
 
 ::: {.callout-note collapse="true"}
 
 ## Statistics 101: Correlation and Colonialism
 
-Content TBD.
+It's not uncommon for specific statistical measures to be named after the first person to formally identify the concept. In the above instance we've discussed the Pearson correlation coefficient, which is named after the British statistician Karl Pearson (1857-1936). While Pearson was a major figure in the development of early mathematical statistics, he was an equally prominent figure in the field of eugenics and social Darwinism in collaboration with figures like Francis Galton. He opposed Jewish immigration into Britain and efforts to emeliorate poverty on the basis of now debunked scientific racism and notions of racial superiority. He was actively enthusiastic about the genocide in the Americas against indigenous people. It might be convenient for us to separate these two aspects of Pearson's work, but in practice they were unavoidably intertwined. As [Aubrey Clayton observes](https://nautil.us/how-eugenics-shaped-statistics-238014/), "many of the theoretical problems with methods like significance testing—first developed to identify racial differences—are remnants of their original purpose, to support eugenics." 
 
-Discuss Pearson correlation coefficient
-
-Include commentary on the importance of Eugenics as a focal point for early statistics; highlight the turn away from significance testing in modern statistical analysis - note helpful commentary in https://nautil.us/how-eugenics-shaped-statistics-238014/
+Significance testing was another element of statistics developed by Pearson which builds on correlation measures to establish the significance of a given correlation, e.g. whether that correlation (which is just a way of noticing a relationship between two variables) is meaningful or simply accidental. In recent decades a range of quantative researchers have noticed with increasing alarm the unreliability of significance testing. The editors of Basic and Applied Social Psychology decided to [ban p-values outright in 2015](https://link.springer.com/chapter/10.1007/978-3-030-04263-9_3). The basic concern is that significance testing conveys the appearance of scientific rigour and normative findings to what are ultimately (repugnant) personal convictions dressed up as science. As Clayton suggests, "In Pearson’s view, it was only by allowing the numbers to tell their own story that we could see these truths for what they were. If anyone objected to Pearson’s conclusions, for example that genocide and race wars were instruments of progress, they were arguing against cold, hard logic and allowing passion to displace truth." Some readers might wonder why my coverage here stops with correlation and doesn't go into significance testing. I won't cover significance testing in this book, not least because it violates several elements of the "hacker way" I've outlined at the outset. Ethical statistics needs to find ways to convey ambiguity and confidence in more transparent and reliable ways.
 
 :::
 
@@ -440,7 +432,7 @@ To caluclate the correlation in R, you can use the function `cor()` like this:
 ```{r}
 cor(climate_experience_data$Q57_1, climate_experience_data$spirituality_score)
 ```
-In this case, we've got a positive value, which is closer to 1 than 0. This indicates there is a positive correlation between these two values. How high must this number be before we call it a "strong" or "very strong" positive correlation? Well, this really depends on the kind of data you're working with. In some physcial sciences with very precise calculations, we might want to see something over 0.8 or even 0.9 before we'd call it a strong correlation. But with surveys, that number is generally taken to be a bit lower. I'd be tempted to call this a "strongly positive correlation" in our survey between spirituality scores and religiosity.
+In this case, we've got a positive value, which is closer to 1 than 0. This indicates there is a positive correlation between these two values. How high must this number be before we call it a "strong" or "very strong" positive correlation? Well, this really depends on the kind of data you're working with. In some physcial sciences with very precise calculations, we might want to see something over 0.8 or even 0.9 before we'd call it a strong correlation. But with surveys, that number is generally taken to be a bit lower. I'd be tempted to call this a somewhat strongly positive correlation in our survey between spirituality scores and religiosity.
 
 We can see the range of possibility by examining correlation between some other elements of our survey. We asked respondents to report on their "happiness" and "life satisfaction" - it would be interesting to see if there's a correlation here:
 
@@ -482,9 +474,7 @@ As before, no correlation to happiness. What about politics?
 ```{r}
 cor(climate_experience_data$spirituality_score, climate_experience_data$Q53_1)
 ```
-We can see here that the value is on the low side, probably not a significannt correlation.
-
-And looking at our two participation scales (social and personal) we can see that the results are a bit different from religiosity:
+We can see here that the value is on the low side and probably not a significant correlation. And looking at our two participation scales (social and personal) we can see that the results are a bit different from religiosity:
 
 ```{r}
 # Religious intensity to participation in services - strong positive (because reverse in scales)
@@ -493,7 +483,7 @@ cor(climate_experience_data$spirituality_score, climate_experience_data$Q58)
 cor(climate_experience_data$Q57_1, climate_experience_data$Q59)
 ```
 
-This is just barely scratching the surface in terms of the kinds of analysis you can do in R around correlation, and very bare bones in terms of statistical concepts. You can, for example, run a more annnotated correlation test using `cor.test()`, `t.test()` and `anova()` in R which are better suited to other kinds of analysis and which may give a wider array of information such as the p_value. I'm not going to dive into this material now, but I'd encourage readers to explore some of the resources listed in the appendix, and continue to dive deeper into the world of correlation testing in R.
+This is just barely scratching the surface in terms of the kinds of analysis you can do in R around correlation, and very bare bones in terms of statistical concepts. You can, for example, run a more annnotated correlation test using `cor.test()`, `t.test()` and `anova()` (Analysis of variance) in R which are better suited to other kinds of analysis and which may give a wider array of information such as the p_value. I'm not going to dive into this material now, but I'd encourage readers to explore some of the resources listed in the appendix, and continue to dive deeper into the world of correlation testing in R.
 
 ```{r}
 # Sample car.test:
@@ -503,32 +493,24 @@ p_value <- result$p.value
 # Format the p-value without scientific notation
 format(p_value, scientific = FALSE)
 # Sample t-test
-result <- t.test(climate_experience_data$Q57_1, climate_experience_data$Q58)
+t.test(climate_experience_data$Q57_1, climate_experience_data$Q58)
 ```
 
 # Using scale values for subsetting
 
 Because the responses to these two questions about spirituality and religiosity are on a numeric continuum, we can also use them to subset other variables in this dataset. A simple way of doing this is to separate our respondents into "high," "medium," and "low" bins for the two questions.
 
-::: {.callout-note collapse="true"}
-
-## Statistics 101: Subsetting
-
-Content TBD.
-
-:::
-
-One way to do this would be to simply sort responses into bins based on their numeric value, like assigning 0-3, 4-6 and 7-10 for low medium and high. But this is a bit problematic in practice and can risk misrepresenting your data. Remember above that when we calculated the mean for each of these two datasets, it wasn't straight in the middle of the 0-10 range (e.g. 5), but a bit above that. This means that if we divided the actual responses into proportional bins, the point at which we might divide them should be shifted a bit. What we want to do ultimately is work with the range of values that respondents actually chose. 
+One way to do this would be to simply sort responses into bins based on their numeric value, like assigning 0-3, 4-6 and 7-10 for low medium and high (see my discussion above about range and quartiles above). But this is a bit problematic in practice and can risk misrepresenting your data. Remember above that when we calculated the mean for each of these two datasets, it wasn't straight in the middle of the 0-10 range (e.g. 5), but a bit above that. This means that if we divided the actual responses into proportional bins, the point at which we might divide them should be shifted a bit. What we want to do ultimately is work with the range of values that respondents actually chose and so we'll work with statistical representations that map onto the total population of responses.
 
 ::: {.callout-note collapse="true"}
 
 ## Statistics 101: Standard Deviation
 
-Content TBD.
+Above where I explained the idea of range and population measures, I mentioned how important it can be to work with the actual content and range of responses in your survey, rather than arbitarily stick with tidy numbers. In the boxplot we saw above, we could see how the mean may be different from the middle of a range of response values, and also how the footprint of quartiles can be different as well depending on how a given set of responses (in this case the content of our Spotlight project data) shaped the overall field. Another way of representing the actual footprint of a given field of values is to measure the standard deviation. After all, sometimes a batch of responses will be quite tightly focussed around the statistical mean, and in other cases they will be more spread out. If we measure the distance of every response from the statistical mean we can calculate the standard deviation, which determines how spread out the data points are around the mean. Assuming that your dataset is a normal distribution, that is, distributes in a bell-shaped cluster around the mean, about 68% of your data will fall within 1 standard deviation of the mean. This means if you move one standard deviation to the left and one to the right of the mean, you'll cover about 68% of the data. About 95% of the data falls within 2 standard deviations of the mean. In statistics this is referred to as the 68–95–99.7 rule, sometimes abbreviated as "3sr". Assuming we have a reasonably normal distribution, we can also use this rule to identify outliers from our data set, which are those more than 2 standard deviations outside the mean.
 
 :::
 
-Luckily, this is easy to do in R using the statistical concept of standard deviation, which R can calculate almost magically for us, in the following way:
+Luckily, this is easy to do in R using the statistical concept of standard deviation, which R can calculate almost magically for us. In the following code, we work with the concept of standard deviation to assume that values which fall within the standard deviation will serve as our "mid" cluster, with any values within the range of 1 standard deviation above serving as "high" and those which are 1 SD below are "low" values. We can calculate this quickly in the following way:
 
 ::: {.panel-tabset}
 
@@ -551,6 +533,8 @@ climate_experience_data <- climate_experience_data %>%
 
 ## Religiosity bins
 
+We can do the same thing for our religiosity measure: 
+
 ```{r}
 climate_experience_data <- climate_experience_data %>%
   mutate(
@@ -568,7 +552,7 @@ climate_experience_data <- climate_experience_data %>%
 
 :::
 
-As I've mentioned in the previous chapter, good analysis draws on multiple factors when possible and when we're trying to hack religion carefully, it can be useful to assess how a given datapoint relates to non-religious categories as well. For our exercise here, I'd like us to take the data about political affiliation to visualise alongside our religion and spirituality data. this will help us to see where effects we are measuring are more or less significant and give us a point of comparison. This is particularly important for research into climate change as various studies have highlighted religious affiliation as an important factor correlating to climate change attitudes, only for later studies to highlight much larger correlations that had been missed by too myopic a research methodology.
+As I've mentioned in the previous chapter, good analysis draws on multiple factors when possible and when we're trying to hack religion well, it can be useful to assess how a given datapoint relates to non-religious categories as well. For our exercise here, I'd like us to take the data about political affiliation to visualise alongside our religion and spirituality data. this will help us to see where effects we are measuring are more or less significant and give us a point of comparison. This is particularly important for research into climate change as various studies have highlighted religious affiliation as an important factor correlating to climate change attitudes, only for later studies to highlight much larger correlations that had been missed by too myopic a research methodology.
 
 Question 53 in the survey asked respondents to place themselves on a political spectrum from "Left" to "Right" so the low bin will represent Left here, high Right and medium a "centrist". 
 
@@ -621,10 +605,6 @@ df %>%
 3. Next, we'll recode the response values so that they're factors and tidy up the representation of those factors for our legend.
 4. Finally, we convert this data from wide into long format and plot using ggplot.
 
-<!--
-Use mutate to put "prefer not to say" at the bottom
-# Info here: https://r4ds.had.co.nz/factors.html#modifying-factor-levels
--->
 
 Have a look over the columns and you can see how there are some clear differences across each of the different kinds of bins we've used and these shift in intensity. It seems like spirituality and religiosity are similar in profile here but political "right" also seems to correlate with a higher level of attendance at weekly worship.
 
@@ -656,3 +636,7 @@ df %>%
   guides(fill = guide_legend(title = NULL)) +
   coord_flip() 
 ```
+
+Take some time to review these last two charts visually. It's interesting to notice how within each of our bins you can observe different kinds of response patterns. So for the first chart measuring against the frequency of attendance at worship services, we can indeed see differences in the self-reported patterns of worship attendance for high spirituality scores and high religiosity scores. However, the difference here seems to be more of degree, and quite minor at that. This finding challenges, at least for this cohort of respondents, a hard distinction between spirituality and religion and underlines some of the useful ways that this kind of bottom-up exploration of data can challenge theoretical claims about religious experience and participation.
+
+There are a lot of different ways you can follow this data, and I'd encourage you to try out your own subsetting and comparisons against different questions in the study. In our next chapter, we're going to take this exploration in an entirely new direction, working with maps and geospatial data.
